@@ -22,13 +22,25 @@ baseurl: "/superlearn-wiki" # the subpath of your site, e.g. /blog
 url: "https://koddo.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # email: your-email@domain.com
-# github_username:  koddo
+github_username:  koddo
 
 # Build settings
 markdown: kramdown
-theme: minima
+
 gems:
   - jekyll-feed
+  
+keep_files:
+    - .git
 exclude:
-  - Gemfile
-  - Gemfile.lock
+  - README.md
+  - _oldwiki
+
+permalink: /blog/:title
+
+
+collections:
+  python:
+    output: true
+    title: "Python"
+
