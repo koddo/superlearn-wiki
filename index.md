@@ -4,3 +4,5 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 ---
+
+[site-map]({{ site.baseurl }}{% link site-map.md %})
