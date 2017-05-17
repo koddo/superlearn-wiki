@@ -1,0 +1,10 @@
+{% if jekyll.environment == "development" %}<script src="{{ site.live_reload_script }}"></script>{% endif %}
+{% if page.mathjax %}
+<script type="text/x-mathjax-config">MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+{% endif %}
+{% if false %}<script id="dsq-count-scr" src="//koddo.disqus.com/count.js" async></script>{% endif %}
+{% if true %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+<script>anchors.add().remove(".no-anchor");</script>
+{% endif %}

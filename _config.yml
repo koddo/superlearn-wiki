@@ -44,3 +44,4 @@ collections:
     output: true
     title: "Python"
 
+live_reload_script: http://vagrant.local:35730/livereload.js
