@@ -123,6 +123,8 @@ TODO:
 <br />
 
 
+<iframe class="autoresize" src="https://vagrant.local:8443/api/v0/deck/4db66f7c-cee0-4de3-84c7-fdd28b030a82"><p>Your browser does not support iframes.</p></iframe>
+
 
 # functions
 
@@ -218,6 +220,8 @@ TODO: what if we do `for i in ...: else: ... use i`?
 - q: What does `else` do after `for` and `while` statements? --- a: The `else` code is executed after the loop ends if there was no `break`.
 - q: What are `break` and `continue` for? --- a: `continue` is for moving forward to the next iteration, `break` is for ending the loop.
 </div>
+
+<iframe class="autoresize" src="https://vagrant.local:8443/api/v0/deck/aeb6a5dd-3ff7-4856-bbe2-f201004d82e2"><p>Your browser does not support iframes.</p></iframe>
 
 # comprehensions
 
