@@ -621,6 +621,8 @@ invert binary tree, yes
 
 quotient filter, bloom filter, <https://en.wikipedia.org/wiki/Quotient_filter>, <https://habrahabr.ru/post/242285/>
 
+https://medium.com/@agafonkin/a-dive-into-spatial-search-algorithms-ebd0c5e39d2a
+
 # Trash
 
 

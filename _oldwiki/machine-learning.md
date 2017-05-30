@@ -29,7 +29,11 @@ A Visual Introduction to Machine Learning --- <http://www.r2d3.us/visual-intro-t
 
 Computational Statistics in Python 0.1 --- <http://people.duke.edu/~ccc14/sta-663/index.html>
 
+http://tutorialzine.com/2017/04/10-machine-learning-examples-in-javascript/
 
+https://dashee87.github.io/data%20science/general/Clustering-with-Scikit-with-GIFs/
+
+http://pbpython.com/effective-matplotlib.html
 
 # Kaggle
 

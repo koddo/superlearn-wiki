@@ -24,3 +24,9 @@ hara.zip vs clojure.zip <https://www.reddit.com/r/Clojure/comments/55t3lg/why_cl
 <https://stuartsierra.com/tag/dos-and-donts>
 
 <http://stackoverflow.com/questions/26050540/what-is-the-difference-between-the-hash-map-and-array-map-in-clojure>
+
+The best way to handle nil: <https://bsima.me/clog/robust-clojure-nil.html>
+
+- q: how to flatten one level of seqs `((...) (...) (...))`? -- a: `(apply concat ...)`
+
+

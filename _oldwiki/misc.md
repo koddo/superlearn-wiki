@@ -33,6 +33,10 @@ TODO: <https://github.com/zkessin/testing-erlang-book>
 TODO: <https://medium.com/@jlouis666/breaking-erlang-maps-1-31952b8729e6>, <https://medium.com/@jlouis666/breaking-erlang-maps-2-362730a91400>
 TODO: <http://blog.listincomprehension.com/2010/03/spoofing-erlang-distribution-protocol.html>
 
+<https://www.reddit.com/r/erlang/comments/6417tj/thebeambook_a_description_of_the_erlang_runtime/>
+<https://github.com/happi/theBeamBook>
+
+
 # garbage collector
 
 <https://spin.atomicobject.com/2014/09/03/visualizing-garbage-collection-algorithms/>, <https://github.com/kenfox/gc-viz>
