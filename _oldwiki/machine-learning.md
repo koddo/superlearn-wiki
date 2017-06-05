@@ -35,6 +35,8 @@ https://dashee87.github.io/data%20science/general/Clustering-with-Scikit-with-GI
 
 http://pbpython.com/effective-matplotlib.html
 
+http://eli5.readthedocs.io/en/latest/
+
 # Kaggle
 
 start with <https://www.quora.com/What-Kaggle-competitions-should-a-beginner-start-with-1/answer/William-Chen-6?srid=Ywn4>
