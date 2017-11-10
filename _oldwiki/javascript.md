@@ -13,6 +13,7 @@ layout:  collection_page
 
 <https://www.reddit.com/r/javascript/comments/5hfq6n/100_minutes_of_free_functional_programming/>, <https://egghead.io/courses/professor-frisby-introduces-function-composition>
 
+<https://www.reddit.com/r/javascript/comments/677tcu/understanding_asyncawait_in_7_seconds/>
 
 # misc
 
@@ -28,6 +29,9 @@ layout:  collection_page
 - q: `readOnly` vs `disabled` state of html input --- a: <http://stackoverflow.com/questions/7730695/whats-the-difference-between-disabled-disabled-and-readonly-readonly-for-ht>
 
 - q: stack and queue in js -- a: <http://stackoverflow.com/questions/1590247/how-do-you-implement-a-stack-and-a-queue-in-javascript/1590262#1590262> 
+
+
+<http://stackoverflow.com/questions/500431/what-is-the-scope-of-variables-in-javascript>
 
 # react 
 

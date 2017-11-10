@@ -983,6 +983,11 @@ TODO
 
 # misc
 
+try logbook module -- <http://logbook.readthedocs.io/en/stable/>
+
+<https://www.reddit.com/r/Python/comments/6cvx0s/the_meaning_of_underscores_in_python>
+<https://github.com/satwikkansal/wtfPython>
+
 ``` python
 def make_counter():
     count = 0
@@ -1060,6 +1065,8 @@ TODO: generate random number
 - q: How to run a simple http server to serve static files? -- a: `$ cd path && python3 -m http.server 4001`
 
 <https://www.reddit.com/r/Python/comments/5zk97l/what_are_some_wtfs_still_in_python_3/>
+
+parallelism lib named dask
 
 ## skipped hackerrank challenges
 

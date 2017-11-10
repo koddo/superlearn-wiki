@@ -1,0 +1,2 @@
+superlearn_baseurl: http://vagrant.local:8080
+livereload_script: http://vagrant.local:35730/livereload.js

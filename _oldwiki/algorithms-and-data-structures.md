@@ -13,6 +13,13 @@ layout:  collection_page
 * this line is replaced with the generated table of contents
 {:toc}
 
+
+# sort this
+
+learning bioinformatics through problem solving --- http://rosalind.info/problems/topics/
+
+
+
 # cracking the coding interview
 
 minimum <http://127.0.0.1:4001/interview_questions/Cracking_the_Coding_Interview.by_Gayle_Laakmann_McDowell.5th.pdf#56>
@@ -623,6 +630,33 @@ quotient filter, bloom filter, <https://en.wikipedia.org/wiki/Quotient_filter>, 
 
 https://medium.com/@agafonkin/a-dive-into-spatial-search-algorithms-ebd0c5e39d2a
 
+<https://techiedelight.quora.com/500-Data-Structures-and-Algorithms-practice-problems-and-their-solutions>
+
+<https://www.quora.com/What-are-some-must-know-topics-in-discrete-math-and-probability-for-competitive-programming/answer/Raziman-T-V>
+    
+smooth sort, a variant of heap sort
+
+<http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/>
+
+## visualisation of algorithms
+
+http://habrahabr.ru/post/227915/, http://bost.ocks.org/mike/algorithms/
+visualisation of some algorithms --- http://qiao.github.com/PathFinding.js/visual/
+http://visualgo.net/
+http://www.cs.usfca.edu/~galles/visualization/Algorithms.html
+
+Sedgewick's algo course
+
+https://workshape.github.io/visual-graph-algorithms/
+https://www.toptal.com/developers/sorting-algorithms/
+
+https://www.reddit.com/r/programming/comments/2ixwxu/15_sorting_algorithms_visualized_it_really_shows/
+
+http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/
+
+<http://fabiensanglard.net/floating_point_visually_explained/>
+
+    
 # Trash
 
 
@@ -643,3 +677,7 @@ https://medium.com/@agafonkin/a-dive-into-spatial-search-algorithms-ebd0c5e39d2a
 
 
 
+
+# dynamic programming
+
+всё, что вы хотели знать о динамическом программировании, но боялись спросить -- <https://habrahabr.ru/post/191498/>

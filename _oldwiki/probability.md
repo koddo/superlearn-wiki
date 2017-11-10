@@ -9,6 +9,17 @@ mathjax: true
 
 <http://students.brown.edu/seeing-theory/>
 
+<http://www.wzchen.com/probability-cheatsheet/>
+
+<http://stats.stackexchange.com/questions/2230/convergence-in-probability-vs-almost-sure-convergence>
+
+What does randomness look like? -- <https://habrahabr.ru/post/163621/>
+
+bootstrap
+
+intro in stats by Max Musin -- ~/books.probability/Statistics_Intro.by_Musin.pdf 
+
+
 # combinatorics
 
 \\[ \binom{N}{n} \ = \ \frac{N!}{(N-n)! \ n!} \\]

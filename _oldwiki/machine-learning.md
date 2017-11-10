@@ -13,6 +13,11 @@ layout:  collection_page
 
 <https://github.com/hangtwenty/dive-into-machine-learning>
 
+# sort
+
+Энтропия и деревья принятия решений -- <https://habrahabr.ru/post/171759/>
+
+
 # misc
 
 examples of statistics using pandas: <https://github.com/rouseguy/intro2stats/tree/master/notebooks>
@@ -36,6 +41,17 @@ https://dashee87.github.io/data%20science/general/Clustering-with-Scikit-with-GI
 http://pbpython.com/effective-matplotlib.html
 
 http://eli5.readthedocs.io/en/latest/
+
+course and book Foundations of Machine Learning by Mehryar Mohri
+
+<https://stats.stackexchange.com/questions/89882/are-there-any-probabilistic-models-for-graph-based-recommender-systems>
+
+# boruta, feature selection algorithm
+
+https://www.reddit.com/r/MachineLearning/comments/44qb9p/python_implementation_of_boruta_an_all_relevant/
+   
+https://github.com/danielhomola/boruta_py
+http://danielhomola.com/2015/05/08/borutapy-an-all-relevant-feature-selection-method/
 
 # Kaggle
 

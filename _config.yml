@@ -27,7 +27,7 @@ github_username:  koddo
 # Build settings
 markdown: kramdown
 
-gems:
+plugins:
   - jekyll-feed
   
 keep_files:
@@ -43,5 +43,11 @@ collections:
   python:
     output: true
     title: "Python"
+  git:
+    output: true
+    title: "Git"
+  rust:
+    output: true
+    title: "Rust"
 
-live_reload_script: http://vagrant.local:35730/livereload.js
+superlearn_baseurl: http://superlearn.it
