@@ -32,6 +32,7 @@ layout:  collection_page
 
 
 <http://stackoverflow.com/questions/500431/what-is-the-scope-of-variables-in-javascript>
+<https://www.reddit.com/r/javascript/comments/73rq45/setimmediate_vs_nexttick_vs_settimeoutfn0_in/>
 
 # react 
 

@@ -33,6 +33,8 @@ The best way to handle nil: <https://bsima.me/clog/robust-clojure-nil.html>
 <http://mishadoff.com/blog/clojure-design-patterns/>
 <https://github.com/bbatsov/clojure-style-guide>
 
+<https://labs.uswitch.com/transducers-from-the-ground-up-the-practice/>
+
 # re-frame
 
 better re-frame subscriptions:
