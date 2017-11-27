@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Basics</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/superlearn-wiki/assets/main.css">
+  <link rel="canonical" href="https://koddo.github.io/superlearn-wiki/python/basics">
+  <link rel="alternate" type="application/rss+xml" title="superlearn-wiki" href="/superlearn-wiki/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/superlearn-wiki/">superlearn-wiki</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+            <a class="page-link" href="/superlearn-wiki/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/superlearn-wiki/site-map">Site map</a>
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        
+  
+
+  
+
+  
+    
+    
+
+<article class="post">
+    <!-- TODO: any html tag for go up a level? -->
+    <a href="/superlearn-wiki/python">Python/</a>
+
+  <header class="post-header">
+    <h1 class="post-title no-anchor">Basics</h1>
+  </header>
+
+  <div class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#hello-world" id="markdown-toc-hello-world">hello world</a></li>
+  <li><a href="#true-false-and-comparisons" id="markdown-toc-true-false-and-comparisons">true, false, and comparisons</a></li>
+  <li><a href="#functions" id="markdown-toc-functions">functions</a></li>
+  <li><a href="#conditionals-and-loops" id="markdown-toc-conditionals-and-loops">conditionals and loops</a></li>
+  <li><a href="#comprehensions" id="markdown-toc-comprehensions">comprehensions</a></li>
+</ul>
+
+<h1 id="hello-world">hello world</h1>
+
+<iframe class="autoresize" src="http://superlearn.it/ht/cards/"><p>Your browser does not support iframes.</p></iframe>
+
+<h1 id="true-false-and-comparisons">true, false, and comparisons</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">()</span> <span class="ow">or</span> <span class="p">[]</span> <span class="ow">or</span> <span class="p">{}</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="s">'this line is skipped'</span>
+</code></pre></div></div>
+<p><a href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing">https://docs.python.org/3/library/stdtypes.html#truth-value-testing</a></p>
+
+<p><br /></p>
+
+<p>The interesting thing in python: <code class="highlighter-rouge">b == not a</code> is a syntax error.
+<code class="highlighter-rouge">not</code> has a lower priority than non-boolean operators, so <code class="highlighter-rouge">not a == b</code> is interpreted as <code class="highlighter-rouge">not (a == b)</code>, and <code class="highlighter-rouge">b == not a</code> is a syntax error.
+<a href="https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not">https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not</a></p>
+
+<p><br /></p>
+
+<p>as always, <code class="highlighter-rouge">and</code> and <code class="highlighter-rouge">or</code> are short-circuit operators, second argument is not evaluated here:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">whatever</span><span class="p">():</span>
+    <span class="s">'this line is skipped, whatever() is not evaluated'</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><code class="highlighter-rouge">x &lt; y &lt;= z</code> is equivalent to <code class="highlighter-rouge">x &lt; y and y &lt;= z</code>, except <code class="highlighter-rouge">y</code> is evaluated only once
+in both cases <code class="highlighter-rouge">z</code> is not evaluated at all when <code class="highlighter-rouge">x &lt; y</code> is found to be false</p>
+
+<p><br /></p>
+
+<p>comparison operators look quite standard: <code class="highlighter-rouge">==</code>, <code class="highlighter-rouge">!=</code>, <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code>
+and for object identity: <code class="highlighter-rouge">is</code>, <code class="highlighter-rouge">is not</code>
+objects of different <em>built-in</em> types never compare equal (except different numeric types), but we can define an object with <code class="highlighter-rouge">__eq__</code> — <a href="http://stackoverflow.com/questions/12379840/python-comparison-between-built-in-and-user-defined-types">http://stackoverflow.com/questions/12379840/python-comparison-between-built-in-and-user-defined-types</a>
+<code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code> raise <code class="highlighter-rouge">TypeError</code> exception when the objects are of different types that cannot be compared, or in other cases where there is no defined ordering</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="s">'abc'</span> <span class="o">&gt;</span> <span class="mi">1000</span>
+<span class="nb">TypeError</span><span class="p">:</span> <span class="n">unorderable</span> <span class="n">types</span><span class="p">:</span> <span class="nb">str</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nb">int</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>behavior of the <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators cannot be customized; also they can be applied to any two objects and never raise an exception</p>
+
+<p><a href="https://docs.python.org/3/library/stdtypes.html#comparisons">https://docs.python.org/3/library/stdtypes.html#comparisons</a></p>
+
+<p><br /></p>
+
+<p>generally you only want to be using <code class="highlighter-rouge">is</code> with mutable objects (or None, which is the exception)
+<code class="highlighter-rouge">x is None</code> vs <code class="highlighter-rouge">x == None</code>: <a href="https://www.python.org/dev/peps/pep-0008/#programming-recommendations">PEP 8</a></p>
+<blockquote>
+  <p>Comparisons to singletons like None should always be done with is or is not , never the equality operators.</p>
+</blockquote>
+
+<p><a href="http://stackoverflow.com/questions/9494404/use-of-true-false-and-none-as-return-values-in-python-functions">http://stackoverflow.com/questions/9494404/use-of-true-false-and-none-as-return-values-in-python-functions</a></p>
+
+<pre><code class="language-Python">class A(object):
+    def __eq__(self, other):
+        print( "A __eq__ called: %r == %r ?" % (self, other) )
+        return self.value == other.value
+class B(object):
+    def __eq__(self, other):
+        print( "B __eq__ called: %r == %r ?" % (self, other) )
+        return self.value == other.value
+
+a = A()
+a.value = 3
+b = B()
+b.value = 4
+a == b
+</code></pre>
+
+<div class="ryctoic-questions">
+  <p>deck:
+python — true, false, and comparisons</p>
+
+  <p>TODO:</p>
+
+  <ul>
+    <li>q: <code class="highlighter-rouge">==</code> vs <code class="highlighter-rouge">__eq__()</code> — a:</li>
+    <li>q: Why <code class="highlighter-rouge">__eq__()</code> returns <code class="highlighter-rouge">NotImplemented</code>? — a:</li>
+    <li>q: What happens when you compare incomparable types?</li>
+  </ul>
+
+  <p><a href="https://docs.python.org/3/reference/datamodel.html#object.__eq__">https://docs.python.org/3/reference/datamodel.html#object.__eq__</a></p>
+
+  <p><a href="https://docs.python.org/3/library/constants.html#NotImplemented">https://docs.python.org/3/library/constants.html#NotImplemented</a></p>
+
+  <p><a href="https://docs.python.org/3/whatsnew/3.0.html#ordering-comparisons">https://docs.python.org/3/whatsnew/3.0.html#ordering-comparisons</a></p>
+
+  <ul>
+    <li>q: What values are considered false in python? — a: <code class="highlighter-rouge">False</code>, <code class="highlighter-rouge">None</code>, any numeric zero, empty sequence, empty dict, instance with <code class="highlighter-rouge">__bool__()</code> returning False or <code class="highlighter-rouge">__len__()</code> returning zero</li>
+    <li>q: <code class="highlighter-rouge">not a == b</code> vs <code class="highlighter-rouge">not (a == b)</code> vs <code class="highlighter-rouge">b == not a</code> — a: <code class="highlighter-rouge">not</code> has a lower priority than non-boolean operators, so <code class="highlighter-rouge">not a == b</code> is interpreted as <code class="highlighter-rouge">not (a == b)</code>, and <code class="highlighter-rouge">b == not a</code> is a syntax error</li>
+    <li>q: short-circuiting behavior of boolean operators — a: <code class="highlighter-rouge">if False and whatever(): 'this line is skipped, whatever() is not evaluated'</code></li>
+    <li>q: <code class="highlighter-rouge">x &lt; y &lt;= z</code> vs <code class="highlighter-rouge">x &lt; y and y &lt;= z</code> — a: <code class="highlighter-rouge">x &lt; y &lt;= z</code> is equivalent to <code class="highlighter-rouge">x &lt; y and y &lt;= z</code>, except <code class="highlighter-rouge">y</code> is evaluated only once, and in both cases <code class="highlighter-rouge">z</code> is not evaluated at all when <code class="highlighter-rouge">x &lt; y</code> is found to be false</li>
+    <li>q: What are equal and not equal operators? — a: <code class="highlighter-rouge">==</code>, <code class="highlighter-rouge">!=</code>, the <code class="highlighter-rouge">&lt;&gt;</code> was removed</li>
+    <li>q: What are less, more, less or equal, more or equal operators? — a: <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code></li>
+    <li>q: How to test for object identity? — a: <code class="highlighter-rouge">is</code>, <code class="highlighter-rouge">is not</code></li>
+    <li>q: How to customize behavior of <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code>? — a: Behavior of the <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators cannot be customized.</li>
+    <li>q: What objects can be tested for identity with the <code class="highlighter-rouge">is</code> ans <code class="highlighter-rouge">is not</code> operators? — a: The <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators can be applied to any two objects and never raise an exception.</li>
+    <li>q: When does the <code class="highlighter-rouge">is</code> operator throw an exception? — a: The <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators can be applied to any two objects and never raise an exception.</li>
+    <li>q: <code class="highlighter-rouge">if x</code> vs <code class="highlighter-rouge">if x == True</code> vs <code class="highlighter-rouge">if x is True</code> — a: Use <code class="highlighter-rouge">if x</code>; and in extremely rare cases when you really want to explicitly distinguish if <code class="highlighter-rouge">x</code> is, for example, not <code class="highlighter-rouge">1</code>, not <code class="highlighter-rouge">[]</code>, but boolean <code class="highlighter-rouge">True</code>, check it with <code class="highlighter-rouge">x == True and type(x) is bool</code>; don’t use <code class="highlighter-rouge">x is True</code>, it will fail in some obscure cases, because <code class="highlighter-rouge">bool</code> is subclass of <code class="highlighter-rouge">int</code>.</li>
+    <li>q: <code class="highlighter-rouge">if not x</code> vs <code class="highlighter-rouge">x is None</code> vs <code class="highlighter-rouge">x == None</code> — a: Use the <code class="highlighter-rouge">if not x</code>; and in cases when you really want to explicitly distinguish <code class="highlighter-rouge">None</code> and other false values, use <code class="highlighter-rouge">x is None</code>; don’t use <code class="highlighter-rouge">x == None</code>, because PEP 8.</li>
+    <li>q: <code class="highlighter-rouge">x is y</code> vs <code class="highlighter-rouge">id(x) == id(y)</code> — a: Use the former. Don’t use <code class="highlighter-rouge">id(x) == id(y)</code>, because id of an object in CPython being the location in memory is an implementation detail, this may change.</li>
+    <li>q: When two objects of different <em>built-in</em> types compare equal? — a: Objects of different <em>built-in</em> types, except different numeric types, never compare equal.</li>
+    <li>q: What happens when you compare objects of different <em>built-in</em> types, e.g, <code class="highlighter-rouge">'a' == 1</code> and <code class="highlighter-rouge">'abc' &gt; 10</code>? a: Except for numeric types, <code class="highlighter-rouge">==</code> and <code class="highlighter-rouge">!=</code> always return <code class="highlighter-rouge">False</code> for objects of different <em>build-in</em> types, <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code> raise <code class="highlighter-rouge">TypeError</code> exception.</li>
+    <li>q: What happens when you sort a heterogeneous list? — a: All the elements must be comparable to each other, otherwise the <code class="highlighter-rouge">TypeError</code> is thrown. If <code class="highlighter-rouge">.sort()</code> is used for in-place sorting, then the list is modified until the occurrence of the error.</li>
+  </ul>
+</div>
+
+<p><br />
+<br /></p>
+
+<iframe class="autoresize" src="https://vagrant.local:8443/api/v0/deck/4db66f7c-cee0-4de3-84c7-fdd28b030a82"><p>Your browser does not support iframes.</p></iframe>
+
+<h1 id="functions">functions</h1>
+
+<div class="ryctoic-questions">
+  <ul>
+    <li>q: Define a function. — a: <code class="highlighter-rouge">def whatever(): ...</code></li>
+    <li>q: Define a function with an optional argument. — a: <code class="highlighter-rouge">def whatever(data=0): ...</code></li>
+    <li>
+      <p>q: Define a function with a docstring. — a: An example:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def whatever():
+    """This is a docstring."""
+    pass
+</code></pre></div>      </div>
+    </li>
+    <li>q: Get the docstring of a function? — a: <code class="highlighter-rouge">help(a_func)</code> or <code class="highlighter-rouge">a_func.__doc__</code></li>
+    <li>q: Define a function with a keyword-only arguments. — a: <code class="highlighter-rouge">def foo(*, arg1=10, arg2=20): ...</code></li>
+    <li>q: Define a function with an arbitraty argument list. — a: <code class="highlighter-rouge">def concat(*args, sep="/"): return sep.join(args)</code></li>
+    <li>q: Define a function with keyword arguments. — a: <code class="highlighter-rouge">def foo(**kwargs): print(kwargs)</code>, then call it like this: <code class="highlighter-rouge">foo(a=1, b=2)</code>, this will print <code class="highlighter-rouge">{'a': 1, 'b': 2}</code></li>
+    <li>q: Pass a list of arguments to a function with an arbitrary argument list. — a: Given a function <code class="highlighter-rouge">def foo(*args): ...</code>, unpack the list <code class="highlighter-rouge">foo(*lst)</code></li>
+    <li>q: Pass a dictionary of arguments to a function with keyword arguments. — a: Given a function <code class="highlighter-rouge">def foo(**kwargs): ...</code>, unpack the dict <code class="highlighter-rouge">foo(**dct)</code></li>
+    <li>q: Define a function with function annotations. — a: <code class="highlighter-rouge">def a_func(a_dict: '{str: int}') -&gt; '[str]': print(a_func.__annotations__); ...</code></li>
+    <li>q: Write a lambda function. — a: <code class="highlighter-rouge">f = lambda x: x**2</code></li>
+  </ul>
+</div>
+
+<p>TODO: mutable default args, and make sure you use immutable types to catch this earlier
+TODO: new type hinting
+TODO: function annotations: <a href="https://github.com/kennknowles/python-rightarrow">https://github.com/kennknowles/python-rightarrow</a></p>
+
+<h1 id="conditionals-and-loops">conditionals and loops</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">whatever</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'ok'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">switch/case</code> <a href="https://www.python.org/dev/peps/pep-3103/">pep-3103</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>these do not support fall through, and this can be good or bad, depends on the point of view and problems you solve</p>
+
+<p><code class="highlighter-rouge">range()</code> used to be <code class="highlighter-rouge">xrange()</code> in python 2</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100000000</span><span class="p">):</span>
+  <span class="k">pass</span>
+
+<span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100000000</span><span class="p">:</span>
+  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p><a href="http://stackoverflow.com/questions/869229/why-is-looping-over-range-in-python-faster-than-using-a-while-loop">http://stackoverflow.com/questions/869229/why-is-looping-over-range-in-python-faster-than-using-a-while-loop</a></p>
+
+<pre><code class="language-Python">if condition:
+    ...
+else:
+    ...
+</code></pre>
+
+<p>TODO: what if we do <code class="highlighter-rouge">for i in range(0)</code>?
+TODO: what if we do <code class="highlighter-rouge">for i in ...: else: ... use i</code>?</p>
+
+<div class="ryctoic-questions">
+  <ul>
+    <li>q: Write an if-then-else.</li>
+    <li>q: Write an one line if-else statement (ternary conditional operator). — a: <code class="highlighter-rouge">x = 'good' if y else 'bad'</code></li>
+    <li>q: What is short for else if? — a: <code class="highlighter-rouge">elif</code></li>
+    <li>q: What is going to be printed in this example when the condition is false? <code class="highlighter-rouge">if x &lt; y &lt; z: print(x); print(y); print(z)</code> — a: Semicolon binds tighter than the colon in this context, so that in this example, either all or none of the print() calls are executed.</li>
+    <li>q: Write a switch/case statement. — a: Python doesn’t have this, but we can have an if/elif chain or dict-based dispatch, but those do not support fall through.</li>
+    <li>q: <code class="highlighter-rouge">range()</code> vs <code class="highlighter-rouge">xrange()</code> — a: <code class="highlighter-rouge">range()</code> used to be <code class="highlighter-rouge">xrange()</code> in python 2.</li>
+    <li>q: Write a for loop from 0 to n-1 inclusive. — a: <code class="highlighter-rouge">for i in range(n): ...</code></li>
+    <li>q: Write a for loop from 1 to n inclusive. — a: <code class="highlighter-rouge">for i in range(1, n+1): ...</code></li>
+    <li>
+      <p>q: What is going to be printed? <code class="highlighter-rouge">for i in range(1, n+1): print(i)</code> — a: Numbers from <code class="highlighter-rouge">1</code> to <code class="highlighter-rouge">n</code> inclusive.</p>
+    </li>
+    <li>
+      <p>q: Get a range with a step — a: <code class="highlighter-rouge">range(start, end, step)</code></p>
+    </li>
+    <li>q: Get a range going backwards. — a: <code class="highlighter-rouge">range(99, 0, -1)</code></li>
+    <li>q: Get a range from <code class="highlighter-rouge">99</code> to <code class="highlighter-rouge">0</code> with a step <code class="highlighter-rouge">2</code>. — a: <code class="highlighter-rouge">range(99, 0, -2)</code></li>
+    <li>q: Get a range from <code class="highlighter-rouge">0</code> to <code class="highlighter-rouge">-10</code>. — a: <code class="highlighter-rouge">range(0, -10, -1)</code></li>
+    <li>q: <code class="highlighter-rouge">for i in range(10**10): ...</code> vs <code class="highlighter-rouge">i=0; while i &lt; 10**10: i+=1; ...;</code>? — a: The former should be faster, code for <code class="highlighter-rouge">range()</code> is optimized.</li>
+    <li>q: Write a while statement. — a: <code class="highlighter-rouge">while condition: ...</code></li>
+    <li>q: What does <code class="highlighter-rouge">else</code> do after <code class="highlighter-rouge">for</code> and <code class="highlighter-rouge">while</code> statements? — a: The <code class="highlighter-rouge">else</code> code is executed after the loop ends if there was no <code class="highlighter-rouge">break</code>.</li>
+    <li>q: What are <code class="highlighter-rouge">break</code> and <code class="highlighter-rouge">continue</code> for? — a: <code class="highlighter-rouge">continue</code> is for moving forward to the next iteration, <code class="highlighter-rouge">break</code> is for ending the loop.</li>
+  </ul>
+</div>
+
+<iframe class="autoresize" src="https://vagrant.local:8443/api/v0/deck/aeb6a5dd-3ff7-4856-bbe2-f201004d82e2"><p>Your browser does not support iframes.</p></iframe>
+
+<h1 id="comprehensions">comprehensions</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>q: Write multidimensional list comprehension. — a: <code class="highlighter-rouge">[ (x,y) for x in ... for y in ... if x&gt;1 if y&gt;1 ]</code></li>
+  <li>q: Write a list comprehension to get squares of odd numbers from 1 to 8. — a: <code class="highlighter-rouge">[x**2 for x in range(1, 9) if x%2==1]</code></li>
+  <li>q: Write a dictionary comprehension. — a: <code class="highlighter-rouge">l = [1, 1, 2, 3]; d = { x : l.count(x)   for x in l}</code>; for this particular example there is <code class="highlighter-rouge">collections.Counter(l)</code> though.</li>
+  <li>q: Write a set comprehension. — a: <code class="highlighter-rouge">set_of_primes = { i for i in range(101) if is_prime(i) }</code></li>
+  <li>q: Check if any element in a list satisfies some condition. — a: <code class="highlighter-rouge">any(l == 'x' for l in a_string)</code></li>
+  <li>q: Check if all elements in a list satisfy some condition. — a: <code class="highlighter-rouge">all(x &gt; 0 for x in lst)</code></li>
+</ul>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">superlearn-wiki</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              superlearn-wiki
+            
+            </li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/koddo"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">koddo</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+    
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+<script>anchors.add().remove(".no-anchor");</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.15/iframeResizer.min.js"></script>
+<script>iFrameResize({log:false}, 'iframe.autoresize')</script>
+
+
+
+
+
+  </body>
+</html>
