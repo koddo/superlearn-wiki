@@ -33,21 +33,16 @@ plugins:
 keep_files:
     - .git
 exclude:
-  - README.md
+  # - README.md
   - _oldwiki
 
 permalink: /blog/:title
 
 
 collections:
-  python:
-    output: true
-    title: "Python"
   git:
     output: true
     title: "Git"
-  rust:
+  python:
     output: true
-    title: "Rust"
-
-superlearn_baseurl: http://superlearn.it
+    title: "Python"

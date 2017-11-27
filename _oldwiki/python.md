@@ -9,6 +9,9 @@ layout:  collection_page
 
 
 
+# todo
+
+TODO: add `sum` somewhere
 
 
 # exceptions
@@ -982,6 +985,10 @@ TODO: generators
 TODO
 
 # misc
+
+<https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python>
+<https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression>
+
 
 try logbook module -- <http://logbook.readthedocs.io/en/stable/>
 

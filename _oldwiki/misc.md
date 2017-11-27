@@ -32,6 +32,7 @@ TODO: Erlang Types Book --- <http://erlang-types-book.com/> --- doesn't work
 TODO: <https://github.com/zkessin/testing-erlang-book>
 TODO: <https://medium.com/@jlouis666/breaking-erlang-maps-1-31952b8729e6>, <https://medium.com/@jlouis666/breaking-erlang-maps-2-362730a91400>
 TODO: <http://blog.listincomprehension.com/2010/03/spoofing-erlang-distribution-protocol.html>
+TODO: buy <https://ninenines.eu/articles/erlanger-playbook/>
 
 <https://www.reddit.com/r/erlang/comments/6417tj/thebeambook_a_description_of_the_erlang_runtime/>
 <https://github.com/happi/theBeamBook>
@@ -46,6 +47,10 @@ Testing Poolboy, Concuerror basics -- http://concuerror.com/tutorials/poolboy-ex
 <http://marcelog.github.io/articles/erlang_link_vs_monitor_difference.html>
 
 <https://stackoverflow.com/questions/600642/how-do-i-concatenate-two-binaries-in-erlang>
+
+erlang battleground
+https://medium.com/erlang-battleground/call-me-maybe-28671e6b92f4
+https://medium.com/erlang-battleground/advanced-list-incomprehensions-6957863dfb4f
 
 # garbage collector
 
@@ -81,3 +86,9 @@ Löb and möb: strange loops in Haskell -- <https://github.com/quchen/articles/b
 # http
 
 <https://www.quora.com/Why-are-PUT-and-DELETE-no-longer-supported-in-HTML5-forms>
+
+https://stackoverflow.com/questions/283752/refresh-http-header, http://www.securiteam.com/securityreviews/6Z00320HFQ.html
+https://stackoverflow.com/questions/4584728/redirecting-with-a-201-created
+browsers do not redirect to the location from 201 response, it has to have a link to new resource or to redirect there
+201 created with a `Refresh: 0;url=/whatever/etc` header works, but 303 see other should be used instead, because refresh breaks back button
+i.e., for forms 303 = 201+refresh, https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5

@@ -1,2 +1,20 @@
-superlearn_baseurl: http://vagrant.local:8080
 livereload_script: http://vagrant.local:35730/livereload.js
+
+collections:
+  postgres:
+    output: true
+    title: "Postgres"
+  erlang:
+    output: true
+    title: "Erlang"
+  clojure:
+    output: true
+    title: "Clojure"
+  spanish:
+    output: true
+    title: "Spanish"
+  korean:
+    output: true
+    title: "Korean"
+
+
