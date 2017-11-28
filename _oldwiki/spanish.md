@@ -7,6 +7,11 @@ layout:  collection_page
 * this line gets replaced with the generated table of contents
 {:toc}
 
+<https://github.com/hermitdave/FrequencyWords/>
+    
+<http://frequencylists.blogspot.ru/2016/05/the-500-most-frequently-used-spanish.html>
+<http://frequencylists.blogspot.ru/2016/05/the-8600-most-frequently-used-spanish.html>
+
 
 # days of week, names of months
 

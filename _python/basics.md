@@ -8,127 +8,107 @@ layout:  collection_page
 {:toc}
 
 
-# hello world
-
-<iframe class="autoresize" src="http://superlearn.it/ht/cards/"><p>Your browser does not support iframes.</p></iframe>
-
-
-
-# true, false, and comparisons
-
-{% comment %}
-{% endcomment %}
+# True, False, and comparisons
 
 ``` python
-if () or [] or {} or None:
+if () or [] or {} or None or 0 or '':
     'this line is skipped'
 ```
-<https://docs.python.org/3/library/stdtypes.html#truth-value-testing>
 
+From <https://docs.python.org/3/library/stdtypes.html#truth-value-testing>:
+> Considered false: instances with `__bool__()` returning False or `__len__()` returning zero. Built-ins:
+> - `False`, `None`
+> - zeroes of any numeric type: `0`, `0.0`, `Decimal(0)`, `Fraction(0, 1)`, `0j`
+> - empty sequences and collections: `''`, `()`, `[]`, `{}`, `{}`, `set()`, `range(0)`
 
-<br/>
-
-The interesting thing in python: `b == not a` is a syntax error.
-`not` has a lower priority than non-boolean operators, so `not a == b` is interpreted as `not (a == b)`, and `b == not a` is a syntax error.
-<https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not>
-
-<br/>
-
-as always, `and` and `or` are short-circuit operators, second argument is not evaluated here:
-
+As in many languages, `and` and `or` are short-circuit operators, second argument is not evaluated here:
 ``` python
 if False and whatever():
     'this line is skipped, whatever() is not evaluated'
 ```
 
-<br/>
+Comparison operators look quite standard: `==`, `!=` (`<>` was removed from the language), `<`, `>`, `<=`, `>=`. And for object identity: `is`, `is not`.
+> Behavior of the `is` and `is not` operators cannot be customized; also they can be applied to any two objects and never raise an exception.
 
-`x < y <= z` is equivalent to `x < y and y <= z`, except `y` is evaluated only once
-in both cases `z` is not evaluated at all when `x < y` is found to be false
-
-<br/>
-
-comparison operators look quite standard: `==`, `!=`, `<`, `>`, `<=`, `>=`
-and for object identity: `is`, `is not`
-objects of different _built-in_ types never compare equal (except different numeric types), but we can define an object with `__eq__` --- <http://stackoverflow.com/questions/12379840/python-comparison-between-built-in-and-user-defined-types>
-`<`, `>`, `<=`, `>=` raise `TypeError` exception when the objects are of different types that cannot be compared, or in other cases where there is no defined ordering
-
+Objects of different _built-in_ types never compare equal (except different numeric types), e.g., `'1' == 1` is false. `<`, `>`, `<=`, `>=` raise `TypeError` exception when the objects are of different types that cannot be compared.
 ``` python
 >>> 'abc' > 1000
 TypeError: unorderable types: str() > int()
 ```
 
-behavior of the `is` and `is not` operators cannot be customized; also they can be applied to any two objects and never raise an exception
+`x < y < z` is equivalent to `x < y and y < z`, except `y` is evaluated only once. In both cases `z` is not evaluated at all when `x < y` is found to be false
 
-<https://docs.python.org/3/library/stdtypes.html#comparisons>
+Most importantly:
 
-<br/>
+Use `if x`. Rarely `if x == True and type(x) is bool` when needed. Never `if x is True`, because `bool` is a subclass of `int`, this fails in obscure cases.
 
-generally you only want to be using `is` with mutable objects (or None, which is the exception)
-`x is None` vs `x == None`: [PEP 8](https://www.python.org/dev/peps/pep-0008/#programming-recommendations)
+Same for `not x` and `False`.
+
+An edge case is comparison to `None`. Use `if x is None`, never `x == None`. From [PEP 8](https://www.python.org/dev/peps/pep-0008/#programming-recommendations):
 > Comparisons to singletons like None should always be done with is or is not , never the equality operators. 
 
-
-<http://stackoverflow.com/questions/9494404/use-of-true-false-and-none-as-return-values-in-python-functions>
-
-
-``` Python
-class A(object):
-    def __eq__(self, other):
-        print( "A __eq__ called: %r == %r ?" % (self, other) )
-        return self.value == other.value
-class B(object):
-    def __eq__(self, other):
-        print( "B __eq__ called: %r == %r ?" % (self, other) )
-        return self.value == other.value
-
-a = A()
-a.value = 3
-b = B()
-b.value = 4
-a == b
+Good:
+```
+if x:
+  ...
+if not x:
+  ...
+if x == True and type(x) is bool:
+  ...
+if x == False and type(x) is bool:
+  ...
+if x is None:
+  ...
 ```
 
+Bad:
 
-<div class="ryctoic-questions" markdown="1">
-deck:
-python --- true, false, and comparisons
+```
+if x is True:
+  ...
+if x is False:
+  ...
+if x == True:
+  ...
+if x == False:
+  ...
+if x == None:
+  ...
+```
 
-TODO:
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf?deckname=python%20--%20true,%20false,%20and%20comparisons&c=00e11412-87e7-46c2-873b-4987138e601e&c=43417abc-f022-42c2-ace7-87bd0239ffcb&c=ce477b4f-271f-4027-bae2-7c74c6847a7a&c=f03ca050-a3a0-481a-aec8-86a21b275aef&c=ec27a052-9ff8-4bbe-81ea-ba4264680d5d&c=2f979875-6470-41e8-98a6-57cf4a7544b8&c=36677f91-1d24-4f5d-970b-29ff4ed99fff&c=97839006-432e-445d-96ac-90fb3a7d8e90&c=20185bb1-d359-4e73-8df3-4734abd48e96&c=c0b810e8-0f6d-4537-9532-98d5ffa3a693&c=f1f76e46-9b13-4bac-98c2-28e3fe1f219e&c=d8313271-3c07-4dcb-9e0d-a861fc7b3da9&c=af569036-0c71-48f4-ab00-2d832a3d5fac&c=725bec17-e183-4fd2-894d-3674ca64df8d&c=a6d623af-6854-453e-adec-639e0b95d63b&c=cc8171d5-4c69-4628-afc7-9bf94f58c42c&c=97b7f65d-6a1c-4a51-aa22-b2b95f4e1d42&c=2cab720c-e62a-4c58-a577-8150b3854584&c=5402f205-f981-40fe-b771-3a4c4aff99f2">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
-- q: `==` vs `__eq__()` --- a:
-- q: Why `__eq__()` returns `NotImplemented`? --- a: 
-- q: What happens when you compare incomparable types?
 
-<https://docs.python.org/3/reference/datamodel.html#object.__eq__>
-
-<https://docs.python.org/3/library/constants.html#NotImplemented>
-
-<https://docs.python.org/3/whatsnew/3.0.html#ordering-comparisons>
-
+{% comment %}
 - q: What values are considered false in python? --- a: `False`, `None`, any numeric zero, empty sequence, empty dict, instance with `__bool__()` returning False or `__len__()` returning zero
-- q: `not a == b` vs `not (a == b)` vs `b == not a` --- a: `not` has a lower priority than non-boolean operators, so `not a == b` is interpreted as `not (a == b)`, and `b == not a` is a syntax error
-- q: short-circuiting behavior of boolean operators --- a: `if False and whatever(): 'this line is skipped, whatever() is not evaluated'`
-- q: `x < y <= z` vs `x < y and y <= z` --- a: `x < y <= z` is equivalent to `x < y and y <= z`, except `y` is evaluated only once, and in both cases `z` is not evaluated at all when `x < y` is found to be false
-- q: What are equal and not equal operators? --- a: `==`, `!=`, the `<>` was removed
-- q: What are less, more, less or equal, more or equal operators? --- a: `<`, `>`, `<=`, `>=`
+- q: What is short-circut behavior of boolean operators `and`, `or`. --- a: `if False and whatever(): 'this line is skipped, whatever() is not evaluated'`
+- q: `x < y <= z` vs `x < y and y <= z` --- a: `x < y <= z` is pretty much equivalent to `x < y and y <= z`, except `y` is evaluated only once, and in both cases `z` is not evaluated at all when `x < y` is found to be false
+- q: What are equal and not equal operators? --- a: `==`, `!=`
+- q: What is `<>`? --- a: It's a _not equal_ opearator in older python versions, was removed from the language. Use `!=` instead.
 - q: How to test for object identity? --- a: `is`, `is not`
-- q: How to customize behavior of `is` and `is not`? --- a: Behavior of the `is` and `is not` operators cannot be customized.
+- q: How to customize behavior of `is` and `is not`? --- a: Not possible.
 - q: What objects can be tested for identity with the `is` ans `is not` operators? --- a: The `is` and `is not` operators can be applied to any two objects and never raise an exception.
 - q: When does the `is` operator throw an exception? --- a: The `is` and `is not` operators can be applied to any two objects and never raise an exception.
-- q: `if x` vs `if x == True` vs `if x is True` --- a: Use `if x`; and in extremely rare cases when you really want to explicitly distinguish if `x` is, for example, not `1`, not `[]`, but boolean `True`, check it with `x == True and type(x) is bool`; don't use `x is True`, it will fail in some obscure cases, because `bool` is subclass of `int`.
-- q: `if not x` vs `x is None` vs `x == None` --- a: Use the `if not x`; and in cases when you really want to explicitly distinguish `None` and other false values, use `x is None`; don't use `x == None`, because PEP 8.
+- q: `if x` versus `if x == True` versus `if x is True` --- a: Use `if x`; and in extremely rare cases when you really want to explicitly distinguish if `x` is, for example, not `1`, not `[]`, but boolean `True`, check it with `x == True and type(x) is bool`; don't use `x is True`, it will fail in some obscure cases, because `bool` is subclass of `int`.
+- q: How to make sure `x` is really `True`, not `1`, not `[]`, etc? Simple `if x` won't work. --- a: `x == True and type(x) is bool`
+- q: `if not x` vs `x is None` vs `x == None` --- a: Use the `if not x`; and in cases when you really want to explicitly distinguish `None` and other false values, use `x is None`; don't use `x == None`.
+- q: `if x is not None` or `if not x is None`?
 - q: `x is y` vs `id(x) == id(y)` --- a: Use the former. Don't use `id(x) == id(y)`, because id of an object in CPython being the location in memory is an implementation detail, this may change.
 - q: When two objects of different _built-in_ types compare equal? --- a: Objects of different _built-in_ types, except different numeric types, never compare equal.
 - q: What happens when you compare objects of different _built-in_ types, e.g, `'a' == 1` and `'abc' > 10`? a: Except for numeric types, `==` and `!=` always return `False` for objects of different _build-in_ types, `<`, `>`, `<=`, `>=` raise `TypeError` exception.
 - q: What happens when you sort a heterogeneous list? --- a: All the elements must be comparable to each other, otherwise the `TypeError` is thrown. If `.sort()` is used for in-place sorting, then the list is modified until the occurrence of the error.
-</div>
+- q: What happens when you compare incomparable types?
+
+skipped
+- q: `not a == b` vs `not (a == b)` vs `b == not a` --- a: `not` has a lower priority than non-boolean operators, so `not a == b` is interpreted as `not (a == b)`, and `b == not a` is a syntax error
+- q: What are _less_, _more_, _less or equal_, _more or equal_ operators? --- a: `<`, `>`, `<=`, `>=`
+{% endcomment%}
+
 
 <br />
 <br />
-
-
-<iframe class="autoresize" src="https://vagrant.local:8443/api/v0/deck/4db66f7c-cee0-4de3-84c7-fdd28b030a82"><p>Your browser does not support iframes.</p></iframe>
 
 
 # functions
@@ -226,7 +206,6 @@ TODO: what if we do `for i in ...: else: ... use i`?
 - q: What are `break` and `continue` for? --- a: `continue` is for moving forward to the next iteration, `break` is for ending the loop.
 </div>
 
-<iframe class="autoresize" src="https://vagrant.local:8443/api/v0/deck/aeb6a5dd-3ff7-4856-bbe2-f201004d82e2"><p>Your browser does not support iframes.</p></iframe>
 
 # comprehensions
 

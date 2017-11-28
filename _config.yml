@@ -26,6 +26,8 @@ github_username:  koddo
 
 # Build settings
 markdown: kramdown
+# kramdown:
+#   toc_levels: 1..1
 
 plugins:
   - jekyll-feed

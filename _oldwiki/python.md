@@ -920,6 +920,14 @@ q: `len(x)` vs `x.__len__` --- a: TODO: `__len__` is slower than `len()`, becaus
 
 # oop
 
+TODO:
+- q: `==` vs `__eq__()` --- a:
+- q: Why `__eq__()` returns `NotImplemented`? --- a: 
+<https://docs.python.org/3/reference/datamodel.html#object.__eq__>
+<https://docs.python.org/3/library/constants.html#NotImplemented>
+<https://docs.python.org/3/whatsnew/3.0.html#ordering-comparisons>
+
+
 TODO: multimethods, dispatch
 
 [classmethod](https://docs.python.org/3/library/functions.html#classmethod)
