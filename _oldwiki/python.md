@@ -12,7 +12,8 @@ layout:  collection_page
 # todo
 
 TODO: add `sum` somewhere
-
+TODO: `None` is a singleton
+TODO: identity
 
 # exceptions
 

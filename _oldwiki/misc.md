@@ -92,3 +92,6 @@ https://stackoverflow.com/questions/4584728/redirecting-with-a-201-created
 browsers do not redirect to the location from 201 response, it has to have a link to new resource or to redirect there
 201 created with a `Refresh: 0;url=/whatever/etc` header works, but 303 see other should be used instead, because refresh breaks back button
 i.e., for forms 303 = 201+refresh, https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5
+
+
+http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api
