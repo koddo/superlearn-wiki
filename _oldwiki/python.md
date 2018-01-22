@@ -348,6 +348,8 @@ TODO: advanced unpacking: `a, b, *rest = range(10)`, `a, *rest, b = range(10)`, 
 
 # deques
 
+<https://dbader.org/blog/queues-in-python>
+
 TODO: better question for deque rotation
 
 - q: `Queue.Queue` vs `collections.deque` for implementing a queue. -- a: If you don't need thread safety, use `collections.deque`. Otherwise use `Queue.Queue`, because the deque is not designed for this and some operations of `collections.deque` are only threadsafe by accident due to the existence of the GIL.
@@ -1331,3 +1333,10 @@ isinstance(tree.getroot().attrib, dict) == True
 
 
 
+# libs
+
+<https://python-graph-gallery.com/>
+# garbage collector
+
+<https://rushter.com/blog/python-garbage-collector/>
+<https://rushter.com/blog/python-memory-managment/>

@@ -46,6 +46,8 @@ course and book Foundations of Machine Learning by Mehryar Mohri
 
 <https://stats.stackexchange.com/questions/89882/are-there-any-probabilistic-models-for-graph-based-recommender-systems>
 
+<https://arogozhnikov.github.io/2016/07/05/gradient_boosting_playground.html>
+
 # boruta, feature selection algorithm
 
 https://www.reddit.com/r/MachineLearning/comments/44qb9p/python_implementation_of_boruta_an_all_relevant/
@@ -142,7 +144,8 @@ impurity of split
 <http://www.asimovinstitute.org/neural-network-zoo/>
 <https://github.com/songrotek/Deep-Learning-Papers-Reading-Roadmap>
 
-<https://www.reddit.com/r/InternetIsBeautiful/comments/4emh2i/play_with_a_neural_network_right_in_your_browser/>
+<http://playground.tensorflow.org/>
+<https://cloud.google.com/blog/big-data/2016/07/understanding-neural-networks-with-tensorflow-playground>
 
 A Few Useful Things to Know about Machine Learning <https://gist.github.com/shagunsodhani/5c2cdfc269bf8aa50b72>, <http://machinelearningmastery.com/useful-things-to-know-about-machine-learning/>
 
