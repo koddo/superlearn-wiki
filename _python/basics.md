@@ -80,35 +80,13 @@ Except `y` is evaluated only once here. \\
 Btw, in both cases `z` is not evaluated at all when `x < y` is false. \\
 Be careful, `1 > 0 < 1` is true.
 
-<!-- <iframe class="autoresize" src="http://superlearn.it/ht/asdf?deckname=python%20--%20true,%20false,%20and%20comparisons&c=00e11412-87e7-46c2-873b-4987138e601e&c=43417abc-f022-42c2-ace7-87bd0239ffcb&c=ce477b4f-271f-4027-bae2-7c74c6847a7a&c=f03ca050-a3a0-481a-aec8-86a21b275aef&c=ec27a052-9ff8-4bbe-81ea-ba4264680d5d&c=2f979875-6470-41e8-98a6-57cf4a7544b8&c=36677f91-1d24-4f5d-970b-29ff4ed99fff&c=97839006-432e-445d-96ac-90fb3a7d8e90&c=20185bb1-d359-4e73-8df3-4734abd48e96&c=c0b810e8-0f6d-4537-9532-98d5ffa3a693&c=f1f76e46-9b13-4bac-98c2-28e3fe1f219e&c=d8313271-3c07-4dcb-9e0d-a861fc7b3da9&c=af569036-0c71-48f4-ab00-2d832a3d5fac&c=725bec17-e183-4fd2-894d-3674ca64df8d&c=a6d623af-6854-453e-adec-639e0b95d63b&c=cc8171d5-4c69-4628-afc7-9bf94f58c42c&c=97b7f65d-6a1c-4a51-aa22-b2b95f4e1d42&c=2cab720c-e62a-4c58-a577-8150b3854584&c=5402f205-f981-40fe-b771-3a4c4aff99f2&c=66a2d9ce-b826-48c8-8212-2222c6d2c6f1&c=d2784179-12d4-4e35-bb74-3cd239a09a4b&c=6e30f635-9cec-49f4-a378-391605c3522f&c=a3184d87-8fe0-4b56-b6c3-088aeaf0d537"> -->
-<!--     <p>Your browser does not support iframes.</p> -->
-<!-- </iframe> -->
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf?deckname=python%20--%20true,%20false,%20and%20comparisons
-&c=00e11412-87e7-46c2-873b-4987138e601e
-&c=43417abc-f022-42c2-ace7-87bd0239ffcb
-&c=ce477b4f-271f-4027-bae2-7c74c6847a7a
-&c=f03ca050-a3a0-481a-aec8-86a21b275aef
-&c=ec27a052-9ff8-4bbe-81ea-ba4264680d5d
-&c=2f979875-6470-41e8-98a6-57cf4a7544b8
-&c=36677f91-1d24-4f5d-970b-29ff4ed99fff
-&c=97839006-432e-445d-96ac-90fb3a7d8e90
-&c=20185bb1-d359-4e73-8df3-4734abd48e96
-&c=c0b810e8-0f6d-4537-9532-98d5ffa3a693
-&c=f1f76e46-9b13-4bac-98c2-28e3fe1f219e
-&c=d8313271-3c07-4dcb-9e0d-a861fc7b3da9
-&c=af569036-0c71-48f4-ab00-2d832a3d5fac
-&c=725bec17-e183-4fd2-894d-3674ca64df8d
-&c=a6d623af-6854-453e-adec-639e0b95d63b
-&c=cc8171d5-4c69-4628-afc7-9bf94f58c42c
-&c=97b7f65d-6a1c-4a51-aa22-b2b95f4e1d42
-&c=2cab720c-e62a-4c58-a577-8150b3854584
-&c=5402f205-f981-40fe-b771-3a4c4aff99f2
-&c=66a2d9ce-b826-48c8-8212-2222c6d2c6f1
-&c=d2784179-12d4-4e35-bb74-3cd239a09a4b
-&c=6e30f635-9cec-49f4-a378-391605c3522f
-&c=a3184d87-8fe0-4b56-b6c3-088aeaf0d537">
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20true,%20false,%20and%20comparisons">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+TODO: `True + 1 == 2`, `False + 1 == 0`
+TODO: <https://github.com/satwikkansal/wtfpython#-be-careful-with-chained-operations>
+
 
 {% comment %}
 - q: What values are considered false in python? --- a: `False`, `None`, any numeric zero, empty sequence, empty dict, instance with `__bool__()` returning False or `__len__()` returning zero
@@ -146,18 +124,9 @@ skipped
 
 # functions
 
-e7080e41-c777-4281-a2f4-0a64b671c145
-e1e1336c-4935-4bad-b722-ab8e2a4a4a84
-77cea275-eba3-4b79-99e4-fe2e62f8f11b
-541d240f-3154-41e7-8948-b532672f6c8c
-b87d16b5-13de-4702-8d0a-66ebcfd92613
-ab64b5af-7677-41b5-a4f1-8bf7d5a9e663
-60a524b9-9bfd-430f-bd43-d348bc6d8248
-121dd141-4d5f-4285-be26-bae4db5dc13c
-9803b5a0-305d-4f3c-a18e-b4d29d0e5a44
-c1ee3347-97b4-4968-889b-a676fe2f6c9d
-ca31e50c-9035-43dd-8e87-1aecb6684160
-e42766a1-6d93-4b2e-be6b-8870800ea90f
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20functions">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
 <https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions>
 
@@ -177,24 +146,6 @@ e42766a1-6d93-4b2e-be6b-8870800ea90f
 - q: How to call this function? `def f(*, a, b): ...`
 - q: How to call this function? `def f(*, a=1, b): ...`
 - q: Can positional arguments come after keyword arguments? Like `f(a=1, 2)`
-
-89c69201-e653-449f-b5c5-6041898fe256
-dfe3d5d8-7b57-4ba6-926a-0fbd0ff7e756
-b9b6eb8a-1d2c-4209-b52b-d232212c3ded
-7093ffea-df35-4cd1-9673-9cb2f27388a4
-62101702-678c-4c43-acf5-f2f226d0028a
-9ff7a4bf-dee4-4469-bfae-1b921173cc92
-7cfc2f5b-cef2-47b2-a953-5fd7fcad83a4
-e3949329-f17e-4c9a-a255-adf81ed4b162
-9d8a6cd6-faf8-4616-9a5f-4faed41122a3
-641b893e-d08d-4d1b-8eb5-9e163bb71da9
-c4359766-503a-47ec-bcf0-3b97e1d78bce
-f77e6f77-1e88-4a9a-84dc-2b80241b0a74
-36495b31-faf2-48d2-a14f-2fdc9cd0ee2a
-26c9c39b-21b7-4383-aae7-c63e4c3102a5
-ca35854c-32df-4826-abdd-ab67e7caba61
-81a0f499-bc4d-41e5-b7b1-2d97d8ff136e
-
 - q: Can we pass positional arguments as keyword arguments to a function `def f(a, b): ...`? --- Yes. `f(a=1, b=2)`
 - q: Can we pass positional arguments as keyword arguments in different order to a function `def f(a, b): ...`? --- Yes. `f(b=2, a=1)`
 - q: How to define a function with an arbitrary argument list? --- a: `def f(*args): ...`
@@ -211,14 +162,16 @@ ca35854c-32df-4826-abdd-ab67e7caba61
 - q: How to pass a dictionary of arguments `dct = {'a' : 1, 'b' : 2 }`to a function with keyword arguments `def f(**kwargs)`? --- a: `foo(**dct)`
 - q: What do we do here? `f(*lst)` --- We pass a list of arguments to a function defined like `def f(*args): ...`
 - q: What do we do here? `f(**dct)` --- We pass a dict of keyword arguments to a function defined like `def f(**kwargs): ...`
+- q: Write a lambda function. --- a: `f = lambda x: x**2`
+{% endcomment %}
 
-
-
+# mutable default arguments
 - q: What happens if you have a mutable object as a default parameter, like `def f(l = []): ...`, and you mutate the list, e.g., append values to it inside the function?
 - q: When you have a mutable object as a default value, like `def f(l = []): ...`, how to make sure it's not shared between function calls? --- a: `def f(l = None): if l is None: l = [] ...`
 - q: What is mutable defaults in functional programming terms? --- a: let over lambda
 - q: Why is python designed this why that is has mutable default arguments?
 
+# scope
 - q: How to have a closure in python? --- `nonlocal`
 - q: What is `nonlocal` for? --- a: For closures.
 - q: Can you access global variables in a function by declaring them `nonlocal`? --- a: No. `nonlocal` specifically excludes the global scope. See _LEGB_ scope resolution rule.
@@ -227,10 +180,13 @@ ca35854c-32df-4826-abdd-ab67e7caba61
 - q: How o to access a global variable in a function? --- a: To read them just read them. To modify mark them `global`.
 - q: Should you mark a variable `global` in a function to access the global? --- a: Well, no. To read them just read them. To modify mark them `global`.
 
-- q: Write a lambda function. --- a: `f = lambda x: x**2`
-{% endcomment %}
+
 
 TODO: configure my editor to highlight default values with a bright red color with an overlay that reminds about dangers of mutable default values
+
+# docstrings
+
+PEP 257 -- Docstring Conventions: <https://www.python.org/dev/peps/pep-0257/>
 
 # type hinting
 

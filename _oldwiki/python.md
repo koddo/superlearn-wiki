@@ -14,6 +14,9 @@ layout:  collection_page
 TODO: add `sum` somewhere
 TODO: `None` is a singleton
 TODO: identity
+TODO: trailing comma, https://stackoverflow.com/questions/11597901/why-are-trailing-commas-allowed-in-a-list
+
+<https://www.tutorialspoint.com/python/python_interview_questions.htm>
 
 # exceptions
 
@@ -1134,6 +1137,7 @@ q: dir() vs vars(...).keys() a: <http://stackoverflow.com/questions/980249/diffe
 q: check the import search path --- a: `sys.path`
 
 
+TODO: <http://canonical.org/~kragen/isinstance/>
 - q: `type(s) is str` vs `type(s) == str` vs `isinstance(s, str)` -- a: Virtually no difference between `is` and `==` here, but people tend to use `is`. Type comparison answers the strict question: is this a type of object. `isinstance(o, cls)` considers type hierarcy.
 
 
