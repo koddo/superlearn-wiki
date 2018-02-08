@@ -78,7 +78,7 @@ if x == None:
 There is a thing in python, operator chaining. It's for things like `x < y < z`, which is roughly equivalent to `x < y and y < z`. \\
 Except `y` is evaluated only once here. \\
 Btw, in both cases `z` is not evaluated at all when `x < y` is false. \\
-Be careful, `1 > 0 < 1` is true.
+Be careful, with operator chaining, `1 == 1 in [1]` is unreadable and it's not obvios that it's an operator chaining.
 
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20true,%20false,%20and%20comparisons">
     <p>Your browser does not support iframes.</p>
@@ -87,6 +87,9 @@ Be careful, `1 > 0 < 1` is true.
 TODO: `True + 1 == 2`, `False + 1 == 0`
 TODO: <https://github.com/satwikkansal/wtfpython#-be-careful-with-chained-operations>
 
+TODO: <http://canonical.org/~kragen/isinstance/>
+<https://stackoverflow.com/questions/152580/whats-the-canonical-way-to-check-for-type-in-python>
+- q: `type(s) is str` vs `type(s) == str` vs `isinstance(s, str)` -- a: Virtually no difference between `is` and `==` here, but people tend to use `is`. Type comparison answers the strict question: is this a type of object. `isinstance(o, cls)` considers type hierarcy.
 
 {% comment %}
 - q: What values are considered false in python? --- a: `False`, `None`, any numeric zero, empty sequence, empty dict, instance with `__bool__()` returning False or `__len__()` returning zero
@@ -134,6 +137,19 @@ skipped
 <https://stackoverflow.com/questions/1132941/least-astonishment-and-the-mutable-default-argument>
 <https://stackoverflow.com/questions/291978/short-description-of-the-scoping-rules>
 
+<https://docs.python.org/2/library/functions.html#apply>
+Deprecated since version 2.3: Use function(*args, **keywords) instead of apply(function, args, keywords) (see Unpacking Argument Lists).
+
+
+<https://www.reddit.com/r/Python/comments/41yr58/let_statement_in_python_2014/>
+<https://nvbn.github.io/2014/09/25/let-statement-in-python/>
+
+No return statement in lambdas: <https://docs.python.org/3/reference/expressions.html#lambda>
+
+<https://stackoverflow.com/questions/862412/is-it-possible-to-have-multiple-statements-in-a-python-lambda-expression>
+just use a tuple: `lambda x: ( f(x), g(x) )`
+
+
 {% comment %}
 - q: How to define a function? --- a: `def whatever(): ...`
 - q: Define a function with an optional argument. --- a: `def whatever(data=0): ...`
@@ -164,121 +180,4 @@ skipped
 - q: What do we do here? `f(**dct)` --- We pass a dict of keyword arguments to a function defined like `def f(**kwargs): ...`
 - q: Write a lambda function. --- a: `f = lambda x: x**2`
 {% endcomment %}
-
-# mutable default arguments
-- q: What happens if you have a mutable object as a default parameter, like `def f(l = []): ...`, and you mutate the list, e.g., append values to it inside the function?
-- q: When you have a mutable object as a default value, like `def f(l = []): ...`, how to make sure it's not shared between function calls? --- a: `def f(l = None): if l is None: l = [] ...`
-- q: What is mutable defaults in functional programming terms? --- a: let over lambda
-- q: Why is python designed this why that is has mutable default arguments?
-
-# scope
-- q: How to have a closure in python? --- `nonlocal`
-- q: What is `nonlocal` for? --- a: For closures.
-- q: Can you access global variables in a function by declaring them `nonlocal`? --- a: No. `nonlocal` specifically excludes the global scope. See _LEGB_ scope resolution rule.
-- q: What is _LEGB_ scope resolution rule?
-- q: Why a function can read global variables without declaring them `global`? --- _LEGB_ scope resolution rule.
-- q: How o to access a global variable in a function? --- a: To read them just read them. To modify mark them `global`.
-- q: Should you mark a variable `global` in a function to access the global? --- a: Well, no. To read them just read them. To modify mark them `global`.
-
-
-
-TODO: configure my editor to highlight default values with a bright red color with an overlay that reminds about dangers of mutable default values
-
-# docstrings
-
-PEP 257 -- Docstring Conventions: <https://www.python.org/dev/peps/pep-0257/>
-
-# type hinting
-
-TODO: function annotations: <https://github.com/kennknowles/python-rightarrow>
-TODO: variable annotations
-
-- q: Define a function with function annotations. --- a: `def a_func(a_dict: '{str: int}') -> '[str]': print(a_func.__annotations__); ...`
-
-
-# conditionals and loops
-
-``` python
-if False:
-    whatever()
-else:
-    print('ok')
-```
-
-`switch/case` [pep-3103](https://www.python.org/dev/peps/pep-3103/)
-
-``` python
-{
-    'a': 1,
-    'b': 2,
-    'c': 3,
-}.get(x, 0)
-```
-
-these do not support fall through, and this can be good or bad, depends on the point of view and problems you solve
-
-
-`range()` used to be `xrange()` in python 2
-
-``` python
-for n in range(0,100000000):
-  pass
-
-int i = 0
-while i < 100000000:
-  i += 1
-```
-
-<http://stackoverflow.com/questions/869229/why-is-looping-over-range-in-python-faster-than-using-a-while-loop>
-
-``` Python
-if condition:
-    ...
-else:
-    ...
-```
-
-TODO: what if we do `for i in range(0)`?
-TODO: what if we do `for i in ...: else: ... use i`?
-
-
-<div class="ryctoic-questions" markdown="1">
-- q: Write an if-then-else.
-- q: Write an one line if-else statement (ternary conditional operator). --- a: `x = 'good' if y else 'bad'`
-- q: What is short for else if? --- a: `elif`
-- q: What is going to be printed in this example when the condition is false? `if x < y < z: print(x); print(y); print(z)` --- a: Semicolon binds tighter than the colon in this context, so that in this example, either all or none of the print() calls are executed.
-- q: Write a switch/case statement. --- a: Python doesn't have this, but we can have an if/elif chain or dict-based dispatch, but those do not support fall through.
-- q: `range()` vs `xrange()` --- a: `range()` used to be `xrange()` in python 2.
-- q: Write a for loop from 0 to n-1 inclusive. --- a: `for i in range(n): ...`
-- q: Write a for loop from 1 to n inclusive. --- a: `for i in range(1, n+1): ...`
-- q: What is going to be printed? `for i in range(1, n+1): print(i)` --- a: Numbers from `1` to `n` inclusive.
-
-- q: Get a range with a step --- a: `range(start, end, step)`
-
-- q: Get a range going backwards. --- a: `range(99, 0, -1)`
-- q: Get a range from `99` to `0` with a step `2`. --- a: `range(99, 0, -2)`
-- q: Get a range from `0` to `-10`. --- a: `range(0, -10, -1)`
-- q: `for i in range(10**10): ...` vs `i=0; while i < 10**10: i+=1; ...;`? --- a: The former should be faster, code for `range()` is optimized.
-- q: Write a while statement. --- a: `while condition: ...`
-- q: What does `else` do after `for` and `while` statements? --- a: The `else` code is executed after the loop ends if there was no `break`.
-- q: What are `break` and `continue` for? --- a: `continue` is for moving forward to the next iteration, `break` is for ending the loop.
-</div>
-
-
-# comprehensions
-
-``` python
-[(x,y) for x in range(2) for y in range(3)]
-```
-
-- q: Write multidimensional list comprehension. --- a: `[ (x,y) for x in ... for y in ... if x>1 if y>1 ]`
-- q: Write a list comprehension to get squares of odd numbers from 1 to 8. --- a: `[x**2 for x in range(1, 9) if x%2==1]`
-- q: Write a dictionary comprehension. --- a: `l = [1, 1, 2, 3]; d = { x : l.count(x)   for x in l}`; for this particular example there is `collections.Counter(l)` though.
-- q: Write a set comprehension. --- a: `set_of_primes = { i for i in range(101) if is_prime(i) }`
-- q: Check if any element in a list satisfies some condition. --- a: `any(l == 'x' for l in a_string)`
-- q: Check if all elements in a list satisfy some condition. --- a: `all(x > 0 for x in lst)`
-
-
-
-
 
