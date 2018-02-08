@@ -7,17 +7,27 @@ layout:  collection_page
 * this line gets replaced with the generated table of contents
 {:toc}
 
+<http://www.cervantesvirtual.com/servlet/sirveobras/35761630101354941976613/p0000004.htm#22>
 
 <https://github.com/hermitdave/FrequencyWords/>
     
 <http://frequencylists.blogspot.ru/2016/05/the-500-most-frequently-used-spanish.html>
 <http://frequencylists.blogspot.ru/2016/05/the-8600-most-frequently-used-spanish.html>
 
-# Who, when, when, etc
+# What, when, where, who, whom, which
 
-que, quien
+que vs quien 
+<https://www.spanishdict.com/guide/relative-pronouns-in-spanish>
+<https://studyspanish.com/grammar/lessons/relproquien>
+
 cuando
 donde/adonde
+
+
+# here, there
+
+aquí
+allá
 
 # grammar
 
@@ -73,8 +83,9 @@ hay
 
 # good, bad
 
-bien
-bueno
+bien, bueno
+mal
+
 
 # time
 
@@ -112,16 +123,35 @@ el otoño
 
 # yesterday, today, tomorrow
 
+la fecha -- date
+¿Cuál es la fecha de hoy?
+
+anteayer
 ayer
 hoy
 mañana
+pasado mañana
+
+# second, minute, hour, day, week, month, year, decade, century
+
+el segundo
+el minuto
+la hora
+el día
+la semana
+el mes
+el año
+
+decade, century?
+
 
 this week -- esta semana
 last week -- la semana pasada
 next week -- la semana que viene
+weekend -- el fin de semana
 
-# second, minute, hour, day, week, month, year, decade, century
-
+el cumpleaños
+¿Cuando es tú cumpleaños?
 
 # infinitives and conjugation
 
