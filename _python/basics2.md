@@ -36,12 +36,11 @@ TODO: configure my editor to highlight default values with a bright red color wi
 
 PEP 257 -- Docstring Conventions: <https://www.python.org/dev/peps/pep-0257/>
 
-# type hinting
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20docstrings">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
-TODO: function annotations: <https://github.com/kennknowles/python-rightarrow>
-TODO: variable annotations
 
-- q: Define a function with function annotations. --- a: `def a_func(a_dict: '{str: int}') -> '[str]': print(a_func.__annotations__); ...`
 
 
 # conditionals and loops
