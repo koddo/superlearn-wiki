@@ -18,194 +18,20 @@ TODO: trailing comma, https://stackoverflow.com/questions/11597901/why-are-trail
 
 <https://www.tutorialspoint.com/python/python_interview_questions.htm>
 
-# exceptions
+<https://www.reddit.com/r/Python/comments/6cvx0s/the_meaning_of_underscores_in_python>
+
+<https://github.com/satwikkansal/wtfPython>, <https://www.reddit.com/r/Python/comments/3cu6ej/what_are_some_wtf_things_about_python/>
+
+pprint
+to a file
+
+<https://stackoverflow.com/questions/5574702/how-to-print-to-stderr-in-python>
+
+
+<https://docs.python.org/3.6/library/contextlib.html>
 
 
 
-``` Python
-# http://stackoverflow.com/questions/1611561/can-i-get-the-exception-from-the-finally-block-in-python/1611572#1611572
-try:
-    whatever
-except:
-    here sys.exc_info is valid
-    to re-raise the exception, use a bare `raise`
-else:
-    here you know there was no exception
-finally:
-    and here you can do exception-independent finalization
-```
-
-
-``` Python
-# The exception variable is excplicitly deleted after the except block is left.
-
-except E as N:
-    foo
-
-# equivalent 
-
-except E as N:
-    try:
-        foo
-    finally:
-        del N
-```
-
-Exception objects now store their traceback as the `__traceback__` attribute. This means that an exception object now contains all the information pertaining to an exception, and there are fewer reasons to use `sys.exc_info()` (though the latter is not removed).
-
-``` Python
-# http://stackoverflow.com/questions/3702675/how-to-print-the-full-traceback-without-halting-the-program/16946886#16946886
-import traceback
-
-try:
-    raise TypeError("Oups!")
-except Exception as err:
-    try:
-        raise TypeError("Again !?!")
-    except:
-        pass
-
-    # traceback.print_tb(err.__traceback__)
-    traceback.print_exc()
-
- ### File "e3.py", line 4, in <module>
- ###    raise TypeError("Oups!")
-```
-
-``` Python
-def func1():
-    try:
-        return 1
-    finally:
-        return 2
-
-def func2():
-    try:
-        raise ValueError()
-    except:
-        return 1
-    finally:
-        return 3
-
-func1()   # returns 2
-func2()   # returns 3
-```
-
-``` Shell
->>> try:
-...     print(1 / 0)
-... except Exception as exc:
-...     raise RuntimeError("Something bad happened") from exc
-...
-Traceback (most recent call last):
-  File "<stdin>", line 2, in <module>
-ZeroDivisionError: int division or modulo by zero
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "<stdin>", line 4, in <module>
-RuntimeError: Something bad happened
-```
-
-``` Python
-try:
-    self.file = open(filename)
-except IOError as e:
-    raise DatabaseError('failed to open') from e
-```
-
-``` Python
-class MyError(Exception):
-    """Raise for my specific kind of exception"""
-```
-
-``` Python
-class Error():
-    pass
-
-class InputError(Error):
-    def __init__(self, message, expression):
-        self.message = message
-        self.expression = expression
-```
-
-``` Python
-def KelvinToFahrenheit(Temperature):
-    assert (Temperature >= 0),"Colder than absolute zero!"
-    return ((Temperature-273)*1.8)+32
-```
-
-
-``` python
-from contextlib import suppress
-import os
-with suppress(FileNotFoundError):
-    print(1')
-    os.remove('1.tmp')
-    os.remove('2.tmp')
-    print(2')
-```
-
-<https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions>
-<https://www.python.org/dev/peps/pep-0352/>
-<https://hg.python.org/cpython/file/3.5/Objects/exceptions.c#l24>
-<https://bugs.python.org/issue1692335>
-
-TODO: - q: Write a custom exception class with a value besides message in a portable manner: <http://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python> 
-
-
-TODO: with statement, contextlib
-TODO: with pytest.raises(ExpectedException) <http://doc.pytest.org/en/latest/assert.html>
-TODO: more from <https://docs.python.org/3/library/traceback.html>
-
-TODO: <https://docs.python.org/3/library/exceptions.html#exception-hierarchy>
-
-<div class="ryctoic-questions" markdown="1">
-- q: Write a new exception class. --- a: `class SomeError(Exception): pass` --- but generally it's a good idea to look for an appropriate existing exception first. See python exception hierarchy.
-- q: Write a custom exception class with a value besides message. --- a: If you do not need portability, you can write the exception class with `__init__(self, message, value)` that just sets these fields and do not run the `super().__init__()`, because `self.args = args` is already set in `super().__new__()`, this is done for historical reasons.
-- q: `Exception` vs `BaseException` as a base class of a custom exception. --- a: The latter should only be used as a base class for exceptions that should only be handled at the top level, such as `SystemExit` or `KeyboardInterrupt`. The recommended idiom for handling all exceptions except for this latter category is to use `except Exception:`. Catching `BaseException` will break `ctrl-c`.
-- q: How to raise an exception? --- a: `raise ValueError('Some message')`; raise exception as specific to the problem as possible, don't `raise Exception('message')`, as catching it will also catch any other more specific ones.
-- q: Raise an exception with an argument besides the message. --- a: `ValueError('message', 99).args(1) == 99` or, when using a custom exception class, `CustomError('message', 99).custom_field == 99`
-- q: How to re-raise the same exception in an except block? --- a: Just `raise` without arguments. Don't do `except ValueError: ... raise ValueError` as you will lose the stack trace.
-- q: Naming convention for exception classes. a: From [PEP 8](https://www.python.org/dev/peps/pep-0008/#exception-names): "Because exceptions should be classes, the class naming convention applies here. However, you should use the suffix "Error" on your exception names (if the exception actually is an error). ... Class names should normally use the CapWords convention.". `BeerNotFound` is probably even better then `BeerError`. But again, you could use already existing `LookupError`.
-- q: Catch an exception. --- a: `except ValueError as e: ...`
-- q: Catch multiple exceptions in one except block. --- a: `except (IDontLIkeYouException, YouAreBeingMeanException) as e: ...`
-- q: Catch different exceptions in different except blocks. --- a: `except ValueError: ... except LookupError: ...`
-- q: How to catch all existing exceptions and just ignore them? --- a: Just `except:`, but never do this.
-- q: How to ignore an exception? Like ignoring file existance before removing it. --- a: `except FileNotFoundError: pass` or `with contextlib.suppress(FileNotFoundError): os.remove('somefile.tmp')` --- it is equivalent to catching and doing `pass` though, this is purely for readability: if we have an exception in a middle of a block, like in `f()` when `z = f(x) * g(y)`, we can't just move on ignoring it.
-- q: What is a problem with this: `with suppress(FileNotFoundError): os.remove(1.tmp'); os.remove(2.tmp')`? -- a: The second file won't be deleted if the first `remove` throws the exception. Use the `with suppress()` carefully.
-- q: What is `else` in try-catch for? --- a: Think of it as a part of `try` block which is not interested in catching exceptions. When there are no exceptions, `try` and `else` blocks are run together, but when exceptions are raised, after that only `catch` and `finally` blocks are executed.
-- q: What is `finally` for? --- a: When an exception has occurred in the try clause and has not been handled by an except clause (or it has occurred in an except or else clause), it is re-raised after the `finally` clause has been executed.
-- q: What if we have `return` in both `try/catch` and `finally` blocks? --- a: `finally` block is guaranteed to be executed, so if we have `return` in both `try/except` and `finally` blocks, only the one in latter is run.
-- q: How to get exception info in the finally block? --- a: Please don't handle anything in the finally block. It is for exception-independent finalization. Also the exception variable is excplicitly deleted after the except block is left, and exception info is unavailable through it.
-- q: What is `assert` for? --- a: Asserts should be used to test conditions that should never happen. The purpose is to crash early in the case of a corrupt program state. They add a tiny overhead, but before making a program fast we have to make it work first. And we can turn asserts off when needed with `-O` flag.
-- q: What does `assert` do? --- a: `assert cond, message` is roughly equivalent to `if __debug__ and not cond: raise AssertionError(message)`
-- q: What happens here? `assert( 2+2==5, 'Houston, we have a problem' )` --- a: `assert`, unlike `print`, which is a function, is still a statement, so this is equivalent to `assert True`, because syntactically we have a non-empty tuple here. Good news is python and lint gives you warning for this.
-- q: Exception chaining. --- a: `except ValueException as exc: raise RuntimeError("Something bad happened") from exc` --- this will give a nice trace back which mentions that `ValueException` is a direct cause of the `RuntimeError("Something bad happened")`. And we have `exc.__cause__`.
-- q: What are `exception.__context__` and `exception.__cause__`? --- a: When raising (or re-raising) an exception in an `except` or `finally` clause `__context__` is automatically set to the last exception caught. `raise new_exc from original_exc` sets `new_exc.__cause__`.
-- q: How to print traceback of an exception? --- a: In the except block: `traceback.print_exc()`
-- q: How to log traceback of an exception? --- a: Use `traceback.format_exc()` and your favorite logger.
-</div>
-
-
-# input
-
-`input()` used to be `raw_input()` in python 2
-
-<http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html#raw_input>
-
-``` python
-int( input().strip() )
-```
-
-<div class="ryctoic-questions" markdown="1">
-- q: `input()` vs `raw_input()` --- a: `input()` used to be called `raw_input()` in python 2.
-- q: Get a string from input. --- a: `resp = input()`
-- q: Get a string from input with a prompt, e.g., "please enter your name". --- a: `resp = input('please enter your name: ')`
-- q: Get an integer from input. --- a: `int(input())`
-- q: Get a list of integers from input in a single line, e.g., `1 2 3 4`. --- a: `list(map(int, input().split()))`
-</div>
 
 
 
@@ -922,7 +748,7 @@ q: `len(x)` vs `x.__len__` --- a: TODO: `__len__` is slower than `len()`, becaus
 [ord](https://docs.python.org/3/library/functions.html#ord)
 [print](https://docs.python.org/3/library/functions.html#print)
 
-
+Don't use file.readlines() in a for-loop, a file object itself is enough: lines = [line.rstrip('\n') for line in file]
 
 # oop
 
@@ -1006,8 +832,6 @@ TODO
 
 try logbook module -- <http://logbook.readthedocs.io/en/stable/>
 
-<https://www.reddit.com/r/Python/comments/6cvx0s/the_meaning_of_underscores_in_python>
-<https://github.com/satwikkansal/wtfPython>
 
 ``` python
 def make_counter():
@@ -1088,6 +912,9 @@ TODO: generate random number
 <https://www.reddit.com/r/Python/comments/5zk97l/what_are_some_wtfs_still_in_python_3/>
 
 parallelism lib named dask
+
+- q: A question on semicolon: what is going to be printed in this example when the condition is false? `if x < y < z: print(x); print(y); print(z)` --- a: Semicolons are introduced to language to write simple one-liners like this. Don't overuse them.
+
 
 ## skipped hackerrank challenges
 
@@ -1342,3 +1169,10 @@ isinstance(tree.getroot().attrib, dict) == True
 
 <https://rushter.com/blog/python-garbage-collector/>
 <https://rushter.com/blog/python-memory-managment/>
+# docstrings
+
+PEP 257 -- Docstring Conventions: <https://www.python.org/dev/peps/pep-0257/>
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20docstrings">
+    <p>Your browser does not support iframes.</p>
+</iframe>

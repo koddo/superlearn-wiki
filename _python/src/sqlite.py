@@ -3,7 +3,7 @@ from contextlib import closing
 import datetime
 
 with closing(sqlite3.connect(":memory:",
-                             detect_types=sqlite3.PARSE_DECLTYPES)) as conn:
+                             detect_types = sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)) as conn:
     conn.row_factory = sqlite3.Row     # access fields by name
     with closing(conn.cursor()) as cur:
         with conn:    # auto-commit or -rollback

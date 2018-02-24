@@ -54,6 +54,7 @@ reset_index
 
 df.groupby('col')
 df.groupby(['col1', 'col2])
+cols = ['col1', 'col2]; df.sort_values(by=cols)[cols]   # to preview what's getting into the groups
 .size(), .min(), .max(), .mean(), .agg(['min', 'max'])
 
 
@@ -62,9 +63,14 @@ df.unstack()
 df.stack()
 
 df.fillna()
+
+df.where()??
 ```
 
+<https://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html>
 
+Exercises-3.ipynb: `t = titles; t[t.title == 'Hamlet'].groupby( t.year // 10 * 10 ).size().sort_index().plot(kind='bar')`
+Exercises-4.ipynb: `cast.groupby(['year', 'type']).size().unstack('type').fillna(0).plot(kind='area')`
 
 ```
   len(df)       series + value    df[df.c == value]
@@ -87,3 +93,28 @@ df.fillna()
   df.fillna(value)  s.dt.day        pd.concat([df1, df2])
   s.fillna(value)   s.dt.dayofweek
 ```
+
+- q: How to create a series, a data frame? --- a: <https://pandas.pydata.org/pandas-docs/stable/10min.html#object-creation>
+- q: How to create a column based on other columns? --- a: `df.assign( col = df.col1 * df.col2 )`
+- q: `df['new_col'] = s` vs `df.assign( new_col = s )` --- a: The former has issues with indices??? Inplace vs a copy, the latter can be inlined
+
+- q: How to get columns? How to get index? How to get values? --- a: <https://pandas.pydata.org/pandas-docs/stable/10min.html#viewing-data>
+
+- q: How to rename a column in pandas? Inplace? --- a:
+`df.rename( columns={'oldName1': 'newName1', 'oldName2': 'newName2'} )`, it can also be `inplace=True`
+or with `df.set_axis(['a', 'b', 'c', 'd', 'e'], axis='columns', inplace=False)` --- <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.set_axis.html#pandas.Series.set_axis>
+`df.columns = ['a', 'b', 'c']` is fine too.
+
+- q: `s.str.contains()` vs `substr in a_str` --- a:  
+
+- q: `DataFrame.merge()` vs `DataFrame.join()` --- a: Use `.merge`. `.join()` is the same as `.merge()`, but has other defaults.
+
+- q: How to sort data frame? By multiple columns? --- a: `df.sort_value(by='col')`, `df.sort_value(by=['col1', 'col2'])`
+
+
+optimized pandas data access methods, .at, .iat, .loc, .iloc and .ix
+
+
+
+
+
