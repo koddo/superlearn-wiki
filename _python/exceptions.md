@@ -31,16 +31,16 @@ finally:
 ``` Python
 # The exception variable is excplicitly deleted after the except block is left.
 
-except E as N:
+except E as e:
     foo
 
 # equivalent 
 
-except E as N:
+except E as e:
     try:
         foo
     finally:
-        del N
+        del e
 ```
 
 Exception objects now store their traceback as the `__traceback__` attribute. This means that an exception object now contains all the information pertaining to an exception, and there are fewer reasons to use `sys.exc_info()` (though the latter is not removed).
@@ -163,6 +163,7 @@ raise
 raise CustomError from e
 ```
 
+<https://docs.python.org/3/reference/compound_stmts.html#the-try-statement>:
 
 ``` Python
 while True:
@@ -201,6 +202,70 @@ Generally it's a good idea to look for an appropriate existing exception first.
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- ignoring exceptions">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+# `with` statement
+
+<https://docs.python.org/3/reference/compound_stmts.html#the-with-statement>
+
+``` Python
+with A() as a, B() as b:
+    suite
+
+# is equivalent to
+
+with A() as a:
+    with B() as b:
+        suite
+```
+
+``` Python
+try:
+    f = open("document.txt")
+except FileNotFoundError:
+    print("document.txt file is missing")
+except PermissionError:
+    print("You are not allowed to read document.txt")
+else:
+    try:
+        with f:
+            content = f.read()
+    except Exception:
+        ...
+```
+
+``` Python
+try:
+    f = open(my_file)
+
+    try:
+        do_stuff_that_fails()
+    except EXPECTED_EXCEPTION_TYPES as e:
+        do_stuff_when_it_doesnt_work()
+    finally:
+        f.close()
+except (IOError, OSError) as e:
+    do_other_stuff_when_it_we_have_file_IO_problems()
+    
+# or
+
+try:
+    file = open(...)
+except OpenErrors...:
+    # handle open exceptions
+else:
+    try:
+        # do stuff with file
+    finally:
+        file.close()
+```
+
+- q: What is the `with` statement for? --- a: For context managers, which make sure to run prepare and clean-up code when you enter and leave the context. E.g., `with open('filename') as f` will run the code to open it, and then make sure to close it no matter what happenned, was it normal code flow or an exception. In this example the `with` statement is pretty much equivalent to a `try/finally` block, and useful for having to not forget to close the file.
+- q: `with A() as a, B() as b:` vs `with A() as a: with B() as b:` --- a: Exactly the same.
+
+- q: How to check if a file exists before opening it? --- a: Don't, that leads to race conditions. Just open it in a try block.
+
+contextlib.closing()
+contextlib.suppress()
 
 # built-in exceptions
 
