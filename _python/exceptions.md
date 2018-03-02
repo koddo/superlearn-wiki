@@ -133,10 +133,10 @@ def KelvinToFahrenheit(Temperature):
 from contextlib import suppress
 import os
 with suppress(FileNotFoundError):
-    print(1')
+    print('1')
     os.remove('1.tmp')
     os.remove('2.tmp')
-    print(2')
+    print('2')
 ```
 
 <https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions>
@@ -207,16 +207,9 @@ Generally it's a good idea to look for an appropriate existing exception first.
 
 <https://docs.python.org/3/reference/compound_stmts.html#the-with-statement>
 
-``` Python
-with A() as a, B() as b:
-    suite
+- q: What is the `with` statement for? What is a context manager? --- a: The `with` statement is for not forgetting to run `.close()` in a finally block to clean up a resourse. Context managers make sure to run prepare and clean up code when you enter and leave the context. E.g., `with open('filename') as f` will run the code to open it, and then make sure to close it no matter what happenned, was it normal code flow or an exception. In this example the `with` statement is pretty much equivalent to a `try/finally` block, and useful for having to not forget to close the file.
 
-# is equivalent to
-
-with A() as a:
-    with B() as b:
-        suite
-```
+- q: How to catch exceptions of with block? --- a: 
 
 ``` Python
 try:
@@ -259,13 +252,136 @@ else:
         file.close()
 ```
 
-- q: What is the `with` statement for? --- a: For context managers, which make sure to run prepare and clean-up code when you enter and leave the context. E.g., `with open('filename') as f` will run the code to open it, and then make sure to close it no matter what happenned, was it normal code flow or an exception. In this example the `with` statement is pretty much equivalent to a `try/finally` block, and useful for having to not forget to close the file.
 - q: `with A() as a, B() as b:` vs `with A() as a: with B() as b:` --- a: Exactly the same.
 
-- q: How to check if a file exists before opening it? --- a: Don't, that leads to race conditions. Just open it in a try block.
+``` Python
+with A() as a, B() as b:
+    suite
 
-contextlib.closing()
-contextlib.suppress()
+# is equivalent to
+
+with A() as a:
+    with B() as b:
+        suite
+```
+
+- q: How to write a custom context manager?
+
+https://docs.python.org/3/library/contextlib.html#contextlib.ContextDecorator
+
+We can write custom context managers as classes or as @contextmanager decorated functions.
+
+``` Python
+@contextmanager
+def chdir(dir):
+    cwd = os.getcwd()
+    try:
+        os.chdir(dir)
+        yield
+    finally:
+        os.chdir(cwd)
+        
+with chdir('/tmp'):
+    print(os.getcwd())
+```
+
+Another example:
+
+``` Python
+@contextmanager
+def closing(thing):    # equivalent to contextlib.closing
+    try:
+        yield thing
+    finally:
+        thing.close()
+        
+with closing(urlopen('http://www.python.org')) as page:
+    for line in page:
+        print(line)
+```
+
+- q: What is `contextlib.ExitStack` for? --- a: 
+
+``` Python
+with open() as a, open() as b, open() as c:
+    ...
+
+# equivalent to
+
+with contextlib.ExitStack as stack:
+    a = stack.enter_context(open())
+    b = stack.enter_context(open())
+    c = stack.enter_context(open())
+    ...
+```
+
+But it's not too benefitial that way. It really shines when you want to have nested contexts of a depth unknown in advance.
+
+``` Python
+with ExitStack() as stack:
+    files = [stack.enter_context(open(fname)) for fname in filenames]
+```
+
+``` Python
+with ExitStack() as stack:
+    tempdirs = []
+    for i in range(3):
+        tempdir = tempfile.mkdtemp()
+        stack.callback(shutil.rmtree, tempdir)
+        tempdirs.append(tempdir)
+    # Do something with the tempdirs
+```
+
+- q: What is `contextlib.nested()` for? --- a: It was removed from the library, because it did not implement handling entering and exiting of nested contexts correctly.
+
+<https://docs.python.org/3/library/contextlib.html#contextlib.ExitStack>
+<https://www.wefearchange.org/2013/05/resource-management-in-python-33-or.html>
+<https://www.rath.org/on-the-beauty-of-pythons-exitstack.html>
+
+
+- q: What is `contextlib.closing` for? --- a: For closing a thing, e.g.:
+
+``` Python
+with closing(sqlite3.connect(path_to_file)) as conn:
+    with closing(conn.cursor()) as cur:
+        with conn: # auto-commits
+            cur.execute(statement)
+```
+
+- q: What is `contextlib.suppress` for? --- a: For ignoring exceptions, e.g.:
+
+``` Python
+with contextlib.suppress(NotFoundError):
+    ...
+    
+# equivalent to 
+
+try:
+    ...
+except NotFoundError:
+    pass
+```
+
+Beware though, the following code will ignore the second line after an exception in the first one:
+
+``` Python
+with suppress(FileNotFoundError):
+    os.remove('1.tmp')       # exception here
+    os.remove('2.tmp')       # this line not run
+```
+
+<https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stdout>
+<https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stderr>
+
+- q: What is `contextlib.redirect_stdout` and `contextlib.redirect_stderr` for? --- a: For utility scripts.
+
+Not suitable for use in library code and most threaded applications. It also has no effect on the output of subprocesses.
+
+``` Python
+with open('help.txt', 'w') as f:
+    with redirect_stdout(f):
+        help(pow)
+```
 
 # built-in exceptions
 
@@ -310,4 +426,8 @@ To ignore the SIGINT:
 ``` Python
 signal.signal(signal.SIGINT, signal.SIG_IGN)
 ```
+
+
+
+
 

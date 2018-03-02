@@ -804,6 +804,8 @@ q: get difference in seconds between two datetimes --- a: `abs(dt2 - dt1).total_
 - q: get absolute path of a given file by relative path --- a: `os.path.realpath('python.md')`
 - q: get metadata of a file and get modification time and size --- a: `metadata = os.stat('python.md'); time.localtime(metadata.st_mtime); import humanize; humansize.approximate_size(metadata.st_size)`
 
+- q: How to check if a file exists before opening it? --- a: Don't, that leads to race conditions. Just open it in a try or with block.
+
 
 # iterators and generators
 
@@ -1169,10 +1171,7 @@ isinstance(tree.getroot().attrib, dict) == True
 
 <https://rushter.com/blog/python-garbage-collector/>
 <https://rushter.com/blog/python-memory-managment/>
-# docstrings
 
-PEP 257 -- Docstring Conventions: <https://www.python.org/dev/peps/pep-0257/>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20docstrings">
-    <p>Your browser does not support iframes.</p>
-</iframe>
+
+

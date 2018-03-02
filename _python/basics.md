@@ -118,16 +118,40 @@ Deprecated since version 2.3: Use function(*args, **keywords) instead of apply(f
 
 ## mutable (default) argument
 
-<https://docs.python.org/3/tutorial/controlflow.html#default-argument-values>
+This is a design flaw, explicitly documented here: <https://docs.python.org/3/reference/compound_stmts.html#function-definitions>
+
+> Default parameter values are evaluated from left to right when the function definition is executed.
+> ...
+> This is generally not what was intended.
+
+The same effect can be easily achieved using let over lambda:
+
+``` Python
+def generate_f():
+    default_mutable_argument = []
+    def f(x, l = default_mutable_argument):
+        l.append(x)
+        return l
+    return f
+
+f = generate_f()
+```
 
 Python docs recommend this construct:
 
 ``` Python
-def f(a, L = None):
-    if L is None:
-        L = []
-    L.append(a)
-    return L
+def f(x, l = None):
+    if l is None:
+        l = []
+    l.append(x)
+    return l
+```
+
+Which can be enhanced slightly with type annotations for readability:
+
+``` Python
+def f(x, l: [] = None):
+    ...
 ```
 
 And doesn't mention this way at all:
@@ -152,7 +176,7 @@ def f(a, L = None):
 Here it really shouldn't modify the argument, but the mistake is obscure and can't be recognized.
 TODO: a good real world example
 
-In ruby it does copy default argument on every call and nobody died because of this.
+In ruby it copies the default argument on every call and no puppy was harmed because of this.
  
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20functions">
     <p>Your browser does not support iframes.</p>
@@ -225,10 +249,17 @@ LEGB rule: <https://stackoverflow.com/questions/291978/short-description-of-the-
 Instance and class variables can only be accessed by explicitly providing the namespace:
 
 ``` Python
-class Foo:
+class Foo():
     x = 0
-    def f():
-        Foo.x = 1
+    def foo(self):
+        self.__class__.x = 1
+        self.x = 10
+
+ff = Foo()
+ff.x == 0
+ff.foo()
+ff.x == 10
+Foo.x == 1
 ```
 
 The scope of names defined in a class block is limited to the class block; it does not extend to the code blocks of methods -– this includes comprehensions and generator expressions since they are implemented using a function scope:
@@ -248,6 +279,16 @@ class Foo:
 ```
 
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20scope">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+# docstrings
+
+PEP 257 -- Docstring Conventions: <https://www.python.org/dev/peps/pep-0257/>
+
+<https://stackoverflow.com/questions/3898572/what-is-the-standard-python-docstring-format>
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20docstrings">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -288,10 +329,19 @@ while i < 100000000:
 <http://stackoverflow.com/questions/869229/why-is-looping-over-range-in-python-faster-than-using-a-while-loop>
 
 ``` Python
-if condition:
-    ...
-else:
-    ...
+i = 100
+for i in range(3):
+    pass
+
+print(i)    # prints 2
+```
+
+``` Python
+i = 100
+for i in []:
+    pass
+
+print(i)    # prints 100
 ```
 
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20conditionals%20and%20loops">
@@ -340,4 +390,8 @@ print(i)
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20user%20input">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+
+
+
 
