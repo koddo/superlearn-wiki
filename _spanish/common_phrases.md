@@ -19,6 +19,7 @@ Fenominal.
 Estupendo.
 
 Hola.
+Buen.
 Buenos días.
 Buenas tardes.
 Buenas noches.
@@ -27,6 +28,7 @@ Adiós.
 Hasta luego. 
 Hasta pronto. 
 Hasta manana.
+Hasta la proxima.
 "Hasta la vista" is only used by Arnie.
 
 Cómo de llamas? / Cómo se llamas usted?

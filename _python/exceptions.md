@@ -144,10 +144,7 @@ with suppress(FileNotFoundError):
 
 <https://hg.python.org/cpython/file/3.5/Objects/exceptions.c#l24>
 
-TODO: - q: Write a custom exception class with a value besides message in a portable manner: <http://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python> 
 
-
-TODO: with statement, contextlib
 TODO: with pytest.raises(ExpectedException) <http://doc.pytest.org/en/latest/assert.html>
 TODO: more from <https://docs.python.org/3/library/traceback.html>
 
@@ -207,9 +204,6 @@ Generally it's a good idea to look for an appropriate existing exception first.
 
 <https://docs.python.org/3/reference/compound_stmts.html#the-with-statement>
 
-- q: What is the `with` statement for? What is a context manager? --- a: The `with` statement is for not forgetting to run `.close()` in a finally block to clean up a resourse. Context managers make sure to run prepare and clean up code when you enter and leave the context. E.g., `with open('filename') as f` will run the code to open it, and then make sure to close it no matter what happenned, was it normal code flow or an exception. In this example the `with` statement is pretty much equivalent to a `try/finally` block, and useful for having to not forget to close the file.
-
-- q: How to catch exceptions of with block? --- a: 
 
 ``` Python
 try:
@@ -224,9 +218,7 @@ else:
             content = f.read()
     except Exception:
         ...
-```
 
-``` Python
 try:
     f = open(my_file)
 
@@ -239,8 +231,6 @@ try:
 except (IOError, OSError) as e:
     do_other_stuff_when_it_we_have_file_IO_problems()
     
-# or
-
 try:
     file = open(...)
 except OpenErrors...:
@@ -252,20 +242,28 @@ else:
         file.close()
 ```
 
-- q: `with A() as a, B() as b:` vs `with A() as a: with B() as b:` --- a: Exactly the same.
+``` Python
+with open('filename') as f:
+    ...
+    
+f = open('filename')
+try:
+    ...
+finally:
+    f.close()
+```
+
 
 ``` Python
 with A() as a, B() as b:
     suite
-
-# is equivalent to
 
 with A() as a:
     with B() as b:
         suite
 ```
 
-- q: How to write a custom context manager?
+TODO: - q: How to write a custom context manager?
 
 https://docs.python.org/3/library/contextlib.html#contextlib.ContextDecorator
 
@@ -300,7 +298,6 @@ with closing(urlopen('http://www.python.org')) as page:
         print(line)
 ```
 
-- q: What is `contextlib.ExitStack` for? --- a: 
 
 ``` Python
 with open() as a, open() as b, open() as c:
@@ -332,23 +329,15 @@ with ExitStack() as stack:
     # Do something with the tempdirs
 ```
 
-- q: What is `contextlib.nested()` for? --- a: It was removed from the library, because it did not implement handling entering and exiting of nested contexts correctly.
+TODO: - q: What is `contextlib.ExitStack().callback()` for?
+TODO: - q: What is `contextlib.ExitStack().pop_all()` for?
 
 <https://docs.python.org/3/library/contextlib.html#contextlib.ExitStack>
 <https://www.wefearchange.org/2013/05/resource-management-in-python-33-or.html>
 <https://www.rath.org/on-the-beauty-of-pythons-exitstack.html>
 
 
-- q: What is `contextlib.closing` for? --- a: For closing a thing, e.g.:
-
-``` Python
-with closing(sqlite3.connect(path_to_file)) as conn:
-    with closing(conn.cursor()) as cur:
-        with conn: # auto-commits
-            cur.execute(statement)
-```
-
-- q: What is `contextlib.suppress` for? --- a: For ignoring exceptions, e.g.:
+`contextlib.closing`
 
 ``` Python
 with contextlib.suppress(NotFoundError):
@@ -373,15 +362,22 @@ with suppress(FileNotFoundError):
 <https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stdout>
 <https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stderr>
 
-- q: What is `contextlib.redirect_stdout` and `contextlib.redirect_stderr` for? --- a: For utility scripts.
+`contextlib.redirect_stdout` and `contextlib.redirect_stderr`
 
-Not suitable for use in library code and most threaded applications. It also has no effect on the output of subprocesses.
+<https://eli.thegreenplace.net/2015/redirecting-all-kinds-of-stdout-in-python/>
+
+Mostly for utility scripts. Not suitable for use in library code and most threaded applications. It also has no effect on the output of subprocesses.
 
 ``` Python
 with open('help.txt', 'w') as f:
     with redirect_stdout(f):
         help(pow)
 ```
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- with statement">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
 
 # built-in exceptions
 
@@ -426,6 +422,11 @@ To ignore the SIGINT:
 ``` Python
 signal.signal(signal.SIGINT, signal.SIG_IGN)
 ```
+
+
+
+
+
 
 
 

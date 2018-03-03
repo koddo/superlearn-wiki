@@ -820,7 +820,7 @@ q: `sum([x in x in range(10)])` vs `sum(x in x in range(10))` -- a: The latter u
 TODO: reset iterator, tee vs list <http://stackoverflow.com/questions/3266180/can-iterators-be-reset-in-python/3267069#3267069>
 TODO: - q: iterator and iterable <http://stackoverflow.com/a/9884501/159149>
 
-TODO: generators
+for, with, comprehensions, StopIteration <https://www.python.org/dev/peps/pep-0479/>
 
 # coroutines
 
