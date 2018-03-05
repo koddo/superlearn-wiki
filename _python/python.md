@@ -13,7 +13,6 @@ layout:  collection_page
 
 TODO: add `sum` somewhere
 TODO: `None` is a singleton
-TODO: identity
 TODO: trailing comma, https://stackoverflow.com/questions/11597901/why-are-trailing-commas-allowed-in-a-list
 
 <https://www.tutorialspoint.com/python/python_interview_questions.htm>
@@ -28,7 +27,46 @@ to a file
 <https://stackoverflow.com/questions/5574702/how-to-print-to-stderr-in-python>
 
 
-<https://docs.python.org/3.6/library/contextlib.html>
+
+
+
+
+<https://docs.python.org/3/library/stdtypes.html#string-methods>
+
+
+TODO:
+casefold?
+capitalize
+lower
+upper
+title
+swapcase
+
+TODO: <https://docs.python.org/3/library/string.html#string-constants>
+isidentifier?
+isalnum
+isalpha
+isdecimal
+isdigit
+islower
+isnumeric
+isprintable
+isspace
+istitle
+isupper
+
+q: reverse case of a string, lower case to upper case and vice versa --- a: `string.swapcase(str)`
+q: get an alphabet string --- a: `string.ascii_lowercase`
+q: get an uppercase alphabet string --- a: `string.ascii_uppercase`
+q: get all printable chars --- a: `string.printable`
+q: get all punctuation chars --- a: `string.punctuation`
+
+
+not covered: `expandtabs`, because highly specialized
+
+
+TODO: `Ellipsis` object --- <http://stackoverflow.com/questions/118370/how-do-you-use-the-ellipsis-slicing-syntax-in-python/118508#118508>
+TODO: `NotImplemented` object
 
 
 
@@ -37,41 +75,96 @@ to a file
 
 
 
-# slicing
+<https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python>
+<https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression>
+
+
+try logbook module -- <http://logbook.readthedocs.io/en/stable/>
+
 
 ``` python
-a = [0, 1, 2, 3, 4, 5, 6, 7]
-b = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-a[::2] = b[::2]
-a == ['a', 1, 'c', 3, 'e', 5, 'g', 7]
+def make_counter():
+    count = 0
+    def counter():
+        nonlocal count
+        count += 1
+        return count
+    return counter
 ```
 
-q: Get a sublist of a list including elements from second to fifth inclusive. --- a: `a_list[1:6]`
-q: Get a sublist of a list including elements from second to the one before last inclusive. --- a: `a_list[1:-1]`
-q: Get a sublist of a list including elements from third to last inclusive. --- a: `a_list[2:]`
-q: Get a sublist of a list including elements from first to third inclusive. --- a: `a_list[:3]`
-q: Get a sublist of a list including every nth element starting from index `0`. --- a: `a_list[::n]`
-q: Get a sublist of a list including every nth element starting from index `n-1`. --- a: `a_list[n-1::n]`
-q: Replace every nth element in a list starting from index `0` with elements from another list using slicing. --- a: `lst[::n] = another_list`, assuming `len(another_list) == len(lst[::n])`, or else the `ValueError` is thrown.
-q: How to reuse slice parameters? E.g., we want to take same slices of different lists. --- a: `s[slice(0,5)]` is equivalent to `s[0:5]`.
+
+- q: Closures in python. -- a: To capture a binding in the outer scope, use `nonlocal x`.
+
+- q: How to generate a list of packages into `requirements.txt`? --- a: `pip freeze > requirements.txt`
+- q: How to install packages from requirements.txt? --- a: `$ pip install -r requirements.txt`
+
+TODO: complexity of all operations for lists, dicts, sets, deques considering their internal structure
+
+[bool](https://docs.python.org/3/library/functions.html#bool)
+[object](https://docs.python.org/3/library/functions.html#object)
+[id](https://docs.python.org/3/library/functions.html#id)
+[hash](https://docs.python.org/3/library/functions.html#hash)
+
+abstract base classes for containers <https://docs.python.org/3/library/collections.abc.html>
+
+q: how to assign an attribute to the built-in object class? a: prohibited, intentionally --- <http://stackoverflow.com/questions/5741699/attribute-assignment-to-built-in-object/22103924#22103924>, <http://stackoverflow.com/questions/1529002/cant-set-attributes-of-object-class/1529099#1529099>
+
+q: what does `@something('whatever') def myfunc()` mean? --- a: this is called pie syntax for decorators, this is a fancy way of doing this: `def myfunc(): pass; myfunc = something('whatever')(myfunc)` 
+q: what is a decorator? --- a: it's a function that gets a function and returns it decorated 
 
 
-# shallow and deep copy
+q: what is `None == None`? --- a: `True`
+q: what is `None == 0`? --- a: `False`
+q: what is `None == ''`? --- a: `False`
+q: what is `None == False`? --- a: `False`
+q: what if we compare `None` to something? --- a: `None == None` is `True`, while comparing to anything else is `False`
 
-<http://www.python-course.eu/deep_copy.php>
+q: what does `map()` return?
 
-q: What are shallow copy and deep copy? --- When you do `a = [1, 2, 3]; b = a`, you bind both variables to a list object. Now, if you operate on `a` and modify it, you modify the object, so you'll see changes through the `b` variable. If the list is flat, you can create a shallow copy, so different vars are bound to different list objects. But if a list contains other lists, a shallow copy is not enough, you need to create a deep copy. The same can be said about other mutable containers like dicts and sets.
-q: In which molule are the `copy()` and `deepcopy()`? --- a: `import copy`; for lists you can just use `lst.copy()` or `lst[:]`, dicts and sets also support `.copy()`.
-q: Get a shallow copy of a list. --- a: `lst[:]` or `lst.copy()` or `copy.copy(lst)`
-q: Get a shallow copy of a list using slicing. --- a: `a_list[:]`
-q: Get a shallow copy of a dict. --- a: `dct.copy()` or `copy.copy(dct)`
-q: Get a shallow copy of a set. --- a: `a_set.copy()` or `copy.copy(a_set)`
-q: Get a shallow copy of a deque. --- a: `dq.copy()` or `copy.copy(dq)`
-q: Get a deep copy of a list. --- a: `copy.deepcopy(lst)`
-q: Get a deep copy of a dict. --- a: `copy.deepcopy(dct)`
-q: Get a deep copy of a set. --- a: `copy.deepcopy(a_set)`
-q: Get a deep copy of a deque. --- a: `copy.deepcopy(dq)`
-q: What does `a_list[:]` mean? --- a: Creates a copy of entire list, a shallow copy to be precise.
+<https://www.quora.com/What-are-good-Python-interview-questions>
+<http://www.ilian.io/python-interview-question-and-answers/>
+<http://career.guru99.com/top-25-python-interview-questions/>
+
+<http://www.tutorialspoint.com/python/python_interview_questions.htm>
+
+
+
+q: declare main() in python --- a: `if __name__ == '__main__': ...`
+
+TODO: how to measure time
+$ python -m timeit "'somestring'.find('str', 2, 9)"
+$ python -m timeit "'somestring'[2:9].find('str')"
+
+
+TODO: shallow and deep copies
+
+q: how to get an integer `111...1` of lenght `n` without using string operations? --- a: `10**n//9`
+q: how to get a palindrome number like `123454321` up to `9` in the middle? --- a: `111..11` to the power of `2`
+
+- q: What does the `pass` do?
+
+TODO: add questions like this: in which module the `deque` is?
+
+TODO: __slots__
+TODO: <https://pypi.python.org/pypi/PyMonad/>
+TODO: persistent data structures <https://github.com/tobgu/pyrsistent>
+TODO: <http://stackoverflow.com/questions/101268/hidden-features-of-python>
+TODO: <http://www.asmeurer.com/python3-presentation/slides.html#1>
+TODO: <https://github.com/sfermigier/awesome-functional-python>, <https://www.reddit.com/r/Python/comments/5iuj70/awesome_functional_python/>
+TODO: generate random number
+
+
+- q: Default character encoding of python3 files? -- a: `utf-8`
+
+- q: How to run a simple http server to serve static files? -- a: `$ cd path && python3 -m http.server 4001`
+
+<https://www.reddit.com/r/Python/comments/5zk97l/what_are_some_wtfs_still_in_python_3/>
+
+parallelism lib named dask
+
+- q: A question on semicolon: what is going to be printed in this example when the condition is false? `if x < y < z: print(x); print(y); print(z)` --- a: Semicolons are introduced to language to write simple one-liners like this. Don't overuse them.
+
+
 
 
 # lists
@@ -117,8 +210,8 @@ def f():
 - q: Delete elements from a list at a given slice. --- a: `del lst[3:11:2]` or `s[3:11:2] = []`
 - q: Delete the first occurrence of a value from a list. --- a: `lst.remove('a')`
 - q: What if we do `lst.remove('a')` and there is no such element in the list? --- a: Raises `ValueError`.
-- q: Delete all occurrences of a value in a list. --- a: `a[:] = [e for e in lst when e!=value]`, keep `[:]` if you want it in-place.
-- q: Delete all occurrences of a value in a list in-place. --- a: `a[:] = [e for e in lst when e!=value]`, keep `[:]` if you want it in-place.
+- q: Delete all occurrences of a value in a list. --- a: `a = [e for e in lst when e!=value]`; use `lst[:] = ` if you want it in-place.
+- q: Delete all occurrences of a value in a list in-place. --- a: `lst[:] = [e for e in lst when e!=value]`
 - q: How to iterate over a list and remove items based on a condition? -- a: Do not add or remove items from data structures while iterating over them. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items. Our choices are: iterate over a copy; create a list of elements to delete after iteration; use list comprehension, e.g., `lst[:] = [x for x in lst if ...]`, keep `[:]` to mutate the original list object.
 - q: Why can't we simply iterate over a list to remove some items in the same list like in `for x in lst: if cond: lst.remove(x)`? -- a: Iterators are not informed when a data structure is modified. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items.
 - q: Get and remove an item at the end of a list. --- a: `lst.pop()`, same as `lst.pop(-1)`
@@ -151,7 +244,7 @@ TODO: advanced unpacking: `a, b, *rest = range(10)`, `a, *rest, b = range(10)`, 
 
 </div>
 
-
+len, max, min, sum
 
 # tuples
 
@@ -517,50 +610,9 @@ misc:
 TODO: `str.format_map` example
 - q: Nested replacement fields. --- a: `'{:{fill}{align}{width}}'.format('hello', fill='*', align='^', width=11) == '***hello***'`
 
-# dates
-
-``` python
-'{:%Y-%m-%d %H:%M:%S}'.format(datetime(2010, 7, 4, 12, 15, 58))
-```
-
-## misc
-
-<https://docs.python.org/3/library/stdtypes.html#string-methods>
 
 
-TODO:
-casefold?
-capitalize
-lower
-upper
-title
-swapcase
 
-TODO: <https://docs.python.org/3/library/string.html#string-constants>
-isidentifier?
-isalnum
-isalpha
-isdecimal
-isdigit
-islower
-isnumeric
-isprintable
-isspace
-istitle
-isupper
-
-q: reverse case of a string, lower case to upper case and vice versa --- a: `string.swapcase(str)`
-q: get an alphabet string --- a: `string.ascii_lowercase`
-q: get an uppercase alphabet string --- a: `string.ascii_uppercase`
-q: get all printable chars --- a: `string.printable`
-q: get all punctuation chars --- a: `string.punctuation`
-
-
-not covered: `expandtabs`, because highly specialized
-
-
-TODO: `Ellipsis` object --- <http://stackoverflow.com/questions/118370/how-do-you-use-the-ellipsis-slicing-syntax-in-python/118508#118508>
-TODO: `NotImplemented` object
 
 # bytes and bytearrays
 
@@ -790,6 +842,9 @@ TODO: multiple inheritance when sets of functions are disjoint
 q: convert a string like `17.04.1975 14:35` to a datetime --- a: `from datetime import datetime; datetime.strptime(s, '%d.%m.%Y %H:%M')`
 q: get difference in seconds between two datetimes --- a: `abs(dt2 - dt1).total_seconds()`, this is equivalent to `diff.seconds + diff.days * 86400`
 
+``` python
+'{:%Y-%m-%d %H:%M:%S}'.format(datetime(2010, 7, 4, 12, 15, 58))
+```
 
 
 # files and dirs
@@ -828,97 +883,8 @@ TODO
 
 # misc
 
-<https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python>
-<https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression>
 
-
-try logbook module -- <http://logbook.readthedocs.io/en/stable/>
-
-
-``` python
-def make_counter():
-    count = 0
-    def counter():
-        nonlocal count
-        count += 1
-        return count
-    return counter
-```
-
-
-- q: Closures in python. -- a: To capture a binding in the outer scope, use `nonlocal x`.
-
-- q: How to generate a list of packages into `requirements.txt`? --- a: `pip freeze > requirements.txt`
-- q: How to install packages from requirements.txt? --- a: `$ pip install -r requirements.txt`
-
-TODO: complexity of all operations for lists, dicts, sets, deques considering their internal structure
-
-[bool](https://docs.python.org/3/library/functions.html#bool)
-[object](https://docs.python.org/3/library/functions.html#object)
-[id](https://docs.python.org/3/library/functions.html#id)
-[hash](https://docs.python.org/3/library/functions.html#hash)
-
-abstract base classes for containers <https://docs.python.org/3/library/collections.abc.html>
-
-q: how to assign an attribute to the built-in object class? a: prohibited, intentionally --- <http://stackoverflow.com/questions/5741699/attribute-assignment-to-built-in-object/22103924#22103924>, <http://stackoverflow.com/questions/1529002/cant-set-attributes-of-object-class/1529099#1529099>
-
-q: what does `@something('whatever') def myfunc()` mean? --- a: this is called pie syntax for decorators, this is a fancy way of doing this: `def myfunc(): pass; myfunc = something('whatever')(myfunc)` 
-q: what is a decorator? --- a: it's a function that gets a function and returns it decorated 
-
-
-q: what is `None == None`? --- a: `True`
-q: what is `None == 0`? --- a: `False`
-q: what is `None == ''`? --- a: `False`
-q: what is `None == False`? --- a: `False`
-q: what if we compare `None` to something? --- a: `None == None` is `True`, while comparing to anything else is `False`
-
-q: what does `map()` return?
-
-<https://www.quora.com/What-are-good-Python-interview-questions>
-<http://www.ilian.io/python-interview-question-and-answers/>
-<http://career.guru99.com/top-25-python-interview-questions/>
-
-<http://www.tutorialspoint.com/python/python_interview_questions.htm>
-
-
-
-q: declare main() in python --- a: `if __name__ == '__main__': ...`
-
-TODO: how to measure time
-$ python -m timeit "'somestring'.find('str', 2, 9)"
-$ python -m timeit "'somestring'[2:9].find('str')"
-
-
-TODO: shallow and deep copies
-
-q: how to get an integer `111...1` of lenght `n` without using string operations? --- a: `10**n//9`
-q: how to get a palindrome number like `123454321` up to `9` in the middle? --- a: `111..11` to the power of `2`
-
-- q: What does the `pass` do?
-
-TODO: add questions like this: in which module the `deque` is?
-
-TODO: __slots__
-TODO: <https://pypi.python.org/pypi/PyMonad/>
-TODO: persistent data structures <https://github.com/tobgu/pyrsistent>
-TODO: <http://stackoverflow.com/questions/101268/hidden-features-of-python>
-TODO: <http://www.asmeurer.com/python3-presentation/slides.html#1>
-TODO: <https://github.com/sfermigier/awesome-functional-python>, <https://www.reddit.com/r/Python/comments/5iuj70/awesome_functional_python/>
-TODO: generate random number
-
-
-- q: Default character encoding of python3 files? -- a: `utf-8`
-
-- q: How to run a simple http server to serve static files? -- a: `$ cd path && python3 -m http.server 4001`
-
-<https://www.reddit.com/r/Python/comments/5zk97l/what_are_some_wtfs_still_in_python_3/>
-
-parallelism lib named dask
-
-- q: A question on semicolon: what is going to be printed in this example when the condition is false? `if x < y < z: print(x); print(y); print(z)` --- a: Semicolons are introduced to language to write simple one-liners like this. Don't overuse them.
-
-
-## skipped hackerrank challenges
+# skipped hackerrank challenges
 
 sets
 <https://www.hackerrank.com/challenges/no-idea>
@@ -949,7 +915,7 @@ closures
 
 
 
-## introspection
+# introspection
 
 [dir](https://docs.python.org/3/library/functions.html#dir)
 [vars](https://docs.python.org/3/library/functions.html#vars)
@@ -968,7 +934,7 @@ q: check the import search path --- a: `sys.path`
 
 
 
-## code evaluation
+# code evaluation
 
 [compile](https://docs.python.org/3/library/functions.html#compile)
 [eval](https://docs.python.org/3/library/functions.html#eval)

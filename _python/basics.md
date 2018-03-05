@@ -395,3 +395,33 @@ print(i)
 
 
 
+
+# slicing
+
+``` python
+a = [0, 1, 2, 3, 4, 5, 6, 7]
+b = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+a[::2] = b[::2]
+a == ['a', 1, 'c', 3, 'e', 5, 'g', 7]
+```
+
+Extended slices can't be used for assigning a list of different length: <https://docs.python.org/2.3/whatsnew/section-slices.html>
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- slicing">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+# shallow and deep copy
+
+<http://www.python-course.eu/deep_copy.php>
+
+q: What are shallow copy and deep copy? --- When you do `a = [1, 2, 3]; b = a`, you bind both variables to a list object. Now, if you operate on `a` and modify it, you modify the object, so you'll see changes through the `b` variable. If the list is flat, you can create a shallow copy, so different vars are bound to different list objects. But if a list contains other lists, a shallow copy is not enough, you need to create a deep copy. The same can be said about other mutable containers like dicts and sets.
+q: Get a deep copy of a list, dict, set, deque. --- a: `copy.deepcopy(thing)`
+q: What does `l = lst[:]` mean? --- a: Creates a shallow copy of entire list.
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- shallow and deep copy">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+

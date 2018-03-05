@@ -204,6 +204,8 @@ Generally it's a good idea to look for an appropriate existing exception first.
 
 <https://docs.python.org/3/reference/compound_stmts.html#the-with-statement>
 
+<http://www.dan-gittik.com/post/deconstructing-context-managers>
+<https://pymotw.com/3/contextlib/index.html>
 
 ``` Python
 try:
@@ -264,8 +266,8 @@ with A() as a:
 ```
 
 TODO: - q: How to write a custom context manager?
-
-https://docs.python.org/3/library/contextlib.html#contextlib.ContextDecorator
+<https://docs.python.org/3/library/contextlib.html#contextlib.ContextDecorator>
+<https://docs.python.org/3/library/contextlib.html#using-a-context-manager-as-a-function-decorator>
 
 We can write custom context managers as classes or as @contextmanager decorated functions.
 
@@ -303,8 +305,6 @@ with closing(urlopen('http://www.python.org')) as page:
 with open() as a, open() as b, open() as c:
     ...
 
-# equivalent to
-
 with contextlib.ExitStack as stack:
     a = stack.enter_context(open())
     b = stack.enter_context(open())
@@ -317,6 +317,16 @@ But it's not too benefitial that way. It really shines when you want to have nes
 ``` Python
 with ExitStack() as stack:
     files = [stack.enter_context(open(fname)) for fname in filenames]
+    ...
+```
+
+``` Python
+with ExitStack() as stack:
+    files = [stack.enter_context(open(fname)) for fname in filenames]
+    stack_opened = stack.pop_all()
+    
+with stack_opened:
+    ...
 ```
 
 ``` Python
@@ -329,8 +339,7 @@ with ExitStack() as stack:
     # Do something with the tempdirs
 ```
 
-TODO: - q: What is `contextlib.ExitStack().callback()` for?
-TODO: - q: What is `contextlib.ExitStack().pop_all()` for?
+
 
 <https://docs.python.org/3/library/contextlib.html#contextlib.ExitStack>
 <https://www.wefearchange.org/2013/05/resource-management-in-python-33-or.html>
@@ -342,8 +351,6 @@ TODO: - q: What is `contextlib.ExitStack().pop_all()` for?
 ``` Python
 with contextlib.suppress(NotFoundError):
     ...
-    
-# equivalent to 
 
 try:
     ...
@@ -393,14 +400,14 @@ GeneratorExit
 
 
 
-## traceback
+# traceback
 
 - q: What is exception chaining? --- a: `except ValueException as exc: raise RuntimeError("Something bad happened") from exc` --- this will give a nice trace back which mentions that `ValueException` is a direct cause of the `RuntimeError("Something bad happened")`. And we have `exc.__cause__`.
 - q: What are `exception.__context__` and `exception.__cause__`? --- a: When raising (or re-raising) an exception in an `except` or `finally` clause `__context__` is automatically set to the last exception caught. `raise new_exc from original_exc` sets `new_exc.__cause__`.
 - q: How to print traceback of an exception? --- a: In the except block: `traceback.print_exc()`
 - q: How to log traceback of an exception? --- a: Use `traceback.format_exc()` and your favorite logger.
 
-## asserts
+# asserts
 
 - q: What is `assert` for? --- a: Asserts should be used to test conditions that should never happen. The purpose is to crash early in the case of a corrupt program state. They add a tiny overhead, but before making a program fast we have to make it work first. And we can turn asserts off when needed with `-O` flag.
 - q: What does `assert` do? --- a: `assert cond, message` is roughly equivalent to `if __debug__ and not cond: raise AssertionError(message)`
