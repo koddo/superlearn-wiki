@@ -11,7 +11,8 @@ layout:  collection_page
 
 # todo
 
-TODO: add `sum` somewhere
+- q: How to pass `+`, `**`, `[3:5]`, `.field` as a function? --- a: The operator module have all these operators: <https://docs.python.org/3/library/operator.html>
+
 TODO: `None` is a singleton
 TODO: trailing comma, https://stackoverflow.com/questions/11597901/why-are-trailing-commas-allowed-in-a-list
 
@@ -167,139 +168,9 @@ parallelism lib named dask
 
 
 
-# lists
-
-``` python
-lst = []
-lst += 'a'
-lst += ['b']
-lst.append(['c'])
-lst.insert(0, '0')
-lst == ['0', 'a', 'b', ['c']]
-
-lst == [3, 1, 2]
-sorted(lst)
-```
-
-`lst.sort()` returns `None`, here is why: <https://mail.python.org/pipermail/python-dev/2003-October/038855.html>
-
-pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pre-allocating-a-list-of-none>
-
-`lst.index(e)` raises `ValueError` when `e` is not in the list, because a value like `-1` could lead to obscure bugs
-
-TODO: destructive and non-destructive insert, remove, append, extend, sort, pop
-
-``` python
-l = [1, 2]
-def f():
-    l += [3]
-```
-
-<div class="ryctoic-questions" markdown="1">
-- q: Check if an element is in the list. --- a: `elt in lst` or `not in`
-- q: Create a list that contains ten copies of a letter. --- `['a'] * 10`
-- q: Get length of a list. --- a: `len(lst)`
-- q: Get min in a list. --- a: `min(lst)`
-- q: Get max in a list. --- a: `max(lst)`
-- q: What if we do `min([])` or `max([])`? ---a: Raises `ValueError`.
-- q: Get an index of an element in a list. --- a: `lst.index(e)`, raises `ValueError` when not found.
-- q: What happens when `lst.index(x)` doesn't find the element? --- Raises `ValueError`.
-- q: Get position of an element in a list between given start and end positions. --- a: `lst.index(e, start, end)`, raises `ValueError`
-- q: How many occurrences of a given element are in the list? --- a: `lst.count(elt)`
-- q: Delete an element from a list at a given position. --- a: `del lst[3]` or `s[3:4] = []`
-- q: Delete elements from a list at a given slice. --- a: `del lst[3:11:2]` or `s[3:11:2] = []`
-- q: Delete the first occurrence of a value from a list. --- a: `lst.remove('a')`
-- q: What if we do `lst.remove('a')` and there is no such element in the list? --- a: Raises `ValueError`.
-- q: Delete all occurrences of a value in a list. --- a: `a = [e for e in lst when e!=value]`; use `lst[:] = ` if you want it in-place.
-- q: Delete all occurrences of a value in a list in-place. --- a: `lst[:] = [e for e in lst when e!=value]`
-- q: How to iterate over a list and remove items based on a condition? -- a: Do not add or remove items from data structures while iterating over them. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items. Our choices are: iterate over a copy; create a list of elements to delete after iteration; use list comprehension, e.g., `lst[:] = [x for x in lst if ...]`, keep `[:]` to mutate the original list object.
-- q: Why can't we simply iterate over a list to remove some items in the same list like in `for x in lst: if cond: lst.remove(x)`? -- a: Iterators are not informed when a data structure is modified. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items.
-- q: Get and remove an item at the end of a list. --- a: `lst.pop()`, same as `lst.pop(-1)`
-- q: Get and remove an item at the given position in a list. --- a: `lst.pop(position)`
-- q: What if we do `lst.pop()` when the list is empty? --- a: Raises `IndexError`.
-- q: What does `lst[-k]` mean? --- a: Get kth element from end, equivalent to `lst[ len(lst) - k ]`.
-- q: What if `lst = [1, 2, 3]` and we try to do `lst[3]`? --- a: Raises `IndexError`.
-- q: `sorted(l)` vs `l.sort()` --- a: `l.sort()` is in-place, and destructive, and, therefore, should be a bit faster.
-- q: What does `lst.sort()` return? --- a: `None`, this is to prevent chaining like `lst.sort().reverse()`
-- q: Sort in descending order. --- a: `sorted(l, reverse=True)` or `l.sort(reverse=True)`
-- q: Get a list in reversed order. --- a: `reversed(lst)` or `lst.reverse()` or `lst[::-1]`
-- q: `reversed(lst)` vs `lst.reverse()` vs `lst[::-1]` --- a: `reversed(a_list)` returns an iterator, `lst[::-1]` is equivalent to `list(reversed(lst))`; `lst.reverse()` does it in-place and returns `None` to prevent chaining.
-- q: What does `lst.reverse()` return? --- a: `None` to prevent chaining.
-- q: What does `reversed(lst)` return? --- a: An iterator object of type `list_reverseiterator`. Usage: `for x in reversed(lst): ...`. Or `list(reversed(lst))`, with all dangers of shallow copy.
-- q: Sort by multiple criteria. --- a: Sorting is stable, so sort twice, or sort by tuples `sorted(lst, key = lambda x: (-x[1], x[0]))`, or `sorted(lst, key = operator.itemgetter(1, 2))`.
-- q: Pre-allocate a list of size `n` with a default value. --- a: `lst = [None] * n` or `lst = [0] * n` with default value `0`, but do you really need this? Try appending or list comprehension instead.
-- q: Pre-allocation of a list vs appending elements vs list comprehension. --- a: Pre-allocation is useful when elements you fill the list with come out of order, appending has complexity of `O(1)`, so no difference with list comprehension (unless you try to optimize, measure it yourself then). 
-- q: Add an element to the end of a list. --- a: `lst.append(e)`
-- q: Concatenate two lists. --- a: `lst1 + [1, 2]`
-- q: `lst1+lst2` vs `lst1.extend(lst2)` vs `lst1 += lst2` --- a: `lst1+lst2` is non-destructive, creates new list; `.extend()` accepts any iterable; `.extend()` and `+=` are destructive, there is virtually no difference in performance (except `.extend()` has involves function call overhead).
-- q: Add an element to a list, not at the end, but at a given position. --- a: `lst.insert(pos, value)`, same as `lst[pos:pos] = [value]`.
-- q: What does mean `lst[i:i] = [v]`? --- a: Same as `lst.insert(i, v)`.
-- q: `lst.append()` vs `lst.extend()` --- a: `.append(e)` appends an element, `.extend(l)` extends the list with elements from an iterable.
-- q: Remove all elements from a list. --- a: `lst.clear()`
-- q: `a, b, c` vs `(a, b, c)` --- a: Exactly the same, it is actually the comma which makes a tuple, not the parentheses, which are useful to avoid ambiguity, e.g., `f(a, b)` is different from `f( (a, b) )`.
-- q: Unpack `[1, [2, 3]]` into three variables `a = 1; b = 2; c = 3`. --- a: `a, (b, c) = [1, [2, 3]]`
-
-TODO: add: - q: merge two lists into a list of pairs --- a: `zip('abcd', [1,2,3,4])`
-TODO: advanced unpacking: `a, b, *rest = range(10)`, `a, *rest, b = range(10)`, `first, *_, last = f.readlines()`
-
-</div>
-
-len, max, min, sum
-
-# tuples
-
-- q: What is the difference between tuples and lists. --- a: Tuples are immutable lists, they have no methods to change them.
-- q: Create a tuple of one element. --- `(1,)`
-- q: Create an empty tuple. --- `()`
-
-- q: Check if an element is in the tuple. --- a: `elt in tpl` or `not in`
-- q: Create a tuple that contains ten copies of a letter. --- `('a',) * 10`
-- q: Get length of a tuple. --- a: `len(tpl)`
-- q: Get min element in a tuple. --- a: `min(tpl)`
-- q: Get max element in a tuple. --- a: `max(tpl)`
-- q: What if we do `min(())` or `max(())`? ---a: Raises `ValueError`.
-- q: Get an index of an element in a tuple. --- a: `tpl.index(e)`, raises `ValueError` when not found.
-- q: What happens when `a_tuple.index(x)` doesn't find the element? --- Raises `ValueError`.
-- q: Get position of an element in a tuple between given start and end positions. --- a: `tuple.index(e, start, end)`, raises `ValueError`.
-- q: Gow many occurrences of a given element are in the tuple? --- a: `tpl.count(elt)`
-- q: Concatenate two tuples. --- a: `(1,) + (2, 3) == (1, 2, 3)`
-- q: Add an element to a tuple. --- a: You can't modify a tuple, but you can create a new one: `tpl += (1,)`.
-- q: Remove an element from a tuple. --- a: You can't modify a tuple, but you can create a new one: `(1, 2, 3, 4)[1:3] + (5,)`
-- q: Slice a tuple. --- a: Same rules as for lists, except you can't modify the tuple.
 
 
-# deques
 
-<https://dbader.org/blog/queues-in-python>
-
-TODO: better question for deque rotation
-
-- q: `Queue.Queue` vs `collections.deque` for implementing a queue. -- a: If you don't need thread safety, use `collections.deque`. Otherwise use `Queue.Queue`, because the deque is not designed for this and some operations of `collections.deque` are only threadsafe by accident due to the existence of the GIL.
-- q: Create a stack data structure. --- a: Use a list, it supports `.append(elt)` and `.pop()` operations.
-- q: Create a queue data structure. --- a: Use a `collections.deque`, it supports `.append(elt)` and `.popleft()` operations. When you need thread safety, use `Queue.Queue`, because the deque is not designed for this and some operations of `collections.deque` are only threadsafe by accident due to the existence of the GIL.
-- q: In which module is the deque? --- a: `collections`
-- q: How to set a size boundary for a deque? --- a: `deque(maxlen=10)`
-- q: What happens if we have a full `deque(maxlen=10)` and we add elements to it? -- a: When new items are added, a corresponding number of items are discarded from the opposite end. Similar to `tail` unix util. Only the most recent activity is of interest.
-- q: Add elements to the left and to the right sides of a deque. --- a: `dq.appendleft(e)` and `dq.append(e)`; `dq.extendleft(lst)` and `dq.extend(lst)` 
-- q: Add a list of elements to the left and to the right sides of a deque. --- a: `dq.extendleft(lst)` and `dq.extend(lst)`
-- q: Pop elements from the left and from the right of a deque. --- a: `dq.popleft()` and `dq.pop()`
-- q: Rotate a deque. --- a: `dq.rotate(1)` rotates to the right, equivalent to `dq.appendleft(dq.pop())`
-- q: Get a slice of a deque. --- a: `collections.deque` itself doesn't support slices, it's a doubly linked list internally; use a list comprehension `[d[i] for i in range(...)]` or `itertools.isslice` when needed.
-- q: How are deques implemented? -- a: In python deques are implemented using doubly linked lists.
-
-- q: Check if an element is in the deque. --- a: `elt in lst`, `not in`
-- q: Get length of a deque. --- a: `len(dq)`
-- q: Get min in a deque. --- a: `min(dq)`
-- q: Get max in a deque. --- a: `max(dq)`
-- q: What if we do `min()` or `max()` on empty deque? ---a: Raises `ValueError`.
-- q: Get number of occurrences of an element in a deque. --- a: `dq.count(el)`
-- q: What happens when `a_deque.index(x)` doesn't find the element? --- Raises `ValueError`.
-- q: Get position of an element in a deque between given start and end positions. --- a: `dq.index(e, start, end)`, raises `ValueError`
-- q: Get position of an element in a deque. --- a: `dq.index(e)`, raises `ValueError`
-- q: Insert an element into a deque at a position. --- a: `dq.insert(i, e)`
-- q: Delete the first occurrence of a value in a deque. --- a: `lst.remove(elt)`
-- q: Reverse a deque. --- a: `dq.reverse()` or `reversed(dq)`
-- q: Remove all elements from a deque. --- a: `dq.clear()`
 
 
 # dicts
@@ -1141,3 +1012,9 @@ isinstance(tree.getroot().attrib, dict) == True
 
 
 
+# unpacking
+
+- q: Unpack `[1, [2, 3]]` into three variables `a = 1; b = 2; c = 3`. --- a: `a, (b, c) = [1, [2, 3]]`
+- q: advanced unpacking: `a, b, *rest = range(10)`, `a, *rest, b = range(10)`, `first, *_, last = f.readlines()`
+
+<https://stackoverflow.com/questions/6967632/unpacking-extended-unpacking-and-nested-extended-unpacking>

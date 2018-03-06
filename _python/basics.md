@@ -425,3 +425,48 @@ q: What does `l = lst[:]` mean? --- a: Creates a shallow copy of entire list.
 </iframe>
 
 
+# lists
+
+``` python
+lst = []
+lst += 'a'
+lst += ['b']
+lst.append(['c'])
+lst.insert(0, '0')
+lst == ['0', 'a', 'b', ['c']]
+
+lst == [3, 1, 2]
+sorted(lst)
+```
+
+`lst.sort()` returns `None`, here is why: <https://mail.python.org/pipermail/python-dev/2003-October/038855.html>
+
+pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pre-allocating-a-list-of-none>
+
+`lst.index(e)` raises `ValueError` when `e` is not in the list, because a value like `-1` could lead to obscure bugs
+
+TODO: destructive and non-destructive insert, remove, append, extend, sort, pop
+
+
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- lists">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+# tuples
+
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- tuples">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+
+# deques
+
+<https://dbader.org/blog/queues-in-python>
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- deques">
+    <p>Your browser does not support iframes.</p>
+</iframe>
