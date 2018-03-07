@@ -76,8 +76,6 @@ TODO: `NotImplemented` object
 
 
 
-<https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python>
-<https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression>
 
 
 try logbook module -- <http://logbook.readthedocs.io/en/stable/>
@@ -197,9 +195,15 @@ q: Get number of key-value pairs in a dictionary. --- a: `len(d)`
 q: Create an empty dictionary. --- a: `d = {}`
 q: Create an dictionary with key-value pairs `1: 'a', 2: 'b'`. --- a: `d = { 1: 'a', 2: 'b' }`
 q: Get a value from dict by a key. --- a: `d['the key']` or `d.get('whatever', 'zero')` when you want a default value. The former raises `KeyError`.
+q: what happens when you try to acces a non-existent key in a dict? --- a: it raises `KeyError`
+
 q: Get list of keys of a dict. --- a: `list(a_dict.keys())`, the `.keys()` returns a dictview.
+
 q: Iterate over keys in a dict. --- a: `for k in dct: ...`, equivalent to `for k in dct.keys(): ...`
+q: Iterate over sorted keys in a dict. --- a:
 q: Iterate over key-value pairs in a dict. --- a: `for k,v in dct.items(): ...`
+q: with sorted keys?
+
 q: How to iterate over a dict and remove items based on a condition? -- a: Do not add or remove items from data structures while iterating over them. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items. For example, given a dict, our choices are: iterate over a copy of keys `for k in list(dct.keys())`; create a list of keys to delete after iteration; use dict comprehension, which creates a new dict.
 q: Why can't we simply iterate over keys in a dict to remove some items in the same dict like in `for k in dct.keys(): if cond: del dct[k]`? -- a: Iterators are not informed when a data structure is modified. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items.
 q: Get a value for key in a dict, or default value when not found. --- a: `d.get(k, 0)`; note that `.get(k, default=0)` will throw `TypeError: get() takes no keyword arguments`
@@ -208,12 +212,54 @@ q: Set a value for key in a dict. --- a: `d['whatever'] = 1`
 q: `a_dict[k]` vs `a_dict.get(k)` --- a: The latter never raises `KeyError`, returns `None` or provided default value, e.g., `a_dict.get(k, 0)`.
 q: What does `a_dict.setdefault(k, defaultvalue)` do? --- a: Returns `a_dict[k]` when `k` exists or sets `a_dict[k] = defaultvalue` and then returns it, instead of just returning it like the `.get()` does. Note that `defaultdict` is a modern replacement for the `.setdefault()`, because its name is much more obvious.
 q: `a_dict.get(k, defaultvalue)` vs `a_dict.setdefault(k, defaultvalue)` vs `collections.defaultdict(init_func)` --- a: When the key does not exist, `.get()` just returns the `defaultvalue`, `.setdefault()` sets `d[k] = default_value` and then returns it, `defaultdict` does the same, but initializes the value with `init_func`, it's called `defaultfactory` in docs. The `defaultdict` is considered a modern version of `.setdefault()`, since its name is much more obvious.
+
 q: What is a `dictview`? --- a: Provids a dynamic view on the dictionary’s entries, which means that when the dictionary changes, the view reflects these changes. Once it's converted to a list, this property disappears.
 q: What does `a_dict.items()` return? --- a: A `dictview` object.
 q: What does `a_dict.keys()` return? --- a: A `dictview` object.
 q: What does `a_dict.values()` return? --- a: A `dictview` object.
 q: What can we do with a `dictview` returned by `dct.items()`, `dct.keys()`, `dct.values()`? --- a: `list(dv)`, `len(dv)`, check `x in dv`; iterate `iter(dv)`; `dct.keys()` and `dct.items()` are set-like, can do `dct.keys() & set(...)`
 
+- q: How to overwrite key/value pairs in a dictionary with ones from another dictionary? --- a: `d.update(d2)`, returns `None`
+- q: How to merge two dictionaries? --- a: 
+<https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python>
+<https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression>
+
+- q: What is `a_dict.pop()` for?
+- q: What is `a_dict.popitem()` for?
+
+- q: What is `iter(a_dict)` for?
+
+- q: What is `dict.fromkeys()` for?
+
+del d[key]
+a_dict.copy()
+
+# collections module
+
+TODO: q:
+ChainMap -- constructing `O(n)`, lookup `O(n)`
+using dict update chain -- constructing `O(nm)`, lookup `O(1)`
+This means that if you construct often and only perform a few lookups each time, or if M is big, ChainMap's lazy-construction approach works in your favor.
+<http://stackoverflow.com/questions/23392976/what-is-the-purpose-of-collections-chainmap/23441777#23441777>
+
+q: create a named tuple --- a: `Point = collections.namedtuple('Point', 'x, y')`
+
+## defaultdict
+
+q: get a dict, which which counts distinct elements in a list --- a: `collections.Counter(list)`
+q: get a dict with default value `'foo'` --- a: `collections.defaultdict(lambda: 'foo')`
+q: get a dict with default value `0` --- a: `collections.defaultdict(int)`
+q: get a dict with default value `[]` --- a: `collections.defaultdict(list)`
+q: `dict` vs `collections.defaultdict` --- a: `d['non-existent key']` raises `KeyError`, `defaultdict` adds and returns a default value
+
+## OrderedDict
+
+<https://www.reddit.com/r/Python/comments/7jyluw/dict_knownordered_versus_ordereddict_an/>
+
+- q: `dict` vs `collections.OrderedDict`? --- a: 
+q: get a dictionary, which preserves the order in which its elements are added --- a: `od = collections.OrderedDict(); od['a'] = 1; od['b'] = 2`
+q: how to initialize a `collections.OrderedDict()` with some content --- a: `OrderedDict( [('a', 1), ('b', 2), ...] )` is the right way, while `OrderedDict({'a': 1, 'b': 2, ...})` and `OrderedDict(a=1, b=2, ...)` are not (`kwargs` is a dict)
+- q: What is `.popitem()` method of `OrderedDict` for? --- a: `.popitem(last=True)` behaves like a stack operation.
 
 # sets
 
@@ -802,7 +848,21 @@ closures
 q: dir() vs vars(...).keys() a: <http://stackoverflow.com/questions/980249/difference-between-dir-and-vars-keys-in-python>
 q: check the import search path --- a: `sys.path`
 
+- q: What is `vars()` for?
+- a: It takes zero or one argument. Without argument `vars()` behaves like `locals()`.
 
+With a argument:
+
+``` Python
+class Whatever:
+    def __init__(self):
+        self.x = 1
+        self.y = 2
+
+w = Whatever()
+print(vars(w))
+# {'x': 1, 'y': 2}
+```
 
 
 # code evaluation
@@ -817,24 +877,6 @@ q: check the import search path --- a: `sys.path`
 
 
 
-
-# collections module
-
-TODO: q:
-ChainMap -- constructing `O(n)`, lookup `O(n)`
-using dict update chain -- constructing `O(nm)`, lookup `O(1)`
-This means that if you construct often and only perform a few lookups each time, or if M is big, ChainMap's lazy-construction approach works in your favor.
-<http://stackoverflow.com/questions/23392976/what-is-the-purpose-of-collections-chainmap/23441777#23441777>
-
-q: get a dict, which which counts distinct elements in a list --- a: `collections.Counter(list)`
-q: get a dict with default value `'foo'` --- a: `collections.defaultdict(lambda: 'foo')`
-q: get a dict with default value `0` --- a: `collections.defaultdict(int)`
-q: get a dict with default value `[]` --- a: `collections.defaultdict(list)`
-q: `dict` vs `collections.defaultdict` --- a: `d['non-existent key']` raises `KeyError`, `defaultdict` adds and returns a default value
-q: what happens when you try to acces a non-existent key in a dict? --- a: it raises `KeyError`
-q: create a named tuple --- a: `Point = collections.namedtuple('Point', 'x, y')`
-q: get a dictionary, which preserves the order in which its elements are added --- a: `od = collections.OrderedDict(); od['a'] = 1; od['b'] = 2`
-q: how to initialize a `collections.OrderedDict()` with some content --- a: `OrderedDict( [('a', 1), ('b', 2), ...] )` is the right way, while `OrderedDict({'a': 1, 'b': 2, ...})` and `OrderedDict(a=1, b=2, ...)` are not (`kwargs` is a dict)
 
 # itertools module
 
@@ -1018,3 +1060,5 @@ isinstance(tree.getroot().attrib, dict) == True
 - q: advanced unpacking: `a, b, *rest = range(10)`, `a, *rest, b = range(10)`, `first, *_, last = f.readlines()`
 
 <https://stackoverflow.com/questions/6967632/unpacking-extended-unpacking-and-nested-extended-unpacking>
+
+

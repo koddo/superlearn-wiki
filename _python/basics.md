@@ -445,9 +445,6 @@ pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pr
 
 `lst.index(e)` raises `ValueError` when `e` is not in the list, because a value like `-1` could lead to obscure bugs
 
-TODO: destructive and non-destructive insert, remove, append, extend, sort, pop
-
-
 
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- lists">
     <p>Your browser does not support iframes.</p>
