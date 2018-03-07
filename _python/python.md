@@ -186,18 +186,30 @@ interesting: Due to the way the Python C-level APIs developed, a lot of built-in
 
 TODO: `iteritems`, `iterkeys`, `itervalues` are no longer supported
 
+q: Create an empty dictionary. --- a: `d = {}`
+q: Create an dictionary with key-value pairs `1: 'a', 2: 'b'`. --- a: `d = { 1: 'a', 2: 'b' }`
+q: Get a value from dict by a key. --- a: `d['the key']` or `d.get('whatever', 'zero')` when you want a default value. The former raises `KeyError`.
+q: what happens when you try to acces a non-existent key in a dict? --- a: it raises `KeyError`
+q: del d[key]
+q: del d[non_existant_key]
+q: what does del d[k] return?
+
+q: Get list of keys of a dict. --- a: `list(a_dict.keys())`, the `.keys()` returns a dictview.
+
+q: What is a `dictview`? --- a: Provids a dynamic view on the dictionary’s entries, which means that when the dictionary changes, the view reflects these changes. Once it's converted to a list, this property disappears.
+q: What does `a_dict.items()` return? --- a: A `dictview` object.
+q: What does `a_dict.keys()` return? --- a: A `dictview` object.
+q: What does `a_dict.values()` return? --- a: A `dictview` object.
+q: What can we do with a `dictview` returned by `dct.items()`, `dct.keys()`, `dct.values()`? --- a: `list(dv)`, `len(dv)`, check `x in dv`; iterate `iter(dv)`; `dct.keys()` and `dct.items()` are set-like, can do `dct.keys() & set(...)`
+
 q: Construct a dict from two lists. -- a: First, make sure they are of same length (or you know what you are doing when not), and then `dict(zip(keys, values))`.
 q: Construct a dict from list of 2-lists.  -- a: `dict( [[1, 'a'], [2, 'b']] )`
 q: Construct a dict from list of 2-tuples. -- a: `dict( [(1, 'a'), (2, 'b')] )`
 q: Convert a dict to a list of 2-tuples. -- a: `list(dct.items())` or a comprehension.
 q: Check if a key exists in a dict. --- a: `if k in a_dict: ...` or `not in`
 q: Get number of key-value pairs in a dictionary. --- a: `len(d)`
-q: Create an empty dictionary. --- a: `d = {}`
-q: Create an dictionary with key-value pairs `1: 'a', 2: 'b'`. --- a: `d = { 1: 'a', 2: 'b' }`
-q: Get a value from dict by a key. --- a: `d['the key']` or `d.get('whatever', 'zero')` when you want a default value. The former raises `KeyError`.
-q: what happens when you try to acces a non-existent key in a dict? --- a: it raises `KeyError`
 
-q: Get list of keys of a dict. --- a: `list(a_dict.keys())`, the `.keys()` returns a dictview.
+
 
 q: Iterate over keys in a dict. --- a: `for k in dct: ...`, equivalent to `for k in dct.keys(): ...`
 q: Iterate over sorted keys in a dict. --- a:
@@ -213,11 +225,6 @@ q: `a_dict[k]` vs `a_dict.get(k)` --- a: The latter never raises `KeyError`, ret
 q: What does `a_dict.setdefault(k, defaultvalue)` do? --- a: Returns `a_dict[k]` when `k` exists or sets `a_dict[k] = defaultvalue` and then returns it, instead of just returning it like the `.get()` does. Note that `defaultdict` is a modern replacement for the `.setdefault()`, because its name is much more obvious.
 q: `a_dict.get(k, defaultvalue)` vs `a_dict.setdefault(k, defaultvalue)` vs `collections.defaultdict(init_func)` --- a: When the key does not exist, `.get()` just returns the `defaultvalue`, `.setdefault()` sets `d[k] = default_value` and then returns it, `defaultdict` does the same, but initializes the value with `init_func`, it's called `defaultfactory` in docs. The `defaultdict` is considered a modern version of `.setdefault()`, since its name is much more obvious.
 
-q: What is a `dictview`? --- a: Provids a dynamic view on the dictionary’s entries, which means that when the dictionary changes, the view reflects these changes. Once it's converted to a list, this property disappears.
-q: What does `a_dict.items()` return? --- a: A `dictview` object.
-q: What does `a_dict.keys()` return? --- a: A `dictview` object.
-q: What does `a_dict.values()` return? --- a: A `dictview` object.
-q: What can we do with a `dictview` returned by `dct.items()`, `dct.keys()`, `dct.values()`? --- a: `list(dv)`, `len(dv)`, check `x in dv`; iterate `iter(dv)`; `dct.keys()` and `dct.items()` are set-like, can do `dct.keys() & set(...)`
 
 - q: How to overwrite key/value pairs in a dictionary with ones from another dictionary? --- a: `d.update(d2)`, returns `None`
 - q: How to merge two dictionaries? --- a: 
@@ -231,7 +238,6 @@ q: What can we do with a `dictview` returned by `dct.items()`, `dct.keys()`, `dc
 
 - q: What is `dict.fromkeys()` for?
 
-del d[key]
 a_dict.copy()
 
 # collections module
