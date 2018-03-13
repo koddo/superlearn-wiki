@@ -201,21 +201,30 @@ q: Construct a dict from list of 2-tuples. -- a: `dict( ((1, 'a'), (2, 'b')) )`
 q: Get number of key-value pairs in a dictionary. --- a: `len(d)`
 q: Check if a key exists in a dict. --- a: `if k in a_dict: ...` or `not in`
 q: Get a value from dict by a key. --- a: `d['the key']` or `d.get('whatever', 'zero')` when you want a default value. The former raises `KeyError`, the latter does not.
-q: What happens when you try to acces a non-existent key in a dict? --- a: `d[k]` raises `KeyError`, `d.get()` returns `None`
+q: What happens when you try to acces a non-existent key in a dict? --- a: `d[k]` raises `KeyError`, `d.get()` returns `None` or a provided default value.
 q: How to assign a value to a key in a dict? --- a: `d[k] = v`
 q: Why a list can't be a key in a dict?
-q: Get a value for key in a dict, or default value when not found. --- a: `d.get(k, 0)`; note that `.get(k, default=0)` will throw `TypeError: get() takes no keyword arguments`
+q: Get a value for a key in a dict, or default value when not found. --- a: `d.get(k, 0)`; note that `.get(k, default=0)` will throw `TypeError: get() takes no keyword arguments`
 q: What happens when you do `a_dict.get(x, default=0)`? --- a: `TypeError: get() takes no keyword arguments`; just write `.get(x, 0)`
 q: `a_dict[k]` vs `a_dict.get(k)` --- a: The latter never raises `KeyError`, returns `None` or provided default value, e.g., `a_dict.get(k, 0)`.
-q: What does `a_dict.setdefault(k, defaultvalue)` do? --- a: Returns `a_dict[k]` when `k` exists or sets `a_dict[k] = defaultvalue` and then returns it, instead of just returning it like the `.get()` does. Note that `defaultdict` is a modern replacement for the `.setdefault()`, because its name is much more obvious.
-q: `a_dict.get(k, defaultvalue)` vs `a_dict.setdefault(k, defaultvalue)` vs `collections.defaultdict(init_func)` --- a: When the key does not exist, `.get()` just returns the `defaultvalue`, `.setdefault()` sets `d[k] = default_value` and then returns it, `defaultdict` does the same, but initializes the value with `init_func`, it's called `defaultfactory` in docs. The `defaultdict` is considered a modern version of `.setdefault()`, since its name is much more obvious.
+q: What does `a_dict.setdefault(k, defaultvalue)` do? --- a: It does this: `d[k] = d.get(k, defaultvalue); d[k]`; typical usage: `somedict.setdefault(somekey, []).append(somevalue)`
+q: `a_dict.get(k, defaultvalue)` vs `a_dict.setdefault(k, defaultvalue)` vs `collections.defaultdict(init_func)` --- a: When the key does not exist, `.get()` just returns the `defaultvalue`, `.setdefault()` sets `d[k] = default_value` and then returns it, `defaultdict` does the same, but initializes the value with `init_func`, it's called `defaultfactory` in docs.
+q: get a `defaultdict` with default value `'foo'`; `0`; `[]`. --- a: `collections.defaultdict(lambda: 'foo')`; `collections.defaultdict(int)`; `collections.defaultdict(list)`
 
+
+- q: How to add/overwrite key/value pairs in a dictionary with ones from another dictionary? --- a: `d.update(d2)`, returns `None`
+- q: How to merge two dictionaries? --- a: `z = {**x, **y}` or `z = x.copy(); z.update(y)`
+
+- q: How to get a copy of a dict? --- a: `d.copy()` or `copy.copy(d)`; `copy.deepcopy(d)` 
+- q: Does dict preserve order of insertions? --- Dicts preserve order of insertion in python 3.7 and newer. In 3.6 it's not guaranteed, just an implementation detail. Nice feature to rely on for introspection, debugginng, printing, etc.
 
 
 q: How to delete a key from a dictionary? --- `del d[k]`, raises `KeyError`
 q: What happens when we do `del d[non_existant_key]`? --- a: `KeyError`
 q: What does del d[k] return? --- It can't return anything, it's a statement, not an expression.
+- q: How to remove all items from a dict? --- a: `d.clear()`
 
+iterating over dictionaries
 q: Get list of keys of a dict. --- a: `list(a_dict.keys())`, the `.keys()` returns a `dictview`; or a comprehension.
 q: Convert a dict to a list of 2-tuples. -- a: `list(dct.items())`, `.items()` returns a `dictview`; or a comprehension.
 q: What is a `dictview`? --- a: Provids a dynamic view on the dictionary’s entries, which means that when the dictionary changes, the view reflects these changes. Once it's converted to a list, this property disappears.
@@ -230,34 +239,40 @@ q: What does `iter(a_dict)` do? --- a: It's a shortcut for `iter(a_dict.keys())`
 
 q: How to iterate over a dict and remove items based on a condition? -- a: Do not add or remove items from data structures while iterating over them. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items. For example, given a dict, our choices are: iterate over a copy of keys `for k in list(dct.keys())`; create a list of keys to delete after iteration; use dict comprehension, which creates a new dict.
 q: Why can't we simply iterate over keys in a dict to remove some items in the same dict like in `for k in dct.keys(): if cond: del dct[k]`? -- a: Iterators are not informed when a data structure is modified. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items.
+- q: What is `a_dict.pop(key[, default])` for? ---   a: If key is in the dictionary, remove it and return its value. Raises `KeyError` unless a default value is given.
+- q: What is `a_dict.popitem()` for? --- a: Remove and return an arbitrary (key, value) pair from the dictionary. Useful to destructively iterate over a dictionary, as often used in set algorithms. Raises `KeyError`.
 
 
-- q: How to overwrite key/value pairs in a dictionary with ones from another dictionary? --- a: `d.update(d2)`, returns `None`
-- q: How to merge two dictionaries? --- a:
-
-``` Python
-z = x.copy()
-z.update(y)
-```
-
-``` Python
-z = {**x, **y}
-```
 
 <https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python>
 <https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression>
 
-- q: What is `a_dict.pop()` for?
-- q: What is `a_dict.popitem()` for?
-- q: How to remove all items from a dict? --- a: `d.clear()`
-
-- q: What is `dict.fromkeys()` for?
-
-- q: How to get a copy of a dict? --- a: `d.copy()` or `copy.copy(d)`; `copy.deepcopy(d)` 
-
-- q: Does dict preserve order of insertions? --- Dicts preserve order of insertion in python 3.7 and newer. In 3.6 it's not guaranteed, just an implementation detail. Nice feature to rely on for introspection, debugginng, printing, etc.
-
 Dicts preserve order of insertion in python 3.7 and newer. <https://www.python.org/dev/peps/pep-0468/#motivation>
+
+<https://github.com/mewwts/addict>
+
+## setdefault and defaultdict
+
+Good examples of `.setdefault()` <http://xwell.org/2015/04/07/python-tricks-setdefault/>:
+
+``` Python
+incident = {}
+incident.setdefault('action', {}).setdefault('hacking', {}).setdefault('variety', []).append("Brute force")   # => {'action': {'hacking': {'variety': ['Brute force']}}}
+```
+
+<https://code.activestate.com/recipes/66516-add-an-entry-to-a-dictionary-unless-the-entry-is-a/>:
+
+> setdefault is normally not useful if the values are immutable
+> setdefault is particularly useful for the very common data structure that is a dictionary whose values are lists, and the single most typical usage form for it is somedict.setdefault(somekey,[]).append(somevalue).
+
+<http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html>:
+
+> The only problem with dict.setdefault() is that the default value is always evaluated, whether needed or not. That only matters if the default value is expensive to compute.
+
+<http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html>:
+
+> You cannot get KeyError exceptions from properly initialized defaultdict instances. You have to use a "key in dict" conditional if you need to check for the existence of a specific key.
+
 
 # collections module
 
@@ -269,13 +284,8 @@ This means that if you construct often and only perform a few lookups each time,
 
 q: create a named tuple --- a: `Point = collections.namedtuple('Point', 'x, y')`
 
-## defaultdict
 
 q: get a dict, which which counts distinct elements in a list --- a: `collections.Counter(list)`
-q: get a dict with default value `'foo'` --- a: `collections.defaultdict(lambda: 'foo')`
-q: get a dict with default value `0` --- a: `collections.defaultdict(int)`
-q: get a dict with default value `[]` --- a: `collections.defaultdict(list)`
-q: `dict` vs `collections.defaultdict` --- a: `d['non-existent key']` raises `KeyError`, `defaultdict` adds and returns a default value
 
 ## OrderedDict
 
