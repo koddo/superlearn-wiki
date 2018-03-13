@@ -183,62 +183,81 @@ d[1] = 'whatever'   # sets the value
 
 interesting: Due to the way the Python C-level APIs developed, a lot of built-in functions and methods don't actually have names for their arguments. `.get(x, default=0)` throws `TypeError: get() takes no keyword arguments`, but `.get(x, 0)` works
 
+How (not) to merge dictionaries: <http://treyhunner.com/2016/02/how-to-merge-dictionaries-in-python/>, <https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression/26853961#26853961>
 
 TODO: `iteritems`, `iterkeys`, `itervalues` are no longer supported
 
+TODO: how dicts are implemented: <https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented/44509302#44509302>, <https://mail.python.org/pipermail/python-dev/2012-December/123028.html>
+
 q: Create an empty dictionary. --- a: `d = {}`
-q: Create an dictionary with key-value pairs `1: 'a', 2: 'b'`. --- a: `d = { 1: 'a', 2: 'b' }`
-q: Get a value from dict by a key. --- a: `d['the key']` or `d.get('whatever', 'zero')` when you want a default value. The former raises `KeyError`.
-q: what happens when you try to acces a non-existent key in a dict? --- a: it raises `KeyError`
-q: del d[key]
-q: del d[non_existant_key]
-q: what does del d[k] return?
-
-q: Get list of keys of a dict. --- a: `list(a_dict.keys())`, the `.keys()` returns a dictview.
-
-q: What is a `dictview`? --- a: Provids a dynamic view on the dictionary’s entries, which means that when the dictionary changes, the view reflects these changes. Once it's converted to a list, this property disappears.
-q: What does `a_dict.items()` return? --- a: A `dictview` object.
-q: What does `a_dict.keys()` return? --- a: A `dictview` object.
-q: What does `a_dict.values()` return? --- a: A `dictview` object.
-q: What can we do with a `dictview` returned by `dct.items()`, `dct.keys()`, `dct.values()`? --- a: `list(dv)`, `len(dv)`, check `x in dv`; iterate `iter(dv)`; `dct.keys()` and `dct.items()` are set-like, can do `dct.keys() & set(...)`
-
-q: Construct a dict from two lists. -- a: First, make sure they are of same length (or you know what you are doing when not), and then `dict(zip(keys, values))`.
+q: Create a dictionary with key-value pairs `1: 'a', 2: 'b'`. --- a: `d = { 1: 'a', 2: 'b' }`
+q: Construct a dict from two lists. -- a: First, make sure they are of same length (or you are sure what you are doing when not), and then `dict(zip(keys, values))`.
 q: Construct a dict from list of 2-lists.  -- a: `dict( [[1, 'a'], [2, 'b']] )`
-q: Construct a dict from list of 2-tuples. -- a: `dict( [(1, 'a'), (2, 'b')] )`
-q: Convert a dict to a list of 2-tuples. -- a: `list(dct.items())` or a comprehension.
-q: Check if a key exists in a dict. --- a: `if k in a_dict: ...` or `not in`
+q: Construct a dict from list of 2-tuples. -- a: `dict( ((1, 'a'), (2, 'b')) )`
+- q: `dict.fromkeys([1, 2, 3], 10)`
+
+
+
 q: Get number of key-value pairs in a dictionary. --- a: `len(d)`
-
-
-
-q: Iterate over keys in a dict. --- a: `for k in dct: ...`, equivalent to `for k in dct.keys(): ...`
-q: Iterate over sorted keys in a dict. --- a:
-q: Iterate over key-value pairs in a dict. --- a: `for k,v in dct.items(): ...`
-q: with sorted keys?
-
-q: How to iterate over a dict and remove items based on a condition? -- a: Do not add or remove items from data structures while iterating over them. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items. For example, given a dict, our choices are: iterate over a copy of keys `for k in list(dct.keys())`; create a list of keys to delete after iteration; use dict comprehension, which creates a new dict.
-q: Why can't we simply iterate over keys in a dict to remove some items in the same dict like in `for k in dct.keys(): if cond: del dct[k]`? -- a: Iterators are not informed when a data structure is modified. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items.
+q: Check if a key exists in a dict. --- a: `if k in a_dict: ...` or `not in`
+q: Get a value from dict by a key. --- a: `d['the key']` or `d.get('whatever', 'zero')` when you want a default value. The former raises `KeyError`, the latter does not.
+q: What happens when you try to acces a non-existent key in a dict? --- a: `d[k]` raises `KeyError`, `d.get()` returns `None`
+q: How to assign a value to a key in a dict? --- a: `d[k] = v`
+q: Why a list can't be a key in a dict?
 q: Get a value for key in a dict, or default value when not found. --- a: `d.get(k, 0)`; note that `.get(k, default=0)` will throw `TypeError: get() takes no keyword arguments`
 q: What happens when you do `a_dict.get(x, default=0)`? --- a: `TypeError: get() takes no keyword arguments`; just write `.get(x, 0)`
-q: Set a value for key in a dict. --- a: `d['whatever'] = 1`
 q: `a_dict[k]` vs `a_dict.get(k)` --- a: The latter never raises `KeyError`, returns `None` or provided default value, e.g., `a_dict.get(k, 0)`.
 q: What does `a_dict.setdefault(k, defaultvalue)` do? --- a: Returns `a_dict[k]` when `k` exists or sets `a_dict[k] = defaultvalue` and then returns it, instead of just returning it like the `.get()` does. Note that `defaultdict` is a modern replacement for the `.setdefault()`, because its name is much more obvious.
 q: `a_dict.get(k, defaultvalue)` vs `a_dict.setdefault(k, defaultvalue)` vs `collections.defaultdict(init_func)` --- a: When the key does not exist, `.get()` just returns the `defaultvalue`, `.setdefault()` sets `d[k] = default_value` and then returns it, `defaultdict` does the same, but initializes the value with `init_func`, it's called `defaultfactory` in docs. The `defaultdict` is considered a modern version of `.setdefault()`, since its name is much more obvious.
 
 
+
+q: How to delete a key from a dictionary? --- `del d[k]`, raises `KeyError`
+q: What happens when we do `del d[non_existant_key]`? --- a: `KeyError`
+q: What does del d[k] return? --- It can't return anything, it's a statement, not an expression.
+
+q: Get list of keys of a dict. --- a: `list(a_dict.keys())`, the `.keys()` returns a `dictview`; or a comprehension.
+q: Convert a dict to a list of 2-tuples. -- a: `list(dct.items())`, `.items()` returns a `dictview`; or a comprehension.
+q: What is a `dictview`? --- a: Provids a dynamic view on the dictionary’s entries, which means that when the dictionary changes, the view reflects these changes. Once it's converted to a list, this property disappears.
+q: What does `a_dict.items()`, `.keys()`, `.values()` return? --- a: A `dictview` object.
+q: What can and cannot we do with a `dictview` returned by `dct.items()`, `dct.keys()`, `dct.values()`? --- a: `list(dv)`, `len(dv)`, check `x in dv`; iterate `iter(dv)`; `dct.keys()` and `dct.items()` are set-like, can do `dct.keys() & set(...)`. We can't do `reversed(dv)`.
+
+q: Iterate over keys in a dict. --- a: `for k in dct: ...`, equivalent to `for k in dct.keys(): ...`
+q: Iterate over sorted keys in a dict. --- a: `for k, v in sorted(d.items()): ...`, this is faster, than `for k in sorted(d): d[k]`
+q: Iterate over sorted values in a dict. --- a: `for k, v in sorted(d.items(), key=itemgetter(1)): ...` or `for k in sorted(d, key=d.get): d[k]`
+q: Iterate over key-value pairs in a dict (in arbitrary order). --- a: `for k,v in dct.items(): ...`
+q: What does `iter(a_dict)` do? --- a: It's a shortcut for `iter(a_dict.keys())`, so `for k in a_dict: ...` is equivalent to `for k in a_dict.keys(): ...`
+
+q: How to iterate over a dict and remove items based on a condition? -- a: Do not add or remove items from data structures while iterating over them. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items. For example, given a dict, our choices are: iterate over a copy of keys `for k in list(dct.keys())`; create a list of keys to delete after iteration; use dict comprehension, which creates a new dict.
+q: Why can't we simply iterate over keys in a dict to remove some items in the same dict like in `for k in dct.keys(): if cond: del dct[k]`? -- a: Iterators are not informed when a data structure is modified. In the best case this causes `RunTimeError`, sometimes it leads to infinite loop, sometimes to skipping items.
+
+
 - q: How to overwrite key/value pairs in a dictionary with ones from another dictionary? --- a: `d.update(d2)`, returns `None`
-- q: How to merge two dictionaries? --- a: 
+- q: How to merge two dictionaries? --- a:
+
+``` Python
+z = x.copy()
+z.update(y)
+```
+
+``` Python
+z = {**x, **y}
+```
+
 <https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python>
 <https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression>
 
 - q: What is `a_dict.pop()` for?
 - q: What is `a_dict.popitem()` for?
-
-- q: What is `iter(a_dict)` for?
+- q: How to remove all items from a dict? --- a: `d.clear()`
 
 - q: What is `dict.fromkeys()` for?
 
-a_dict.copy()
+- q: How to get a copy of a dict? --- a: `d.copy()` or `copy.copy(d)`; `copy.deepcopy(d)` 
+
+- q: Does dict preserve order of insertions? --- Dicts preserve order of insertion in python 3.7 and newer. In 3.6 it's not guaranteed, just an implementation detail. Nice feature to rely on for introspection, debugginng, printing, etc.
+
+Dicts preserve order of insertion in python 3.7 and newer. <https://www.python.org/dev/peps/pep-0468/#motivation>
 
 # collections module
 
@@ -262,10 +281,12 @@ q: `dict` vs `collections.defaultdict` --- a: `d['non-existent key']` raises `Ke
 
 <https://www.reddit.com/r/Python/comments/7jyluw/dict_knownordered_versus_ordereddict_an/>
 
-- q: `dict` vs `collections.OrderedDict`? --- a: 
-q: get a dictionary, which preserves the order in which its elements are added --- a: `od = collections.OrderedDict(); od['a'] = 1; od['b'] = 2`
-q: how to initialize a `collections.OrderedDict()` with some content --- a: `OrderedDict( [('a', 1), ('b', 2), ...] )` is the right way, while `OrderedDict({'a': 1, 'b': 2, ...})` and `OrderedDict(a=1, b=2, ...)` are not (`kwargs` is a dict)
-- q: What is `.popitem()` method of `OrderedDict` for? --- a: `.popitem(last=True)` behaves like a stack operation.
+TODO: performance comparison `dict` vs `collections.OrderedDict` 
+
+- q: `dict` vs `collections.OrderedDict`? --- a: While either is now preserves order, they are implemented differently; `OrderedDict`  has `.popitem()` and `.move_to_end(key, last=True)` functions; `OrderedDict` considers order when two instances are compared; `OrderedDict` supports `reversed()`
+- q: Get a dictionary, which preserves the order in which its elements are added --- a: `od = collections.OrderedDict(); od['a'] = 1; od['b'] = 2`
+- q: How to initialize a `collections.OrderedDict()` with some content? --- a: `OrderedDict( [('a', 1), ('b', 2), ...] )` is the right way, while `OrderedDict({'a': 1, 'b': 2, ...})` and `OrderedDict(a=1, b=2, ...)` are not (`kwargs` is a dict)
+- q: What are `.popitem()` and `.move_to_end(key, last=True)` method of `OrderedDict` for? --- a: `.popitem(last=True)` behaves like a stack operation
 
 # sets
 
