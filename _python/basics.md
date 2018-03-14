@@ -467,3 +467,83 @@ pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pr
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- deques">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+# dicts
+
+interesting thing: `d[k]` raises `ValueError` when the `k` is not in the dict, while `d[k] = 'whatever'` sets the new value
+
+``` python
+d = {}
+d[1]   # raises ValueError 
+d[1] = 'whatever'   # sets the value
+```
+
+interesting: Due to the way the Python C-level APIs developed, a lot of built-in functions and methods don't actually have names for their arguments. `.get(x, default=0)` throws `TypeError: get() takes no keyword arguments`, but `.get(x, 0)` works
+
+How (not) to merge dictionaries: <http://treyhunner.com/2016/02/how-to-merge-dictionaries-in-python/>, <https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression/26853961#26853961>
+
+TODO: `iteritems`, `iterkeys`, `itervalues` are no longer supported
+
+TODO: how dicts are implemented: <https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented/44509302#44509302>, <https://mail.python.org/pipermail/python-dev/2012-December/123028.html>
+
+Why lists can't be keys in a dict: <https://wiki.python.org/moin/DictionaryKeys>
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- dictionaries">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- iterating over dictionaries">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+<https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python>
+<https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression>
+
+Dicts preserve order of insertion in python 3.7 and newer. <https://www.python.org/dev/peps/pep-0468/#motivation>
+
+<https://github.com/mewwts/addict>
+
+## setdefault and defaultdict
+
+Good examples of `.setdefault()` <http://xwell.org/2015/04/07/python-tricks-setdefault/>:
+
+``` Python
+incident = {}
+incident.setdefault('action', {}).setdefault('hacking', {}).setdefault('variety', []).append("Brute force")   # => {'action': {'hacking': {'variety': ['Brute force']}}}
+```
+
+<https://code.activestate.com/recipes/66516-add-an-entry-to-a-dictionary-unless-the-entry-is-a/>:
+
+> setdefault is normally not useful if the values are immutable
+> setdefault is particularly useful for the very common data structure that is a dictionary whose values are lists, and the single most typical usage form for it is somedict.setdefault(somekey,[]).append(somevalue).
+
+<http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html>:
+
+> The only problem with dict.setdefault() is that the default value is always evaluated, whether needed or not. That only matters if the default value is expensive to compute.
+
+<http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html>:
+
+> You cannot get KeyError exceptions from properly initialized defaultdict instances. You have to use a "key in dict" conditional if you need to check for the existence of a specific key.
+
+
+## OrderedDict
+
+<https://www.reddit.com/r/Python/comments/7jyluw/dict_knownordered_versus_ordereddict_an/>
+
+TODO: performance comparison `dict` vs `collections.OrderedDict` 
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- collections.OrderedDict">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+
+# sets
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- sets">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
