@@ -148,17 +148,24 @@ with suppress(FileNotFoundError):
 TODO: with pytest.raises(ExpectedException) <http://doc.pytest.org/en/latest/assert.html>
 TODO: more from <https://docs.python.org/3/library/traceback.html>
 
+<https://github.com/satwikkansal/wtfpython/issues/73>
 
-## basics
+## raising and catching
+
+
 
 ``` Python
+raise
 raise ValueError
 raise ValueError('Some message')
 raise ValueError('Some message', 100)
+
 raise CustomError(100)
-raise
+
 raise CustomError from e
 ```
+
+## misc 
 
 <https://docs.python.org/3/reference/compound_stmts.html#the-try-statement>:
 
@@ -388,17 +395,24 @@ with open('help.txt', 'w') as f:
 
 # built-in exceptions
 
-ArithmeticError --> 
+ArithmeticError --> FloatingPointError, OverflowError, ZeroDivisionError
 
-AttributeError --- x.attr, None.attr
 TypeError --- None[0]
 ValueError --- int('a')
+
+AttributeError --- x.attr, None.attr
 LookupError --> IndexError, KeyError --- l[10]; d['b']
 
 StopIteration
 GeneratorExit
 
-
+     +-- OSError
+      |    +-- FileExistsError
+      |    +-- FileNotFoundError
+      |    +-- IsADirectoryError
+      |    +-- NotADirectoryError
+      |    +-- PermissionError
+      +-- EOFError
 
 # traceback
 

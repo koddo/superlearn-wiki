@@ -17,7 +17,8 @@ TODO: `str(bytes, encoding, errors)` is equivalent to `bytes.decode(encoding, er
 TODO: `str.encode(encoding="utf-8", errors="strict")`
 TODO: `io.StringIO`, `io.BytesIO`, `tempfile.SpooledTemporaryFile`
 
-TODO: `.casefold()`, `lower()`, `.upper()`, `.swapcase()`, `.capitalize()`
+TODO: `.casefold()`, `lower()`, `.upper()`, `.swapcase()`, `.capitalize()`, etc
+- q: `a_str.capitalize()` vs `a_str.title()` vs `string.capswords(s, sep=None)` class method. --- a: There's no simple solution to make words in a string capitalized: `.capitalize()` only does capitalize the very first character of the string (if it's a space, it does nothing); `.title()` makes all consequtive letters in a string capitalized `"they're bill's friends from the UK".title() == "They'Re Bill'S Friends From The Uk"`; <https://docs.python.org/3/library/string.html#string.capwords>
 
 TODO: <https://docs.python.org/3/library/string.html#string-constants>
 isidentifier?

@@ -608,6 +608,8 @@ closures
 
 # introspection
 
+<https://python-hunter.readthedocs.io/en/latest/readme.html>
+
 [dir](https://docs.python.org/3/library/functions.html#dir)
 [vars](https://docs.python.org/3/library/functions.html#vars)
 [globals](https://docs.python.org/3/library/functions.html#globals)
