@@ -165,8 +165,6 @@ q: get a dict, which which counts distinct elements in a list --- a: `collection
 
 ## format
 
-TODO: f-strings, new in 3.6
-
 <https://docs.python.org/3/library/string.html#format-specification-mini-language>
 
 ``` Text
@@ -239,22 +237,18 @@ locale.setlocale(locale.LC_ALL, locale.getdefaultlocale())
 
 for formatting dates see the dates section
 
-not covered: besides `<`, `>`, and `^` alignment options there is another one, `=`, for putting the sign before fill chars: `'{:0=5}'.format(-1) == '-0001'`
 not covered: printing binary and octal
 Note, we don't have questions for formatting floats with reserved space for sign, we only have question about meaning of those options: `'{:+f} {: f} {:-f}'`.
+
+
 
 TODO: `print(..., sep=', ')`
 TODO: `print(..., end=' ')`
 
 basics:
 - q: `s.format()` vs `%`-interpolation --- a: Just use the `.format()`, the `%`-style formatting is left in the language for backward compatibility.
-- q: TODO: Explicit and implicit positional arguments. --- a: Implicit: `'hello, {}'.format(username)`; explicit: `'{1} is cooler than {0}'.format('vim', 'emacs')`.
-- q: What happens when we mix replacement fields like this: `'{} {1}'.format(1, 2)`? --- a: `ValueError: cannot switch from automatic field numbering to manual field specification`
-- q: How to `str.format()` curly braces? --- a: Just double them: `'left curly brace:\{\{, and the right one: \}\}'.format()`
-- q: named arguments --- a: `'{first} {last}'.format(first='John', last='Smith')` and `'{first} {last}'.format( **{'first': 'John', 'last': 'Smith'} )`
 - q: accessing argument's attributes --- a: `'{0.real}, {0.imag}'.format(1-1j) == '1.0, -1.0'`
 - q: accessing argument's items --- a: `'X: {0[0]};  Y: {0[1]}'.format( (2, 3) ) == 'X: 2;  Y: 3'`
-- q: How to format arguments out of order they come? --- a: `'{1} is cooler than {0}'.format('vim', 'emacs')`
 - q: How precision affects formatting of strings? `'{:.3}'.format('xylophone')` --- a: `'{:.3}'.format('xylophone') == 'xyl'`
 - q: How to format only the first n chars of a string usign `str.format()`? --- a: `'{:.3}'.format('xylophone') == 'xyl'`
 
@@ -275,31 +269,12 @@ numbers:
 - q: What is this shit? `'{:%}'` --- a: Percentage. Multiplies the number by 100 and displays in fixed (`'f'`) format, followed by a percent sign: `'{:%}'.format(0.42) == '42.000000%'` --- you probably want to use precision, `'{:.1%}'`
 - q: How to format a float as percents when it represents a ratio? --- a: `'{:.1%}'.format(1/3) == '33.3%'` --- you probably want to use precision, because it displays floats in fixed (`f`) format with default precision 6.
 
-- q: What do these mean? `'{:+f} {: f} {:-f}'` --- a: `'{:-f}'` is same as `'{:f}'`, `'{:+f}'` is for always showing the sign, `'{: f}'` preserves space: `'{: f}; {: f}'.format(3.14, -3.14) == ' 3.140000; -3.140000'`.
+- q: What do these mean? `'{:+f} {: f} {:-f}'`? --- a: `'{:-f}'` is same as `'{:f}'`, `'{:+f}'` is for always showing the sign, `'{: f}'` preserves space: `'{: f}; {: f}'.format(3.14, -3.14) == ' 3.140000; -3.140000'`.
 
 - q: How to print a hex number with and without `0x` prefix? --- a: `'with: {0:#x}; without: {0:x}'.format(15) == 'with: 0xf; without: f'` --- the octothorp `#` does alternate behaviour.
 - q: What does `'{:#x}'` mean? --- a: Hexadecimal with the `0x` prefix.
 - q: What if we use capital letters for presentation types? `'{:F}'`, `'{:G}'`, `'{:E}'`, `'{:#X}'`? --- It formats `nan`, `inf`, `e`, etc, in uppercase; for hexadecimals it also formats the prefix `'0X'` uppercase.
 
-alignment:
-- q: How to align a string to the left when using `str.format()`? --- a: `'{:<3}'.format('l') == 'l  '`
-- q: How to align a string to the right when using `str.format()`? --- a: `'{:>3}'.format('r') =='  r'`
-- q: How to align a string at the center when using `str.format()`? --- a: `'{:^5}'.format('c') == '  c  '`
-- q: How to use a fill character when aligning a string using `str.format()`? --- a: `'{:*^5}'.format('c') == '**c**'`
-
-
-
-misc:
-- q: `str()` vs `repr()` --- a: `repr()` is meant to generate representations which can be read by the interpreter, `str()` is for end-users.
-- q: What are outputs of `str('hello')` and `repr('hello')`? --- a: `'hello'` and `"'hello'"`
-- q: What is `ascii()` for? --- It's the `repr()` with escaped non-ASCII characters.
-- q: What is conversion flag to call `repr()` on an argument of `str.format()`? --- a: `'{!r}'.format('hello') == "'hello'"`
-- q: What is conversion flag to call `str()` on an argument of `str.format()`? --- a: `'{!s}'.format('hello') == 'hello'`
-- q: What does this mean? `{!r}.format(whatever)` --- a: Calls `repr()` on the argument.
-- q: What does this mean? `{!s}.format(whatever)` --- a: Calls `str()` on the argument.
-- q: `str.format(**dct)` vs `str.format_map(defaultdct)`? --- a: Unpacking produces a `dict`, so this fails if it doesn't contain a needed key. But with `.format_map()` we can use `defaultdict`.
-TODO: `str.format_map` example
-- q: Nested replacement fields. --- a: `'{:{fill}{align}{width}}'.format('hello', fill='*', align='^', width=11) == '***hello***'`
 
 
 
@@ -724,7 +699,7 @@ q: get rid of head of a list before a predicate becomes false --- a: `list(itert
 q: get rid of tail of a list after a predicate becomes false --- a: `list(itertools.takewhile(lambda x: x<3, [1, 2, 3, 1, 2, 3])) == [1, 2]`
 q: `slice()` vs `itertools.islice()` --- a: the latter is for iterators, which don't support indexing, consumes data on them; in most cases just use the former
 q: `map()` vs `itertools.starmap()` --- a: the latter is for data, which has been pre-zipped, `list( itertools.starmap(pow, [(5,2), (3,2), (10,3)]) ) == [25, 9, 1000]`
-q: `zip()` two sequences until the longest one is exhauseted, with a given value for missing bits --- a: `itertools.zip_longest(lst1, lst2, fillvalue=None)`
+q: `zip()` two sequences until the longest one is exhauseted, with a given value for missing bits --- a: `itertools.zip_longest(*iterables, fillvalue=None)`
 q: `zip()` vs `itertools.zip_longest()` --- a: the former stops when the shortest iterator is exhausted, the latter stops when the longest one is done
 
 

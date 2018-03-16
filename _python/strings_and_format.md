@@ -62,20 +62,16 @@ When it's not actually split: returns a list containing the string. `'  a  '.spl
 </iframe>
 
 
+
+- q: How to align a string to the left when using `str.format()`? --- a: `'{:<3}'.format('l') == 'l  '`
+- q: How to align a string to the right when using `str.format()`? --- a: `'{:>3}'.format('r') =='  r'`
+- q: How to align a string at the center when using `str.format()`? --- a: `'{:^5}'.format('c') == '  c  '`
+- q: How to use a fill character when aligning a string using `str.format()`? --- a: `'{:*^5}'.format('c') == '**c**'`
+
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings adjustments">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
-
-misc:
-- q: How are string literals written in python? --- a: `'Single'` or `"double"` or `'''three single'''` or `"""three double"""` quotes. Triple quoted strings may span multiple lines.
-- q: Is there a character type in python? --- a: No, only strings. `s[0]` is equivalent to `s[0:1]` substring.
-- q: What does this return as there is no character type in python: `s[0]`? --- a: Returns a string of length 1, `s[0]` is equivalent to `s[0:1]` substring.
-- q: Get length of a string. --- a: `len(s)`
-- q: What if `s = 'abc'` and we try to get `s[3]`? --- a: Raises `IndexError`.
-- q: We can't do `a_string[::n] = a_char`, so how to write an equivalent? -- a: `''.join(a_char if i % n == 0 else c for i, c in enumerate(a_string))`
-- q: What are `str.maketrans()` and `str.translate` for? --- a: For character substitution. `l->1, e->3, t->7` is done like this: `'leet'.translate(str.maketrans('let', '137')) == '1337'`
-- q: Can we mutate strings? What operations are supported? --- a: No, strings are immutable. `s[i] = l`, `s.append(l)`, `s.insert(i, l)`, `s.reverse()`, `s.remove(l)`, etc are not supported.
 
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings">
     <p>Your browser does not support iframes.</p>
@@ -101,6 +97,18 @@ Our choises are:
 - `'{}'.format('\n'.join(l))`
 - `print(*l, sep='\n')`
 
+<https://docs.python.org/3/reference/lexical_analysis.html#f-strings>
+
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings f-strings">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+
+# format
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings format">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+
