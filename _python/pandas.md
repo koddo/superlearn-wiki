@@ -118,3 +118,4 @@ optimized pandas data access methods, .at, .iat, .loc, .iloc and .ix
 
 
 
+Using format strings: <https://pandas.pydata.org/pandas-docs/stable/style.html#Finer-Control:-Display-Values>

@@ -17,24 +17,12 @@ TODO: `str(bytes, encoding, errors)` is equivalent to `bytes.decode(encoding, er
 TODO: `str.encode(encoding="utf-8", errors="strict")`
 TODO: `io.StringIO`, `io.BytesIO`, `tempfile.SpooledTemporaryFile`
 
-TODO: `.casefold()`, `lower()`, `.upper()`, `.swapcase()`, `.capitalize()`, etc
-- q: `a_str.capitalize()` vs `a_str.title()` vs `string.capswords(s, sep=None)` class method. --- a: There's no simple solution to make words in a string capitalized: `.capitalize()` only does capitalize the very first character of the string (if it's a space, it does nothing); `.title()` makes all consequtive letters in a string capitalized `"they're bill's friends from the UK".title() == "They'Re Bill'S Friends From The Uk"`; <https://docs.python.org/3/library/string.html#string.capwords>
-
 TODO: <https://docs.python.org/3/library/string.html#string-constants>
-isidentifier?
-isalnum
-isalpha
-isdecimal
-isdigit
-islower
-isnumeric
-isprintable
-isspace
-istitle
-isupper
 
-TODO: `expandtabs`
+<https://stackoverflow.com/questions/40348174/should-i-use-python-casefold>
 
+
+<https://stackoverflow.com/questions/34546171/python-expandtabs-string-operation>
 
 Strings `.join()` vs `+=` in a loop: <http://stackoverflow.com/questions/1349311/python-string-join-is-faster-than-but-whats-wrong-here/21964653#21964653>
 
@@ -62,12 +50,6 @@ When it's not actually split: returns a list containing the string. `'  a  '.spl
 </iframe>
 
 
-
-- q: How to align a string to the left when using `str.format()`? --- a: `'{:<3}'.format('l') == 'l  '`
-- q: How to align a string to the right when using `str.format()`? --- a: `'{:>3}'.format('r') =='  r'`
-- q: How to align a string at the center when using `str.format()`? --- a: `'{:^5}'.format('c') == '  c  '`
-- q: How to use a fill character when aligning a string using `str.format()`? --- a: `'{:*^5}'.format('c') == '**c**'`
-
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings adjustments">
     <p>Your browser does not support iframes.</p>
 </iframe>
@@ -81,6 +63,11 @@ When it's not actually split: returns a list containing the string. `'  a  '.spl
 
 {: .centered}
 ![python strings methods](./images/python.strings.001.svg)
+
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings other">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
 # f-strings
 
@@ -106,9 +93,89 @@ Our choises are:
 
 # format
 
+<https://docs.python.org/3/library/string.html#format-specification-mini-language>
+
+``` Text
+format_spec     ::=  [[fill]align][sign][#][0][width][grouping_option][.precision][type]
+fill            ::=  <any character>
+align           ::=  "<" | ">" | "=" | "^"
+sign            ::=  "+" | "-" | " "
+width           ::=  integer
+grouping_option ::=  "_" | ","
+precision       ::=  integer
+type            ::=  "b" | "c" | "d" | "e" | "E" | "f" | "F" | "g" | "G" | "n" | "o" | "s" | "x" | "X" | "%"
+```
+
+``` python
+'hello, {}'.format(username)
+
+'{1} is better than {0}, {2}{2}'.format('emacs', 'vim', 'ha')
+'{0} {2} {1} {2}'.format(*tpl)
+
+'{0!s}'.format(an_obj)   # calls str() on the argument
+'{0!r}'.format(an_obj)   # calls repr() on the argument
+'{0!a}'.format(an_obj)   # calls ascii() on the argument
+'repr() shows quotes: {0!r}; str() doesn't: {0!s}'.format('test')
+
+'{first} {last}'.format(first='John', last='Smith')
+'{first} {last}'.format(**{'first': 'John', 'last': 'Smith'})
+
+'{0.real}, {0.imag}'.format(1-1j)
+
+coord = (3, 5)
+'X: {0[0]};  Y: {0[1]}'.format(coord)
+
+
+'{:f}'.format(1) == '1.000000'
+'{:.1f} {}'.format(698.243, 'GB') == '698.2 GB'
+'{0} {0:g}'.format(1.0)
+
+'{:+f}; {:+f}'.format(3.14, -3.14) == '+3.140000; -3.140000'   # always show sign
+'{: f}; {: f}'.format(3.14, -3.14) == ' 3.140000; -3.140000'
+
+'{:-f}; {:-f}'.format(3.14, -3.14)    # default, same as just {:f}
+
+'{:#5x}'.format(15) == '  0xf'
+'{:#5X}'.format(15) == '  0XF'
+
+map('%Y-%m-%d'.format, lst)
+```
+
+``` python
+>>> '{:<30}'.format('left aligned')
+'left aligned                  '
+>>> '{:>30}'.format('right aligned')
+'                 right aligned'
+>>> '{:^30}'.format('centered')
+'           centered           '
+>>> '{:*^30}'.format('centered')  # use '*' as a fill char
+'***********centered***********'
+
+import locale
+locale.setlocale(locale.LC_ALL, 'en_US')   ## in this example we set a locale to see the difference:
+'{:n}'.format(10**6) == '1,000,000'
+locale.setlocale(locale.LC_ALL, locale.getdefaultlocale())
+
+'{:.1%}'.format(0.33) == '33.0%'
+'{:.3}'.format('xylophone') == 'xyl'
+
+'{:{fill}{align}{width}}'.format('hello', fill='*', align='^', width=11) == '***hello***'
+```
+
+for formatting dates see the dates section
+
+not covered: printing binary and octal
+
+
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings format">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings format numbers">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings print">
+    <p>Your browser does not support iframes.</p>
+</iframe>
