@@ -208,8 +208,7 @@ def outer(msg):
     return inner
 
 i = outer('hell')
-i()
-# hell
+i()    # prints 'hell'
 ```
 
 ```
@@ -463,6 +462,10 @@ pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pr
 # deques
 
 <https://dbader.org/blog/queues-in-python>
+
+{: .centered}
+![python deques](./images/python.deques.001.svg)
+
 
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- deques">
     <p>Your browser does not support iframes.</p>

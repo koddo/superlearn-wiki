@@ -1,0 +1,19 @@
+FROM node
+
+RUN apt-get update && apt-get install -y \
+            vim \
+            && \
+    apt-get -y autoclean && apt-get -y autoremove
+
+USER node
+WORKDIR /home/node
+
+RUN git clone https://github.com/maryrosecook/gitlet
+RUN chmod +x ~/gitlet/gitlet.js && echo PATH=$PATH:~/gitlet/ >> .bashrc
+
+ENTRYPOINT bash
+
+
+# $ docker build -t maryrosecook/gitlet - < Dockerfile_gitlet
+# $ docker run --rm -it maryrosecook/gitlet
+
