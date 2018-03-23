@@ -12,17 +12,18 @@ layout:  collection_page
 
 Interactive tutorials:
 <https://onlywei.github.io/explain-git-with-d3/#commit>
-<https://marklodato.github.io/visual-git-guide/index-en.html>
 
 Interactive cheatsheet: <https://ndpsoftware.com/git-cheatsheet.html#loc=stash;>
 Fixing a mess cheatsheet: <http://justinhileman.info/article/git-pretty/git-pretty.png>
 <https://www.quora.com/What-is-the-best-Git-cheat-sheet>
 
 <https://www.atlassian.com/git/tutorials/syncing>
+<https://marklodato.github.io/visual-git-guide/index-en.html>
 
 <https://maryrosecook.com/blog/post/git-from-the-inside-out>, <http://gitlet.maryrosecook.com/docs/gitlet.html>
 
 <http://think-like-a-git.net/tldr.html>
+<http://ftp.newartisans.com/pub/git.from.bottom.up.pdf>
 
 # undo
 
@@ -70,24 +71,64 @@ TODO: Consequences of `git push --force`? <https://stackoverflow.com/questions/2
 <https://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git>
 <http://think-like-a-git.net/sections/graphs-and-git/visualizing-your-git-repository.html>
 
-- q: What happens if you checkout a branch without committing changes? --- a? It doesn't allow you to checkout without committing or stashing.
-- q: What is the index?
+- q: What happens if you checkout something without committing changes? --- a? It doesn't allow you to checkout without committing or stashing.
+- q: What are the working dir, the index?
+- q: How to move head to a branch or a commit or a tag? --- a: `git checkout [name]`
 
-
-- q: How to create a branch? --- a: `git branch [name]`
-- q: How to switch to a branch? --- a: `git checkout [name]`
+- q: How to create a branch? --- a: `git branch [name]` creates a branch at the head.
 - q: How to create and switch to a branch with a single command? --- a: `git checkout -b [name]`
-- q: What is `git branch -f [name] [commit]` for? --- a: ask community, learngitbranching-rampup3, <https://stackoverflow.com/questions/28149804/difference-between-git-branch-f-branch-name-hash-and-git-checkout-branc/28150031>
+
+- q: How to reassign a branch ref to another commit? --- a: `git branch --force [name] [commit]`
+- q: What is `git branch --force [name] [commit]` for? --- a: ask community, learngitbranching-rampup3, <https://stackoverflow.com/questions/28149804/difference-between-git-branch-f-branch-name-hash-and-git-checkout-branc/28150031>
+
 
 - q: `git revert`vs `git reset` --- a: learngitbranching-rampup4
 
-- q: What is `git cherry-pick` for? --- a: learngitbranching-move1
+- q: What is `git cherry-pick` for? --- a: learngitbranching-move1, `git cherry-pick` copies a commit from anywhere in the tree onto the head (except ancestors).
 - q: What is rebase? --- a: it's like a massive cherry-picking from one branch to another --- a: <http://think-like-a-git.net/sections/rebase-from-the-ground-up/using-git-cherry-pick-to-simulate-git-rebase.html>, <http://think-like-a-git.net/sections/rebase-from-the-ground-up/a-helpful-mnemonic-for-git-rebase-arguments.html>
 
+`git rebase` won't do anything if you try to rebase to it's ancestor, but `git rebase -i` will be equivalent to cherry-picking
 
 - q: What if you want to merge branches after cherry-picking? --- a: Avoid duplicating by using rebase:
 <https://stackoverflow.com/questions/14486122/how-does-git-merge-after-cherry-pick-work/44966513#44966513>
 <https://stackoverflow.com/questions/20380013/git-merge-strategies-spaces-make-default-shows-no-conflict-and-bring-unexpected>
 
+<https://gcbenison.wordpress.com/2012/01/17/git-bugfix-branches-choose-the-root-wisely/>
+<https://medium.com/@porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa>
+<https://stackoverflow.com/questions/34504807/git-flow-vs-cherry-picks>
+
+- q: What is `git fetch` for? --- a: It makes our local graph synched to the remote one. And updates remote branches, like `origin/master`. It doesn't touch anything local: working dir, index, branches, etc.
+- q: What is `git pull` for? --- a: It's essantially a shorthand for `git fetch; git merge`.
+- q: What is `git pull --rebase` for? --- a: It's essantially a shorthand for `git fetch; git rebase`.
+- q: `push.default`?
+
+- q: What is `git branch -u origin/master foo` or `git checkout --track origin/serverfix` for? --- a: To set the `foo` to track the `origin/master`.
+
+- q: What is `git reflog` for?
+
+when rebasing, as long as you don't force push you can't mess anything, just reset to origin/master
+maybe also `git tag pre-rebase-x; do the rebase;`
+
 {: .centered}
 ![python deques](./images/git.graph.001.svg)
+
+```
+git branch [name]
+git checkout [ref]
+git checkout -b [name]
+
+git branch --force <name> [commit]
+
+git revert
+git reset
+
+git rebase <dest> <commit>
+git rebase -i
+git cherry-pick
+
+git tag [tag] [commit]
+git describe <ref>
+
+HEAD~^2~
+
+```

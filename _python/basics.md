@@ -491,6 +491,8 @@ TODO: how dicts are implemented: <https://stackoverflow.com/questions/327311/how
 
 Why lists can't be keys in a dict: <https://wiki.python.org/moin/DictionaryKeys>
 
+![python deques](./images/python.dicts.001.svg)
+
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- dictionaries">
     <p>Your browser does not support iframes.</p>
 </iframe>
@@ -515,6 +517,14 @@ Good examples of `.setdefault()` <http://xwell.org/2015/04/07/python-tricks-setd
 ``` Python
 incident = {}
 incident.setdefault('action', {}).setdefault('hacking', {}).setdefault('variety', []).append("Brute force")   # => {'action': {'hacking': {'variety': ['Brute force']}}}
+```
+
+<https://github.com/mewwts/addict>: for working with dicts js-style:
+
+```
+mapping = addict.Dict()
+mapping.a.b.c.d.e = 2
+mapping == {'a': {'b': {'c': {'d': {'e': 2}}}}}
 ```
 
 <https://code.activestate.com/recipes/66516-add-an-entry-to-a-dictionary-unless-the-entry-is-a/>:
