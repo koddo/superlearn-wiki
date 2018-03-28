@@ -12,6 +12,8 @@ layout:  collection_page
 
 Interactive tutorials:
 <https://onlywei.github.io/explain-git-with-d3/#commit>
+<https://learngitbranching.js.org/>
+<https://veerasundar.com/blog/2018/03/gitflow-animated/>
 
 Interactive cheatsheet: <https://ndpsoftware.com/git-cheatsheet.html#loc=stash;>
 Fixing a mess cheatsheet: <http://justinhileman.info/article/git-pretty/git-pretty.png>
@@ -73,10 +75,11 @@ TODO: Consequences of `git push --force`? <https://stackoverflow.com/questions/2
 
 - q: What happens if you checkout something without committing changes? --- a? It doesn't allow you to checkout without committing or stashing.
 - q: What are the working dir, the index?
-- q: How to move head to a branch or a commit or a tag? --- a: `git checkout [name]`
+- q: How to move head to a branch or a commit or a tag? --- a: `git checkout <ref>`
 
 - q: How to create a branch? --- a: `git branch [name]` creates a branch at the head.
 - q: How to create and switch to a branch with a single command? --- a: `git checkout -b [name]`
+- q: How to list branches? --- a: `--list <pattern>` or empty argument list for local branches, `-r` for remote ones, `-a` for both local and remote ones.
 
 - q: How to reassign a branch ref to another commit? --- a: `git branch --force [name] [commit]`
 - q: What is `git branch --force [name] [commit]` for? --- a: ask community, learngitbranching-rampup3, <https://stackoverflow.com/questions/28149804/difference-between-git-branch-f-branch-name-hash-and-git-checkout-branc/28150031>
@@ -103,21 +106,41 @@ TODO: Consequences of `git push --force`? <https://stackoverflow.com/questions/2
 - q: `push.default`?
 
 - q: What is `git branch -u origin/master foo` or `git checkout --track origin/serverfix` for? --- a: To set the `foo` to track the `origin/master`.
+- q: How to create a remove branch? --- a: checkout a branch and then `git puth --set-upstream origin branch-name` or `git branch --set-upstream-to=origin/foo foo`
 
 - q: What is `git reflog` for?
+
+- q: `git fetch origin :bar` creates a local branch, `git push origin :foo` removes a remote one
 
 when rebasing, as long as you don't force push you can't mess anything, just reset to origin/master
 maybe also `git tag pre-rebase-x; do the rebase;`
 
+
+First I try to rebase, but I have any conflicts, I abort the rebase and do merge instead.
+
+A dog: `git log --all --decorate --oneline --graph` --- <https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs/35075021#35075021>
+
 {: .centered}
 ![python deques](./images/git.graph.001.svg)
 
+- q: How to see changes? --- a: `git diff` or `git diff --cached`
+- q: How write a commit message? --- a: `git commit -m '...'` --- a short summary followed by a blank line and a thorough description
+
 ```
+git add
+git add --all
+git commit -a
+
+git merge bname
+
 git branch [name]
 git checkout [ref]
 git checkout -b [name]
 
 git branch --force <name> [commit]
+git branch -d crazy-idea
+-d = --delete
+-D = --delete --force
 
 git revert
 git reset
@@ -131,4 +154,23 @@ git describe <ref>
 
 HEAD~^2~
 
+git diff
+git diff --cache
+git status
+
+gitk HEAD...FETCH_HEAD
+git show <commit>
+
+git stash??
 ```
+
+
+
+
+
+
+
+
+
+
+
