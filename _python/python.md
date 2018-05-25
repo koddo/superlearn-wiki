@@ -502,78 +502,7 @@ print(vars(w))
 
 
 
-# itertools module
 
-<https://more-itertools.readthedocs.io/en/latest/>
-
-``` python
-lst = [('USA', 'LA'), ('Russia', 'Moscow'), ('USA', 'NY'), ('Russia', 'St. Petersburg'), ('England', 'London')]
-
-[(k, list(g)) 
-   for k, g in 
-   itertools.groupby( sorted(lst), key = lambda x: x[0] )]
-             ## [('England', [('England', 'London')]), ('Russia', [('Russia', 'Moscow'), ('Russia', 'St. Petersburg')]), ('USA', [('USA', 'LA'), ('USA', 'NY')])]
-
-[(k, [j for i,j in g]) 
-   for k, g in 
-   itertools.groupby( sorted(lst), key = lambda x: x[0] )]
-             ## [('England', ['London']), ('Russia', ['Moscow', 'St. Petersburg']), ('USA', ['LA', 'NY'])]
-
-
-
-```
-
-product
-permutations
-combinations
-
-count(start=0[, step=1])
-cycle(lst)
-repeat(elem[, times=10])
-
-groupby
-accumulate
-chain
-dropwhile, takewhile
-zip_longest
-
-TODO: compress, better groupby, tee
-
-TODO: `itertools.isslice`
-
-TODO: how to get prev and next values in a loop
-if you don't have to look too smart:
-```
-l = len(timestamps)
-for i in range(l):
-    if i < l-1:
-        result.append(timestamps[i])
-        result.append(  (timestamps[i] + timestamps[i+1]) / 2  )
-    else:
-        result.append(timestamps[i])
-```
-
-
-q: get a cartesian product of two sequences --- a: `itertools.product(s1, s2)`
-q: get permutations of length `k` of elements in a list --- a: `itertools.permutations(a_list, k)`
-q: get combinations of length `k` of elements in a list --- a: `itertools.combinations(a_list, k)`
-q: get combinations with repetitions of length `k` of elements in a list --- a: `itertools.combinations_with_replacement(a_list, k)`
-q: divide a string into groups of repeated consecutive elements, e.g., `'AAAABBBCCDAA'` into `['AAAA', 'BBB', 'CC', 'D', 'AA']` --- a: `[''.join(list(g)) for k, g in itertools.groupby('AAAABBBCCDAA')]`
-q: group elements of a list by some key, e.g., `[..., ('Russia', 'Moscow'), ..., ('Russia', 'St. Petersburg'), ...]` into  `[..., ('Russia', ['Moscow', 'St. Petersburg']), ...]`--- a: `[(k, [j for i,j in g]) for k, g in itertools.groupby(sorted(lst), lambda x: x[0])]`
-
-q: get an iterator for an infinite sequence of numbers like `10, 15, 20, 25, ...` --- a: `from itertools import count; for i in count(start10, step=5): ...`
-q: get an iterator, which infinitely goes through a list like `a, b, c -> a, b, c, a, b, c, a, ...` --- a: `from itertools import cycle; for i in cycle('abc'): ...`
-q: get an iterator, which infinitely (or optionally for a given number of times) returns an element --- a: `from itertools import repeat; for i in repeat('a'): ...` or `repeat('a', times=10)`
-
-q: get an iterator, which is similar to reduce, but returns an intermediate results --- a: `itertools.accumulate(lst, operator.mul)`
-q: how to iterate over multiple lists, one after another, without concatenating --- a: `itertools.chain( [1, 2, 3], [4, 5, 6] )`
-q: `itertools.chain()` vs `itertools.chain.from_iterable()` --- a: the latter gets lazily iterates over input, which can be infinite sequence
-q: get rid of head of a list before a predicate becomes false --- a: `list(itertools.dropwhile(lambda x: x<3, [1, 2, 3, 1, 2, 3])) == [3, 1, 2, 3]`
-q: get rid of tail of a list after a predicate becomes false --- a: `list(itertools.takewhile(lambda x: x<3, [1, 2, 3, 1, 2, 3])) == [1, 2]`
-q: `slice()` vs `itertools.islice()` --- a: the latter is for iterators, which don't support indexing, consumes data on them; in most cases just use the former
-q: `map()` vs `itertools.starmap()` --- a: the latter is for data, which has been pre-zipped, `list( itertools.starmap(pow, [(5,2), (3,2), (10,3)]) ) == [25, 9, 1000]`
-q: `zip()` two sequences until the longest one is exhauseted, with a given value for missing bits --- a: `itertools.zip_longest(*iterables, fillvalue=None)`
-q: `zip()` vs `itertools.zip_longest()` --- a: the former stops when the shortest iterator is exhausted, the latter stops when the longest one is done
 
 
 

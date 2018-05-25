@@ -63,6 +63,15 @@ https://medium.com/erlang-battleground/advanced-list-incomprehensions-6957863dfb
 
 there are container vulnerability scanners
 
+# ansible
+
+Run a single task:
+
+```
+ansible-playbook playbook-configure-debian.yml -i '1.1.1.1,' --step --start-at-task='build dockerfiles'
+```
+
+
 # functional programming
 
 

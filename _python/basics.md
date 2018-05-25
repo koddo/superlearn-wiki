@@ -473,6 +473,8 @@ pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pr
 
 # dicts
 
+<https://docs.python.org/3/library/stdtypes.html#typesmapping>
+
 interesting thing: `d[k]` raises `ValueError` when the `k` is not in the dict, while `d[k] = 'whatever'` sets the new value
 
 ``` python
@@ -545,6 +547,8 @@ mapping == {'a': {'b': {'c': {'d': {'e': 2}}}}}
 
 <https://www.reddit.com/r/Python/comments/7jyluw/dict_knownordered_versus_ordereddict_an/>
 
+<https://docs.python.org/3/library/collections.html#collections.OrderedDict>
+
 TODO: performance comparison `dict` vs `collections.OrderedDict` 
 
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- collections.OrderedDict">
@@ -555,8 +559,78 @@ TODO: performance comparison `dict` vs `collections.OrderedDict`
 
 # sets
 
+`isdisjoint` is faster than `s & t`, because it does short-circuit: <https://stackoverflow.com/questions/45112928/python-isdisjoint-runtime>
+
 <iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- sets">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+
+# itertools module
+
+<https://more-itertools.readthedocs.io/en/latest/>
+
+```
+lst = [('USA', 'LA'), ('Russia', 'Moscow'), ('USA', 'NY'), ('Russia', 'St. Petersburg'), ('England', 'London')]
+
+[(k, list(g)) 
+   for k, g in 
+   itertools.groupby( sorted(lst), key = lambda x: x[0] )]
+             ## [('England', [('England', 'London')]), ('Russia', [('Russia', 'Moscow'), ('Russia', 'St. Petersburg')]), ('USA', [('USA', 'LA'), ('USA', 'NY')])]
+
+[(k, [j for i,j in g]) 
+   for k, g in 
+   itertools.groupby( sorted(lst), key = lambda x: x[0] )]
+             ## [('England', ['London']), ('Russia', ['Moscow', 'St. Petersburg']), ('USA', ['LA', 'NY'])]
+```
+
+TODO: how to get prev and next values in a loop
+if you don't have to look too smart:
+
+
+```
+l = len(timestamps)
+for i in range(l):
+    if i < l-1:
+        result.append(timestamps[i])
+        result.append(  (timestamps[i] + timestamps[i+1]) / 2  )
+    else:
+        result.append(timestamps[i])
+```
+
+q: divide a string into groups of repeated consecutive elements, e.g., `'AAAABBBCCDAA'` into `['AAAA', 'BBB', 'CC', 'D', 'AA']` --- a: `[''.join(list(g)) for k, g in itertools.groupby('AAAABBBCCDAA')]`
+q: group elements of a list by some key, e.g., `[..., ('Russia', 'Moscow'), ..., ('Russia', 'St. Petersburg'), ...]` into  `[..., ('Russia', ['Moscow', 'St. Petersburg']), ...]`--- a: `[(k, [j for i,j in g]) for k, g in itertools.groupby(sorted(lst), lambda x: x[0])]`
+
+q: get an iterator, which is similar to reduce, but returns an intermediate results --- a: `itertools.accumulate(lst, operator.mul)`
+q: how to iterate over multiple lists, one after another, without concatenating --- a: `itertools.chain( [1, 2, 3], [4, 5, 6] )`
+q: `itertools.chain()` vs `itertools.chain.from_iterable()` --- a: the latter gets lazily iterates over input, which can be infinite sequence
+q: get rid of head of a list before a predicate becomes false --- a: `list(itertools.dropwhile(lambda x: x<3, [1, 2, 3, 1, 2, 3])) == [3, 1, 2, 3]`
+q: get rid of tail of a list after a predicate becomes false --- a: `list(itertools.takewhile(lambda x: x<3, [1, 2, 3, 1, 2, 3])) == [1, 2]`
+q: `slice()` vs `itertools.islice()` --- a: the latter is for iterators, which don't support indexing, consumes data on them; in most cases just use the former
+q: `map()` vs `itertools.starmap()` --- a: the latter is for data, which has been pre-zipped, `list( itertools.starmap(pow, [(5,2), (3,2), (10,3)]) ) == [25, 9, 1000]`
+q: `zip()` two sequences until the longest one is exhauseted, with a given value for missing bits --- a: `itertools.zip_longest(*iterables, fillvalue=None)`
+q: `zip()` vs `itertools.zip_longest()` --- a: the former stops when the shortest iterator is exhausted, the latter stops when the longest one is done
+
+
+![python itertools](./images/python.itertools.001.svg)
+
+
+<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- itertools">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
