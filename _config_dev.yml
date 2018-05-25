@@ -1,5 +1,7 @@
 livereload_script: http://vagrant.local:35730/livereload.js
 
+superlearn_url: "https://superlearn.localhost"
+
 collections:
   postgres:
     output: true
