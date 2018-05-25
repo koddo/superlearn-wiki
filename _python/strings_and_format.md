@@ -28,34 +28,34 @@ Strings `.join()` vs `+=` in a loop: <http://stackoverflow.com/questions/1349311
 
 Strings are immutable, we can't use these operations on them: <https://docs.python.org/3/library/stdtypes.html#typesseq-mutable>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings concatenation">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings concatenation">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings substrings">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings substrings">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings reverse">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings reverse">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 Be careful with the `sep` argument of `a_str.split()`: if a `sep` arg is not specified or `None`, an empty string is split into an empty list: `''.split() == []`; otherwise: `''.split(',') ==['']`.
 When it's not actually split: returns a list containing the string. `'  a  '.split(',') == ['  a  ']`; if a `sep` arg is not specified or `None`, it also trims it: `'  a  '.split() == ['a']`
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings split and trim">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings split and trim">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings adjustments">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings adjustments">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -65,7 +65,7 @@ When it's not actually split: returns a list containing the string. `'  a  '.spl
 ![python strings methods](./images/python.strings.001.svg)
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings other">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings other">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -86,7 +86,7 @@ Our choises are:
 
 <https://docs.python.org/3/reference/lexical_analysis.html#f-strings>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings f-strings">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings f-strings">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -167,15 +167,15 @@ for formatting dates see the dates section
 not covered: printing binary and octal
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings format">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings format">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings format numbers">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings format numbers">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- strings print">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings print">
     <p>Your browser does not support iframes.</p>
 </iframe>

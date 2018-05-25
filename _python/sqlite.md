@@ -34,7 +34,7 @@ TODO: difference between `PARSE_COLNAMES` and `PARSE_DECLTYPES`
 How to use sqlite with context managers?
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- sqlite">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- sqlite">
     <p>Your browser does not support iframes.</p>
 </iframe>
 

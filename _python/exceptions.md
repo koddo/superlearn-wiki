@@ -181,7 +181,7 @@ while True:
 print('hell')     # it does print indeed
 ```
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- exceptions">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- exceptions">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -197,13 +197,13 @@ class MyError(ValueError):
 
 Generally it's a good idea to look for an appropriate existing exception first.
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- custom exceptions">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- custom exceptions">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 ## ignoring exceptions
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- ignoring exceptions">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- ignoring exceptions">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -388,7 +388,7 @@ with open('help.txt', 'w') as f:
         help(pow)
 ```
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- with statement">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- with statement">
     <p>Your browser does not support iframes.</p>
 </iframe>
 

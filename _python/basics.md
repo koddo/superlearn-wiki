@@ -80,7 +80,7 @@ Except `y` is evaluated only once here. \\
 Btw, in both cases `z` is not evaluated at all when `x < y` is false. \\
 Be careful, with operator chaining, `1 == 1 in [1]` is unreadable and it's not obvios that it's an operator chaining.
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20true,%20false,%20and%20comparisons">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20true,%20false,%20and%20comparisons">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -97,7 +97,7 @@ TODO: <http://canonical.org/~kragen/isinstance/>
 
 # identity
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20identity">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20identity">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -178,7 +178,7 @@ TODO: a good real world example
 
 In ruby it copies the default argument on every call and no puppy was harmed because of this.
  
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20functions">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20functions">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -191,7 +191,7 @@ No return statement in lambdas: <https://docs.python.org/3/reference/expressions
 <https://stackoverflow.com/questions/862412/is-it-possible-to-have-multiple-statements-in-a-python-lambda-expression>
 just use a tuple: `lambda x: ( f(x), g(x) )`
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20lambda">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20lambda">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -277,7 +277,7 @@ class Foo:
     y = [x for _ in range(3)]     # NameError: name 'x' is not defined
 ```
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20scope">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20scope">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -287,7 +287,7 @@ PEP 257 -- Docstring Conventions: <https://www.python.org/dev/peps/pep-0257/>
 
 <https://stackoverflow.com/questions/3898572/what-is-the-standard-python-docstring-format>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20docstrings">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20docstrings">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -343,7 +343,7 @@ for i in []:
 print(i)    # prints 100
 ```
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20conditionals%20and%20loops">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20conditionals%20and%20loops">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -351,7 +351,7 @@ print(i)    # prints 100
 
 <https://stackoverflow.com/questions/35004162/why-is-range0-range2-2-2-true-in-python-3>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20ranges">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20ranges">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -361,7 +361,7 @@ print(i)    # prints 100
 [(x,y) for x in range(2) for y in range(3)]
 ```
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20comprehensions">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20comprehensions">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -386,7 +386,7 @@ while True:
 print(i)
 ```
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python%20--%20user%20input">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python%20--%20user%20input">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -406,7 +406,7 @@ a == ['a', 1, 'c', 3, 'e', 5, 'g', 7]
 
 Extended slices can't be used for assigning a list of different length: <https://docs.python.org/2.3/whatsnew/section-slices.html>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- slicing">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- slicing">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -419,7 +419,7 @@ q: What are shallow copy and deep copy? --- When you do `a = [1, 2, 3]; b = a`, 
 q: Get a deep copy of a list, dict, set, deque. --- a: `copy.deepcopy(thing)`
 q: What does `l = lst[:]` mean? --- a: Creates a shallow copy of entire list.
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- shallow and deep copy">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- shallow and deep copy">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -445,7 +445,7 @@ pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pr
 `lst.index(e)` raises `ValueError` when `e` is not in the list, because a value like `-1` could lead to obscure bugs
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- lists">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- lists">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -453,7 +453,7 @@ pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pr
 # tuples
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- tuples">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- tuples">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -467,7 +467,7 @@ pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pr
 ![python deques](./images/python.deques.001.svg)
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- deques">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- deques">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -495,12 +495,12 @@ Why lists can't be keys in a dict: <https://wiki.python.org/moin/DictionaryKeys>
 
 ![python deques](./images/python.dicts.001.svg)
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- dictionaries">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- dictionaries">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- iterating over dictionaries">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- iterating over dictionaries">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -551,7 +551,7 @@ mapping == {'a': {'b': {'c': {'d': {'e': 2}}}}}
 
 TODO: performance comparison `dict` vs `collections.OrderedDict` 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- collections.OrderedDict">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- collections.OrderedDict">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -561,7 +561,7 @@ TODO: performance comparison `dict` vs `collections.OrderedDict`
 
 `isdisjoint` is faster than `s & t`, because it does short-circuit: <https://stackoverflow.com/questions/45112928/python-isdisjoint-runtime>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- sets">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- sets">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
@@ -615,7 +615,7 @@ q: `zip()` vs `itertools.zip_longest()` --- a: the former stops when the shortes
 ![python itertools](./images/python.itertools.001.svg)
 
 
-<iframe class="autoresize" src="http://superlearn.it/ht/asdf2?deckname=python -- itertools">
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- itertools">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
