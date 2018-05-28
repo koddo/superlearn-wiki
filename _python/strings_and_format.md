@@ -24,6 +24,17 @@ TODO: <https://docs.python.org/3/library/string.html#string-constants>
 
 <https://stackoverflow.com/questions/34546171/python-expandtabs-string-operation>
 
+{: .centered}
+![python strings methods](./images/python.strings.001.svg)
+
+
+<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
+## concatenation
+
 Strings `.join()` vs `+=` in a loop: <http://stackoverflow.com/questions/1349311/python-string-join-is-faster-than-but-whats-wrong-here/21964653#21964653>
 
 Strings are immutable, we can't use these operations on them: <https://docs.python.org/3/library/stdtypes.html#typesseq-mutable>
@@ -32,11 +43,13 @@ Strings are immutable, we can't use these operations on them: <https://docs.pyth
     <p>Your browser does not support iframes.</p>
 </iframe>
 
+## substrings
 
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings substrings">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
+## reverse
 
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings reverse">
     <p>Your browser does not support iframes.</p>
@@ -45,29 +58,28 @@ Strings are immutable, we can't use these operations on them: <https://docs.pyth
 Be careful with the `sep` argument of `a_str.split()`: if a `sep` arg is not specified or `None`, an empty string is split into an empty list: `''.split() == []`; otherwise: `''.split(',') ==['']`.
 When it's not actually split: returns a list containing the string. `'  a  '.split(',') == ['  a  ']`; if a `sep` arg is not specified or `None`, it also trims it: `'  a  '.split() == ['a']`
 
+## split and trim
+
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings split and trim">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
+## alignment
+
+{: .centered}
+![python strings methods](./images/python.strings.alignment.001.svg)
 
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings adjustments">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
-<iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings">
-    <p>Your browser does not support iframes.</p>
-</iframe>
-
-
-
-{: .centered}
-![python strings methods](./images/python.strings.001.svg)
-
+## checks
 
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings other">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
 
 # f-strings
 
@@ -166,15 +178,19 @@ for formatting dates see the dates section
 
 not covered: printing binary and octal
 
-
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings format">
     <p>Your browser does not support iframes.</p>
 </iframe>
 
 
+## format numbers
+
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings format numbers">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+
+# print()
 
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings print">
     <p>Your browser does not support iframes.</p>
