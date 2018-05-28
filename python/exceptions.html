@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Exceptions</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/superlearn-wiki/assets/main.css">
+  <link rel="canonical" href="http://0.0.0.0:4000/superlearn-wiki/python/exceptions">
+  <link rel="alternate" type="application/rss+xml" title="superlearn-wiki" href="/superlearn-wiki/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/superlearn-wiki/">superlearn-wiki</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+            <a class="page-link" href="/superlearn-wiki/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/superlearn-wiki/site-map">Site map</a>
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+
+<article class="post">
+    <!-- TODO: any html tag for go up a level? -->
+    <a href="/superlearn-wiki/python">Python/</a>
+
+  <header class="post-header">
+    <h1 class="post-title no-anchor">Exceptions</h1>
+  </header>
+
+  <div class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#exceptions" id="markdown-toc-exceptions">exceptions</a>    <ul>
+      <li><a href="#raising-and-catching" id="markdown-toc-raising-and-catching">raising and catching</a></li>
+      <li><a href="#misc" id="markdown-toc-misc">misc</a></li>
+      <li><a href="#custom-exception-classes" id="markdown-toc-custom-exception-classes">custom exception classes</a></li>
+      <li><a href="#ignoring-exceptions" id="markdown-toc-ignoring-exceptions">ignoring exceptions</a></li>
+    </ul>
+  </li>
+  <li><a href="#with-statement" id="markdown-toc-with-statement"><code class="highlighter-rouge">with</code> statement</a></li>
+  <li><a href="#built-in-exceptions" id="markdown-toc-built-in-exceptions">built-in exceptions</a></li>
+  <li><a href="#traceback" id="markdown-toc-traceback">traceback</a></li>
+  <li><a href="#asserts" id="markdown-toc-asserts">asserts</a></li>
+  <li><a href="#sigint" id="markdown-toc-sigint">sigint</a></li>
+</ul>
+
+<h1 id="exceptions">exceptions</h1>
+
+<p><a href="https://stackoverflow.com/questions/3702675/how-to-print-the-full-traceback-without-halting-the-program">https://stackoverflow.com/questions/3702675/how-to-print-the-full-traceback-without-halting-the-program</a>
+<a href="https://docs.python.org/3/library/traceback.html">https://docs.python.org/3/library/traceback.html</a>
+<a href="https://stackoverflow.com/questions/34046703/does-python-traceback-print-exc-prints-to-stdout-or-stderr">https://stackoverflow.com/questions/34046703/does-python-traceback-print-exc-prints-to-stdout-or-stderr</a></p>
+
+<pre><code class="language-Python"># http://stackoverflow.com/questions/1611561/can-i-get-the-exception-from-the-finally-block-in-python/1611572#1611572
+try:
+    whatever
+except:
+    here sys.exc_info is valid
+    to re-raise the exception, use a bare `raise`
+else:
+    here you know there was no exception
+finally:
+    and here you can do exception-independent finalization
+</code></pre>
+
+<pre><code class="language-Python"># The exception variable is excplicitly deleted after the except block is left.
+
+except E as e:
+    foo
+
+# equivalent 
+
+except E as e:
+    try:
+        foo
+    finally:
+        del e
+</code></pre>
+
+<p>Exception objects now store their traceback as the <code class="highlighter-rouge">__traceback__</code> attribute. This means that an exception object now contains all the information pertaining to an exception, and there are fewer reasons to use <code class="highlighter-rouge">sys.exc_info()</code> (though the latter is not removed).</p>
+
+<pre><code class="language-Python"># http://stackoverflow.com/questions/3702675/how-to-print-the-full-traceback-without-halting-the-program/16946886#16946886
+import traceback
+
+try:
+    raise TypeError("Oups!")
+except Exception as err:
+    try:
+        raise TypeError("Again !?!")
+    except:
+        pass
+
+    # traceback.print_tb(err.__traceback__)
+    traceback.print_exc()
+
+ ### File "e3.py", line 4, in &lt;module&gt;
+ ###    raise TypeError("Oups!")
+</code></pre>
+
+<pre><code class="language-Python">def func1():
+    try:
+        return 1
+    finally:
+        return 2
+
+def func2():
+    try:
+        raise ValueError()
+    except:
+        return 1
+    finally:
+        return 3
+
+func1()   # returns 2
+func2()   # returns 3
+</code></pre>
+
+<pre><code class="language-Shell">&gt;&gt;&gt; try:
+...     print(1 / 0)
+... except Exception as exc:
+...     raise RuntimeError("Something bad happened") from exc
+...
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 2, in &lt;module&gt;
+ZeroDivisionError: int division or modulo by zero
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 4, in &lt;module&gt;
+RuntimeError: Something bad happened
+</code></pre>
+
+<pre><code class="language-Python">try:
+    self.file = open(filename)
+except IOError as e:
+    raise DatabaseError('failed to open') from e
+</code></pre>
+
+<pre><code class="language-Python">class MyError(Exception):
+    """Raise for my specific kind of exception"""
+</code></pre>
+
+<pre><code class="language-Python">class Error():
+    pass
+
+class InputError(Error):
+    def __init__(self, message, expression):
+        self.message = message
+        self.expression = expression
+</code></pre>
+
+<pre><code class="language-Python">def KelvinToFahrenheit(Temperature):
+    assert (Temperature &gt;= 0),"Colder than absolute zero!"
+    return ((Temperature-273)*1.8)+32
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">suppress</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="n">FileNotFoundError</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'1'</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">'1.tmp'</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">'2.tmp'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'2'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><a href="https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions">https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions</a>
+<a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">https://docs.python.org/3/library/exceptions.html#exception-hierarchy</a></p>
+
+<p><a href="https://hg.python.org/cpython/file/3.5/Objects/exceptions.c#l24">https://hg.python.org/cpython/file/3.5/Objects/exceptions.c#l24</a></p>
+
+<p>TODO: with pytest.raises(ExpectedException) <a href="http://doc.pytest.org/en/latest/assert.html">http://doc.pytest.org/en/latest/assert.html</a>
+TODO: more from <a href="https://docs.python.org/3/library/traceback.html">https://docs.python.org/3/library/traceback.html</a></p>
+
+<p><a href="https://github.com/satwikkansal/wtfpython/issues/73">https://github.com/satwikkansal/wtfpython/issues/73</a></p>
+
+<h2 id="raising-and-catching">raising and catching</h2>
+
+<pre><code class="language-Python">raise
+raise ValueError
+raise ValueError('Some message')
+raise ValueError('Some message', 100)
+
+raise CustomError(100)
+
+raise CustomError from e
+</code></pre>
+
+<h2 id="misc">misc</h2>
+
+<p><a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">https://docs.python.org/3/reference/compound_stmts.html#the-try-statement</a>:</p>
+
+<pre><code class="language-Python">while True:
+    try:
+        1/0
+    except:
+        raise
+    finally:
+        break     # discards the exception
+
+print('hell')     # it does print indeed
+</code></pre>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- exceptions">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="custom-exception-classes">custom exception classes</h2>
+
+<pre><code class="language-Python">class MyError(ValueError):
+    def __init__(self, message, field):
+        self.message = message
+        self.field = field
+</code></pre>
+
+<p>Generally it’s a good idea to look for an appropriate existing exception first.</p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- custom exceptions">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="ignoring-exceptions">ignoring exceptions</h2>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- ignoring exceptions">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="with-statement"><code class="highlighter-rouge">with</code> statement</h1>
+
+<p><a href="https://docs.python.org/3/reference/compound_stmts.html#the-with-statement">https://docs.python.org/3/reference/compound_stmts.html#the-with-statement</a></p>
+
+<p><a href="http://www.dan-gittik.com/post/deconstructing-context-managers">http://www.dan-gittik.com/post/deconstructing-context-managers</a>
+<a href="https://pymotw.com/3/contextlib/index.html">https://pymotw.com/3/contextlib/index.html</a></p>
+
+<pre><code class="language-Python">try:
+    f = open("document.txt")
+except FileNotFoundError:
+    print("document.txt file is missing")
+except PermissionError:
+    print("You are not allowed to read document.txt")
+else:
+    try:
+        with f:
+            content = f.read()
+    except Exception:
+        ...
+
+try:
+    f = open(my_file)
+
+    try:
+        do_stuff_that_fails()
+    except EXPECTED_EXCEPTION_TYPES as e:
+        do_stuff_when_it_doesnt_work()
+    finally:
+        f.close()
+except (IOError, OSError) as e:
+    do_other_stuff_when_it_we_have_file_IO_problems()
+    
+try:
+    file = open(...)
+except OpenErrors...:
+    # handle open exceptions
+else:
+    try:
+        # do stuff with file
+    finally:
+        file.close()
+</code></pre>
+
+<pre><code class="language-Python">with open('filename') as f:
+    ...
+    
+f = open('filename')
+try:
+    ...
+finally:
+    f.close()
+</code></pre>
+
+<pre><code class="language-Python">with A() as a, B() as b:
+    suite
+
+with A() as a:
+    with B() as b:
+        suite
+</code></pre>
+
+<p>TODO: - q: How to write a custom context manager?
+<a href="https://docs.python.org/3/library/contextlib.html#contextlib.ContextDecorator">https://docs.python.org/3/library/contextlib.html#contextlib.ContextDecorator</a>
+<a href="https://docs.python.org/3/library/contextlib.html#using-a-context-manager-as-a-function-decorator">https://docs.python.org/3/library/contextlib.html#using-a-context-manager-as-a-function-decorator</a></p>
+
+<p>We can write custom context managers as classes or as @contextmanager decorated functions.</p>
+
+<pre><code class="language-Python">@contextmanager
+def chdir(dir):
+    cwd = os.getcwd()
+    try:
+        os.chdir(dir)
+        yield
+    finally:
+        os.chdir(cwd)
+        
+with chdir('/tmp'):
+    print(os.getcwd())
+</code></pre>
+
+<p>Another example:</p>
+
+<pre><code class="language-Python">@contextmanager
+def closing(thing):    # equivalent to contextlib.closing
+    try:
+        yield thing
+    finally:
+        thing.close()
+        
+with closing(urlopen('http://www.python.org')) as page:
+    for line in page:
+        print(line)
+</code></pre>
+
+<pre><code class="language-Python">with open() as a, open() as b, open() as c:
+    ...
+
+with contextlib.ExitStack as stack:
+    a = stack.enter_context(open())
+    b = stack.enter_context(open())
+    c = stack.enter_context(open())
+    ...
+</code></pre>
+
+<p>But it’s not too benefitial that way. It really shines when you want to have nested contexts of a depth unknown in advance.</p>
+
+<pre><code class="language-Python">with ExitStack() as stack:
+    files = [stack.enter_context(open(fname)) for fname in filenames]
+    ...
+</code></pre>
+
+<pre><code class="language-Python">with ExitStack() as stack:
+    files = [stack.enter_context(open(fname)) for fname in filenames]
+    stack_opened = stack.pop_all()
+    
+with stack_opened:
+    ...
+</code></pre>
+
+<pre><code class="language-Python">with ExitStack() as stack:
+    tempdirs = []
+    for i in range(3):
+        tempdir = tempfile.mkdtemp()
+        stack.callback(shutil.rmtree, tempdir)
+        tempdirs.append(tempdir)
+    # Do something with the tempdirs
+</code></pre>
+
+<p><a href="https://docs.python.org/3/library/contextlib.html#contextlib.ExitStack">https://docs.python.org/3/library/contextlib.html#contextlib.ExitStack</a>
+<a href="https://www.wefearchange.org/2013/05/resource-management-in-python-33-or.html">https://www.wefearchange.org/2013/05/resource-management-in-python-33-or.html</a>
+<a href="https://www.rath.org/on-the-beauty-of-pythons-exitstack.html">https://www.rath.org/on-the-beauty-of-pythons-exitstack.html</a></p>
+
+<p><code class="highlighter-rouge">contextlib.closing</code></p>
+
+<pre><code class="language-Python">with contextlib.suppress(NotFoundError):
+    ...
+
+try:
+    ...
+except NotFoundError:
+    pass
+</code></pre>
+
+<p>Beware though, the following code will ignore the second line after an exception in the first one:</p>
+
+<pre><code class="language-Python">with suppress(FileNotFoundError):
+    os.remove('1.tmp')       # exception here
+    os.remove('2.tmp')       # this line not run
+</code></pre>
+
+<p><a href="https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stdout">https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stdout</a>
+<a href="https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stderr">https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stderr</a></p>
+
+<p><code class="highlighter-rouge">contextlib.redirect_stdout</code> and <code class="highlighter-rouge">contextlib.redirect_stderr</code></p>
+
+<p><a href="https://eli.thegreenplace.net/2015/redirecting-all-kinds-of-stdout-in-python/">https://eli.thegreenplace.net/2015/redirecting-all-kinds-of-stdout-in-python/</a></p>
+
+<p>Mostly for utility scripts. Not suitable for use in library code and most threaded applications. It also has no effect on the output of subprocesses.</p>
+
+<pre><code class="language-Python">with open('help.txt', 'w') as f:
+    with redirect_stdout(f):
+        help(pow)
+</code></pre>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- with statement">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="built-in-exceptions">built-in exceptions</h1>
+
+<p>ArithmeticError –&gt; FloatingPointError, OverflowError, ZeroDivisionError</p>
+
+<p>TypeError — None[0]
+ValueError — int(‘a’)</p>
+
+<p>AttributeError — x.attr, None.attr
+LookupError –&gt; IndexError, KeyError — l[10]; d[‘b’]</p>
+
+<p>StopIteration
+GeneratorExit</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> +-- OSError
+  |    +-- FileExistsError
+  |    +-- FileNotFoundError
+  |    +-- IsADirectoryError
+  |    +-- NotADirectoryError
+  |    +-- PermissionError
+  +-- EOFError
+</code></pre></div></div>
+
+<h1 id="traceback">traceback</h1>
+
+<ul>
+  <li>q: What is exception chaining? — a: <code class="highlighter-rouge">except ValueException as exc: raise RuntimeError("Something bad happened") from exc</code> — this will give a nice trace back which mentions that <code class="highlighter-rouge">ValueException</code> is a direct cause of the <code class="highlighter-rouge">RuntimeError("Something bad happened")</code>. And we have <code class="highlighter-rouge">exc.__cause__</code>.</li>
+  <li>q: What are <code class="highlighter-rouge">exception.__context__</code> and <code class="highlighter-rouge">exception.__cause__</code>? — a: When raising (or re-raising) an exception in an <code class="highlighter-rouge">except</code> or <code class="highlighter-rouge">finally</code> clause <code class="highlighter-rouge">__context__</code> is automatically set to the last exception caught. <code class="highlighter-rouge">raise new_exc from original_exc</code> sets <code class="highlighter-rouge">new_exc.__cause__</code>.</li>
+  <li>q: How to print traceback of an exception? — a: In the except block: <code class="highlighter-rouge">traceback.print_exc()</code></li>
+  <li>q: How to log traceback of an exception? — a: Use <code class="highlighter-rouge">traceback.format_exc()</code> and your favorite logger.</li>
+</ul>
+
+<h1 id="asserts">asserts</h1>
+
+<ul>
+  <li>q: What is <code class="highlighter-rouge">assert</code> for? — a: Asserts should be used to test conditions that should never happen. The purpose is to crash early in the case of a corrupt program state. They add a tiny overhead, but before making a program fast we have to make it work first. And we can turn asserts off when needed with <code class="highlighter-rouge">-O</code> flag.</li>
+  <li>q: What does <code class="highlighter-rouge">assert</code> do? — a: <code class="highlighter-rouge">assert cond, message</code> is roughly equivalent to <code class="highlighter-rouge">if __debug__ and not cond: raise AssertionError(message)</code></li>
+  <li>q: What happens here? <code class="highlighter-rouge">assert( 2+2==5, 'Houston, we have a problem' )</code> — a: <code class="highlighter-rouge">assert</code>, unlike <code class="highlighter-rouge">print</code>, which is a function, is still a statement, so this is equivalent to <code class="highlighter-rouge">assert True</code>, because syntactically we have a non-empty tuple here. Good news is python and lint gives you warning for this.</li>
+</ul>
+
+<h1 id="sigint">sigint</h1>
+
+<pre><code class="language-Python">def signal_handler(signal, frame):
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+</code></pre>
+
+<p>To ignore the SIGINT:</p>
+
+<pre><code class="language-Python">signal.signal(signal.SIGINT, signal.SIG_IGN)
+</code></pre>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">superlearn-wiki</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              superlearn-wiki
+            
+            </li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/koddo"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">koddo</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+    <script src="http://vagrant.local:35730/livereload.js"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+<script>anchors.add().remove(".no-anchor");</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.15/iframeResizer.min.js"></script>
+<script>iFrameResize({log:false}, 'iframe.autoresize')</script>
+
+
+
+
+
+  </body>
+</html>

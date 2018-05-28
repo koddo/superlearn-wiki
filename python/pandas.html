@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Pandas</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/superlearn-wiki/assets/main.css">
+  <link rel="canonical" href="http://0.0.0.0:4000/superlearn-wiki/python/pandas">
+  <link rel="alternate" type="application/rss+xml" title="superlearn-wiki" href="/superlearn-wiki/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/superlearn-wiki/">superlearn-wiki</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+            <a class="page-link" href="/superlearn-wiki/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/superlearn-wiki/site-map">Site map</a>
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+
+<article class="post">
+    <!-- TODO: any html tag for go up a level? -->
+    <a href="/superlearn-wiki/python">Python/</a>
+
+  <header class="post-header">
+    <h1 class="post-title no-anchor">Pandas</h1>
+  </header>
+
+  <div class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#helloworld" id="markdown-toc-helloworld">helloworld</a></li>
+</ul>
+
+<h1 id="helloworld">helloworld</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>len(df)
+df.head(), df.tail()
+df['column'], df.column
+
+s + value
+s1 + s2
+s.notnull(), s.isnull()
+
+df.sort_values(ascending=False)
+s.sort_values(by='col')
+
+df[ df.col == value ]
+df[ (v1 &lt; df.c) &amp; (df.c &lt; v2) ]
+
+df[ ~df['type'].isin(['actor', 'actress']) ]   # plain not in doesn't work
+df = df[ df['title'].str.startswith('Hamlet') ]
+
+df[ ['col1', 'col2'] ]
+
+s.value_counts().sort_index()   # dropna=True by default
+# it's like s.groupby('col').size()
+
+s.str.len()
+s.str.contains()
+s.str.startswith()
+
+s = s.unique()
+s = s.sort_values(by=['year', 'name'])
+
+
+df.plot()
+s.plot(kind='bar')
+titles.year.value_count().sort_index().plot()
+
+%%time df[ df.title == 'Hamlet' ]
+c = cast.set_index(['title']).sort_index()
+c.loc('Hamlet')
+c = cast.set_index(['title', 'year']).sort_index()
+c.loc['Hamlet'].loc['1972']
+c.loc[('Hamlet', '1972')]
+reset_index
+
+df.groupby('col')
+df.groupby(['col1', 'col2])
+cols = ['col1', 'col2]; df.sort_values(by=cols)[cols]   # to preview what's getting into the groups
+.size(), .min(), .max(), .mean(), .agg(['min', 'max'])
+
+
+???:
+df.unstack()
+df.stack()
+
+df.fillna()
+
+df.where()??
+</code></pre></div></div>
+
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html">https://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html</a></p>
+
+<p>Exercises-3.ipynb: <code class="highlighter-rouge">t = titles; t[t.title == 'Hamlet'].groupby( t.year // 10 * 10 ).size().sort_index().plot(kind='bar')</code>
+Exercises-4.ipynb: <code class="highlighter-rouge">cast.groupby(['year', 'type']).size().unstack('type').fillna(0).plot(kind='area')</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  len(df)       series + value    df[df.c == value]
+  df.head()     series + series2  df[(df.c &gt;= value) &amp; (df.d &lt; value)]
+  df.tail()     series.notnull()  df[(df.c &lt; value) | (df.d != value)]
+  df.COLUMN     series.isnull()   df.sort_values('column')
+  df['COLUMN']  series.order()    df.sort_values(['column1', 'column2'])
+
+  s.str.len()        s.value_counts()
+  s.str.contains()   s.sort_index()    df[['column1', 'column2']]
+  s.str.startswith() s.plot(...)       df.plot(x='a', y='b', kind='bar')
+
+  df.set_index('a').sort_index()        df.loc['value']
+  df.set_index(['a', 'b']).sort_index() df.loc[('v','u')]
+  df.groupby('column')                  .size() .mean() .min() .max()
+  df.groupby(['column1', 'column2'])    .agg(['min', 'max'])
+
+  df.unstack()      s.dt.year       df.merge(df2, how='outer', ...)
+  df.stack()        s.dt.month      df.rename(columns={'a': 'y', 'b': 'z'})
+  df.fillna(value)  s.dt.day        pd.concat([df1, df2])
+  s.fillna(value)   s.dt.dayofweek
+</code></pre></div></div>
+
+<ul>
+  <li>q: How to create a series, a data frame? — a: <a href="https://pandas.pydata.org/pandas-docs/stable/10min.html#object-creation">https://pandas.pydata.org/pandas-docs/stable/10min.html#object-creation</a></li>
+  <li>q: How to create a column based on other columns? — a: <code class="highlighter-rouge">df.assign( col = df.col1 * df.col2 )</code></li>
+  <li>
+    <p>q: <code class="highlighter-rouge">df['new_col'] = s</code> vs <code class="highlighter-rouge">df.assign( new_col = s )</code> — a: The former has issues with indices??? Inplace vs a copy, the latter can be inlined</p>
+  </li>
+  <li>
+    <p>q: How to get columns? How to get index? How to get values? — a: <a href="https://pandas.pydata.org/pandas-docs/stable/10min.html#viewing-data">https://pandas.pydata.org/pandas-docs/stable/10min.html#viewing-data</a></p>
+  </li>
+  <li>
+    <p>q: How to rename a column in pandas? Inplace? — a:
+<code class="highlighter-rouge">df.rename( columns={'oldName1': 'newName1', 'oldName2': 'newName2'} )</code>, it can also be <code class="highlighter-rouge">inplace=True</code>
+or with <code class="highlighter-rouge">df.set_axis(['a', 'b', 'c', 'd', 'e'], axis='columns', inplace=False)</code> — <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.set_axis.html#pandas.Series.set_axis">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.set_axis.html#pandas.Series.set_axis</a>
+<code class="highlighter-rouge">df.columns = ['a', 'b', 'c']</code> is fine too.</p>
+  </li>
+  <li>
+    <p>q: <code class="highlighter-rouge">s.str.contains()</code> vs <code class="highlighter-rouge">substr in a_str</code> — a:</p>
+  </li>
+  <li>
+    <p>q: <code class="highlighter-rouge">DataFrame.merge()</code> vs <code class="highlighter-rouge">DataFrame.join()</code> — a: Use <code class="highlighter-rouge">.merge</code>. <code class="highlighter-rouge">.join()</code> is the same as <code class="highlighter-rouge">.merge()</code>, but has other defaults.</p>
+  </li>
+  <li>q: How to sort data frame? By multiple columns? — a: <code class="highlighter-rouge">df.sort_value(by='col')</code>, <code class="highlighter-rouge">df.sort_value(by=['col1', 'col2'])</code></li>
+</ul>
+
+<p>optimized pandas data access methods, .at, .iat, .loc, .iloc and .ix</p>
+
+<p>Using format strings: <a href="https://pandas.pydata.org/pandas-docs/stable/style.html#Finer-Control:-Display-Values">https://pandas.pydata.org/pandas-docs/stable/style.html#Finer-Control:-Display-Values</a></p>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">superlearn-wiki</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              superlearn-wiki
+            
+            </li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/koddo"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">koddo</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+    <script src="http://vagrant.local:35730/livereload.js"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+<script>anchors.add().remove(".no-anchor");</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.15/iframeResizer.min.js"></script>
+<script>iFrameResize({log:false}, 'iframe.autoresize')</script>
+
+
+
+
+
+  </body>
+</html>

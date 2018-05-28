@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/superlearn-wiki/assets/main.css">
-  <link rel="canonical" href="https://koddo.github.io/superlearn-wiki/python/basics">
+  <link rel="canonical" href="http://0.0.0.0:4000/superlearn-wiki/python/basics">
   <link rel="alternate" type="application/rss+xml" title="superlearn-wiki" href="/superlearn-wiki/feed.xml">
   
   
@@ -75,6 +75,14 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
     
     
 
@@ -88,237 +96,599 @@
 
   <div class="post-content">
     <ul id="markdown-toc">
-  <li><a href="#hello-world" id="markdown-toc-hello-world">hello world</a></li>
-  <li><a href="#true-false-and-comparisons" id="markdown-toc-true-false-and-comparisons">true, false, and comparisons</a></li>
-  <li><a href="#functions" id="markdown-toc-functions">functions</a></li>
+  <li><a href="#true-false-and-comparisons" id="markdown-toc-true-false-and-comparisons">True, False, and comparisons</a></li>
+  <li><a href="#identity" id="markdown-toc-identity">identity</a></li>
+  <li><a href="#functions" id="markdown-toc-functions">functions</a>    <ul>
+      <li><a href="#mutable-default-argument" id="markdown-toc-mutable-default-argument">mutable (default) argument</a></li>
+      <li><a href="#lambda" id="markdown-toc-lambda">lambda</a></li>
+    </ul>
+  </li>
+  <li><a href="#scope" id="markdown-toc-scope">scope</a></li>
+  <li><a href="#docstrings" id="markdown-toc-docstrings">docstrings</a></li>
   <li><a href="#conditionals-and-loops" id="markdown-toc-conditionals-and-loops">conditionals and loops</a></li>
+  <li><a href="#ranges" id="markdown-toc-ranges">ranges</a></li>
   <li><a href="#comprehensions" id="markdown-toc-comprehensions">comprehensions</a></li>
+  <li><a href="#input" id="markdown-toc-input">input</a></li>
+  <li><a href="#slicing" id="markdown-toc-slicing">slicing</a></li>
+  <li><a href="#shallow-and-deep-copy" id="markdown-toc-shallow-and-deep-copy">shallow and deep copy</a></li>
+  <li><a href="#lists" id="markdown-toc-lists">lists</a></li>
+  <li><a href="#tuples" id="markdown-toc-tuples">tuples</a></li>
+  <li><a href="#deques" id="markdown-toc-deques">deques</a></li>
+  <li><a href="#dicts" id="markdown-toc-dicts">dicts</a>    <ul>
+      <li><a href="#setdefault-and-defaultdict" id="markdown-toc-setdefault-and-defaultdict">setdefault and defaultdict</a></li>
+      <li><a href="#ordereddict" id="markdown-toc-ordereddict">OrderedDict</a></li>
+    </ul>
+  </li>
+  <li><a href="#sets" id="markdown-toc-sets">sets</a></li>
+  <li><a href="#itertools-module" id="markdown-toc-itertools-module">itertools module</a></li>
 </ul>
 
-<h1 id="hello-world">hello world</h1>
+<h1 id="true-false-and-comparisons">True, False, and comparisons</h1>
 
-<iframe class="autoresize" src="http://superlearn.it/ht/cards/"><p>Your browser does not support iframes.</p></iframe>
-
-<h1 id="true-false-and-comparisons">true, false, and comparisons</h1>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">()</span> <span class="ow">or</span> <span class="p">[]</span> <span class="ow">or</span> <span class="p">{}</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">()</span> <span class="ow">or</span> <span class="p">[]</span> <span class="ow">or</span> <span class="p">{}</span> <span class="ow">or</span> <span class="bp">None</span> <span class="ow">or</span> <span class="mi">0</span> <span class="ow">or</span> <span class="s">''</span><span class="p">:</span>
     <span class="s">'this line is skipped'</span>
 </code></pre></div></div>
-<p><a href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing">https://docs.python.org/3/library/stdtypes.html#truth-value-testing</a></p>
 
-<p><br /></p>
+<p>From <a href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing">https://docs.python.org/3/library/stdtypes.html#truth-value-testing</a>:</p>
+<blockquote>
+  <p>Considered false: instances with <code class="highlighter-rouge">__bool__()</code> returning False or <code class="highlighter-rouge">__len__()</code> returning zero. Built-ins:</p>
+  <ul>
+    <li><code class="highlighter-rouge">False</code>, <code class="highlighter-rouge">None</code></li>
+    <li>zeroes of any numeric type: <code class="highlighter-rouge">0</code>, <code class="highlighter-rouge">0.0</code>, <code class="highlighter-rouge">Decimal(0)</code>, <code class="highlighter-rouge">Fraction(0, 1)</code>, <code class="highlighter-rouge">0j</code></li>
+    <li>empty sequences and collections: <code class="highlighter-rouge">''</code>, <code class="highlighter-rouge">()</code>, <code class="highlighter-rouge">[]</code>, <code class="highlighter-rouge">{}</code>, <code class="highlighter-rouge">{}</code>, <code class="highlighter-rouge">set()</code>, <code class="highlighter-rouge">range(0)</code></li>
+  </ul>
+</blockquote>
 
-<p>The interesting thing in python: <code class="highlighter-rouge">b == not a</code> is a syntax error.
-<code class="highlighter-rouge">not</code> has a lower priority than non-boolean operators, so <code class="highlighter-rouge">not a == b</code> is interpreted as <code class="highlighter-rouge">not (a == b)</code>, and <code class="highlighter-rouge">b == not a</code> is a syntax error.
-<a href="https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not">https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not</a></p>
-
-<p><br /></p>
-
-<p>as always, <code class="highlighter-rouge">and</code> and <code class="highlighter-rouge">or</code> are short-circuit operators, second argument is not evaluated here:</p>
-
+<p>As in many languages, <code class="highlighter-rouge">and</code> and <code class="highlighter-rouge">or</code> are short-circuit operators, second argument is not evaluated here:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">whatever</span><span class="p">():</span>
     <span class="s">'this line is skipped, whatever() is not evaluated'</span>
 </code></pre></div></div>
 
-<p><br /></p>
+<p>Comparison operators look quite standard: <code class="highlighter-rouge">==</code>, <code class="highlighter-rouge">!=</code> (<code class="highlighter-rouge">&lt;&gt;</code> was removed from the language), <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code>. And for object identity: <code class="highlighter-rouge">is</code>, <code class="highlighter-rouge">is not</code>.</p>
+<blockquote>
+  <p>Behavior of the <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators cannot be customized; also they can be applied to any two objects and never raise an exception.</p>
+</blockquote>
 
-<p><code class="highlighter-rouge">x &lt; y &lt;= z</code> is equivalent to <code class="highlighter-rouge">x &lt; y and y &lt;= z</code>, except <code class="highlighter-rouge">y</code> is evaluated only once
-in both cases <code class="highlighter-rouge">z</code> is not evaluated at all when <code class="highlighter-rouge">x &lt; y</code> is found to be false</p>
-
-<p><br /></p>
-
-<p>comparison operators look quite standard: <code class="highlighter-rouge">==</code>, <code class="highlighter-rouge">!=</code>, <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code>
-and for object identity: <code class="highlighter-rouge">is</code>, <code class="highlighter-rouge">is not</code>
-objects of different <em>built-in</em> types never compare equal (except different numeric types), but we can define an object with <code class="highlighter-rouge">__eq__</code> — <a href="http://stackoverflow.com/questions/12379840/python-comparison-between-built-in-and-user-defined-types">http://stackoverflow.com/questions/12379840/python-comparison-between-built-in-and-user-defined-types</a>
-<code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code> raise <code class="highlighter-rouge">TypeError</code> exception when the objects are of different types that cannot be compared, or in other cases where there is no defined ordering</p>
-
+<p>Objects of different <em>built-in</em> types never compare equal (except different numeric types), e.g., <code class="highlighter-rouge">'1' == 1</code> is false. <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code> raise <code class="highlighter-rouge">TypeError</code> exception when the objects are of different types that cannot be compared.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="s">'abc'</span> <span class="o">&gt;</span> <span class="mi">1000</span>
 <span class="nb">TypeError</span><span class="p">:</span> <span class="n">unorderable</span> <span class="n">types</span><span class="p">:</span> <span class="nb">str</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nb">int</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>behavior of the <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators cannot be customized; also they can be applied to any two objects and never raise an exception</p>
+<p><code class="highlighter-rouge">x &lt; y &lt; z</code> is equivalent to <code class="highlighter-rouge">x &lt; y and y &lt; z</code>, except <code class="highlighter-rouge">y</code> is evaluated only once. In both cases <code class="highlighter-rouge">z</code> is not evaluated at all when <code class="highlighter-rouge">x &lt; y</code> is found to be false</p>
 
-<p><a href="https://docs.python.org/3/library/stdtypes.html#comparisons">https://docs.python.org/3/library/stdtypes.html#comparisons</a></p>
+<p>Most importantly:</p>
 
-<p><br /></p>
+<p>Use <code class="highlighter-rouge">if x</code>. Rarely <code class="highlighter-rouge">if x == True and type(x) is bool</code> when needed. Never <code class="highlighter-rouge">if x is True</code>, because <code class="highlighter-rouge">bool</code> is a subclass of <code class="highlighter-rouge">int</code>, this fails in obscure cases.</p>
 
-<p>generally you only want to be using <code class="highlighter-rouge">is</code> with mutable objects (or None, which is the exception)
-<code class="highlighter-rouge">x is None</code> vs <code class="highlighter-rouge">x == None</code>: <a href="https://www.python.org/dev/peps/pep-0008/#programming-recommendations">PEP 8</a></p>
+<p>Same for <code class="highlighter-rouge">not x</code> and <code class="highlighter-rouge">False</code>.</p>
+
+<p>An edge case is comparison to <code class="highlighter-rouge">None</code>. Use <code class="highlighter-rouge">if x is None</code>, never <code class="highlighter-rouge">x == None</code>. From <a href="https://www.python.org/dev/peps/pep-0008/#programming-recommendations">PEP 8</a>:</p>
 <blockquote>
   <p>Comparisons to singletons like None should always be done with is or is not , never the equality operators.</p>
 </blockquote>
 
-<p><a href="http://stackoverflow.com/questions/9494404/use-of-true-false-and-none-as-return-values-in-python-functions">http://stackoverflow.com/questions/9494404/use-of-true-false-and-none-as-return-values-in-python-functions</a></p>
+<p>Good:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if x:
+  ...
+if not x:
+  ...
+if x == True and type(x) is bool:
+  ...
+if x == False and type(x) is bool:
+  ...
+if x is None:
+  ...
+</code></pre></div></div>
 
-<pre><code class="language-Python">class A(object):
-    def __eq__(self, other):
-        print( "A __eq__ called: %r == %r ?" % (self, other) )
-        return self.value == other.value
-class B(object):
-    def __eq__(self, other):
-        print( "B __eq__ called: %r == %r ?" % (self, other) )
-        return self.value == other.value
+<p>Bad:</p>
 
-a = A()
-a.value = 3
-b = B()
-b.value = 4
-a == b
-</code></pre>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if x is True:
+  ...
+if x is False:
+  ...
+if x == True:
+  ...
+if x == False:
+  ...
+if x == None:
+  ...
+</code></pre></div></div>
 
-<div class="ryctoic-questions">
-  <p>deck:
-python — true, false, and comparisons</p>
+<p>There is a thing in python, operator chaining. It’s for things like <code class="highlighter-rouge">x &lt; y &lt; z</code>, which is roughly equivalent to <code class="highlighter-rouge">x &lt; y and y &lt; z</code>. <br />
+Except <code class="highlighter-rouge">y</code> is evaluated only once here. <br />
+Btw, in both cases <code class="highlighter-rouge">z</code> is not evaluated at all when <code class="highlighter-rouge">x &lt; y</code> is false. <br />
+Be careful, with operator chaining, <code class="highlighter-rouge">1 == 1 in [1]</code> is unreadable and it’s not obvios that it’s an operator chaining.</p>
 
-  <p>TODO:</p>
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20true,%20false,%20and%20comparisons">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
-  <ul>
-    <li>q: <code class="highlighter-rouge">==</code> vs <code class="highlighter-rouge">__eq__()</code> — a:</li>
-    <li>q: Why <code class="highlighter-rouge">__eq__()</code> returns <code class="highlighter-rouge">NotImplemented</code>? — a:</li>
-    <li>q: What happens when you compare incomparable types?</li>
-  </ul>
+<p>TODO: <code class="highlighter-rouge">True + 1 == 2</code>, <code class="highlighter-rouge">False + 1 == 0</code>
+TODO: <a href="https://github.com/satwikkansal/wtfpython#-be-careful-with-chained-operations">https://github.com/satwikkansal/wtfpython#-be-careful-with-chained-operations</a></p>
 
-  <p><a href="https://docs.python.org/3/reference/datamodel.html#object.__eq__">https://docs.python.org/3/reference/datamodel.html#object.__eq__</a></p>
-
-  <p><a href="https://docs.python.org/3/library/constants.html#NotImplemented">https://docs.python.org/3/library/constants.html#NotImplemented</a></p>
-
-  <p><a href="https://docs.python.org/3/whatsnew/3.0.html#ordering-comparisons">https://docs.python.org/3/whatsnew/3.0.html#ordering-comparisons</a></p>
-
-  <ul>
-    <li>q: What values are considered false in python? — a: <code class="highlighter-rouge">False</code>, <code class="highlighter-rouge">None</code>, any numeric zero, empty sequence, empty dict, instance with <code class="highlighter-rouge">__bool__()</code> returning False or <code class="highlighter-rouge">__len__()</code> returning zero</li>
-    <li>q: <code class="highlighter-rouge">not a == b</code> vs <code class="highlighter-rouge">not (a == b)</code> vs <code class="highlighter-rouge">b == not a</code> — a: <code class="highlighter-rouge">not</code> has a lower priority than non-boolean operators, so <code class="highlighter-rouge">not a == b</code> is interpreted as <code class="highlighter-rouge">not (a == b)</code>, and <code class="highlighter-rouge">b == not a</code> is a syntax error</li>
-    <li>q: short-circuiting behavior of boolean operators — a: <code class="highlighter-rouge">if False and whatever(): 'this line is skipped, whatever() is not evaluated'</code></li>
-    <li>q: <code class="highlighter-rouge">x &lt; y &lt;= z</code> vs <code class="highlighter-rouge">x &lt; y and y &lt;= z</code> — a: <code class="highlighter-rouge">x &lt; y &lt;= z</code> is equivalent to <code class="highlighter-rouge">x &lt; y and y &lt;= z</code>, except <code class="highlighter-rouge">y</code> is evaluated only once, and in both cases <code class="highlighter-rouge">z</code> is not evaluated at all when <code class="highlighter-rouge">x &lt; y</code> is found to be false</li>
-    <li>q: What are equal and not equal operators? — a: <code class="highlighter-rouge">==</code>, <code class="highlighter-rouge">!=</code>, the <code class="highlighter-rouge">&lt;&gt;</code> was removed</li>
-    <li>q: What are less, more, less or equal, more or equal operators? — a: <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code></li>
-    <li>q: How to test for object identity? — a: <code class="highlighter-rouge">is</code>, <code class="highlighter-rouge">is not</code></li>
-    <li>q: How to customize behavior of <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code>? — a: Behavior of the <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators cannot be customized.</li>
-    <li>q: What objects can be tested for identity with the <code class="highlighter-rouge">is</code> ans <code class="highlighter-rouge">is not</code> operators? — a: The <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators can be applied to any two objects and never raise an exception.</li>
-    <li>q: When does the <code class="highlighter-rouge">is</code> operator throw an exception? — a: The <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">is not</code> operators can be applied to any two objects and never raise an exception.</li>
-    <li>q: <code class="highlighter-rouge">if x</code> vs <code class="highlighter-rouge">if x == True</code> vs <code class="highlighter-rouge">if x is True</code> — a: Use <code class="highlighter-rouge">if x</code>; and in extremely rare cases when you really want to explicitly distinguish if <code class="highlighter-rouge">x</code> is, for example, not <code class="highlighter-rouge">1</code>, not <code class="highlighter-rouge">[]</code>, but boolean <code class="highlighter-rouge">True</code>, check it with <code class="highlighter-rouge">x == True and type(x) is bool</code>; don’t use <code class="highlighter-rouge">x is True</code>, it will fail in some obscure cases, because <code class="highlighter-rouge">bool</code> is subclass of <code class="highlighter-rouge">int</code>.</li>
-    <li>q: <code class="highlighter-rouge">if not x</code> vs <code class="highlighter-rouge">x is None</code> vs <code class="highlighter-rouge">x == None</code> — a: Use the <code class="highlighter-rouge">if not x</code>; and in cases when you really want to explicitly distinguish <code class="highlighter-rouge">None</code> and other false values, use <code class="highlighter-rouge">x is None</code>; don’t use <code class="highlighter-rouge">x == None</code>, because PEP 8.</li>
-    <li>q: <code class="highlighter-rouge">x is y</code> vs <code class="highlighter-rouge">id(x) == id(y)</code> — a: Use the former. Don’t use <code class="highlighter-rouge">id(x) == id(y)</code>, because id of an object in CPython being the location in memory is an implementation detail, this may change.</li>
-    <li>q: When two objects of different <em>built-in</em> types compare equal? — a: Objects of different <em>built-in</em> types, except different numeric types, never compare equal.</li>
-    <li>q: What happens when you compare objects of different <em>built-in</em> types, e.g, <code class="highlighter-rouge">'a' == 1</code> and <code class="highlighter-rouge">'abc' &gt; 10</code>? a: Except for numeric types, <code class="highlighter-rouge">==</code> and <code class="highlighter-rouge">!=</code> always return <code class="highlighter-rouge">False</code> for objects of different <em>build-in</em> types, <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&gt;=</code> raise <code class="highlighter-rouge">TypeError</code> exception.</li>
-    <li>q: What happens when you sort a heterogeneous list? — a: All the elements must be comparable to each other, otherwise the <code class="highlighter-rouge">TypeError</code> is thrown. If <code class="highlighter-rouge">.sort()</code> is used for in-place sorting, then the list is modified until the occurrence of the error.</li>
-  </ul>
-</div>
+<p>TODO: <a href="http://canonical.org/~kragen/isinstance/">http://canonical.org/~kragen/isinstance/</a>
+<a href="https://stackoverflow.com/questions/152580/whats-the-canonical-way-to-check-for-type-in-python">https://stackoverflow.com/questions/152580/whats-the-canonical-way-to-check-for-type-in-python</a></p>
+<ul>
+  <li>q: <code class="highlighter-rouge">type(s) is str</code> vs <code class="highlighter-rouge">type(s) == str</code> vs <code class="highlighter-rouge">isinstance(s, str)</code> – a: Virtually no difference between <code class="highlighter-rouge">is</code> and <code class="highlighter-rouge">==</code> here, but people tend to use <code class="highlighter-rouge">is</code>. Type comparison answers the strict question: is this a type of object. <code class="highlighter-rouge">isinstance(o, cls)</code> considers type hierarcy.</li>
+</ul>
 
 <p><br />
 <br /></p>
 
-<iframe class="autoresize" src="https://vagrant.local:8443/api/v0/deck/4db66f7c-cee0-4de3-84c7-fdd28b030a82"><p>Your browser does not support iframes.</p></iframe>
+<h1 id="identity">identity</h1>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20identity">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
 <h1 id="functions">functions</h1>
 
-<div class="ryctoic-questions">
-  <ul>
-    <li>q: Define a function. — a: <code class="highlighter-rouge">def whatever(): ...</code></li>
-    <li>q: Define a function with an optional argument. — a: <code class="highlighter-rouge">def whatever(data=0): ...</code></li>
-    <li>
-      <p>q: Define a function with a docstring. — a: An example:</p>
+<p><a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions</a></p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def whatever():
-    """This is a docstring."""
-    pass
-</code></pre></div>      </div>
-    </li>
-    <li>q: Get the docstring of a function? — a: <code class="highlighter-rouge">help(a_func)</code> or <code class="highlighter-rouge">a_func.__doc__</code></li>
-    <li>q: Define a function with a keyword-only arguments. — a: <code class="highlighter-rouge">def foo(*, arg1=10, arg2=20): ...</code></li>
-    <li>q: Define a function with an arbitraty argument list. — a: <code class="highlighter-rouge">def concat(*args, sep="/"): return sep.join(args)</code></li>
-    <li>q: Define a function with keyword arguments. — a: <code class="highlighter-rouge">def foo(**kwargs): print(kwargs)</code>, then call it like this: <code class="highlighter-rouge">foo(a=1, b=2)</code>, this will print <code class="highlighter-rouge">{'a': 1, 'b': 2}</code></li>
-    <li>q: Pass a list of arguments to a function with an arbitrary argument list. — a: Given a function <code class="highlighter-rouge">def foo(*args): ...</code>, unpack the list <code class="highlighter-rouge">foo(*lst)</code></li>
-    <li>q: Pass a dictionary of arguments to a function with keyword arguments. — a: Given a function <code class="highlighter-rouge">def foo(**kwargs): ...</code>, unpack the dict <code class="highlighter-rouge">foo(**dct)</code></li>
-    <li>q: Define a function with function annotations. — a: <code class="highlighter-rouge">def a_func(a_dict: '{str: int}') -&gt; '[str]': print(a_func.__annotations__); ...</code></li>
-    <li>q: Write a lambda function. — a: <code class="highlighter-rouge">f = lambda x: x**2</code></li>
-  </ul>
-</div>
+<p><a href="http://effbot.org/zone/default-values.htm">http://effbot.org/zone/default-values.htm</a>
+<a href="https://stackoverflow.com/questions/1132941/least-astonishment-and-the-mutable-default-argument">https://stackoverflow.com/questions/1132941/least-astonishment-and-the-mutable-default-argument</a>
+<a href="https://stackoverflow.com/questions/291978/short-description-of-the-scoping-rules">https://stackoverflow.com/questions/291978/short-description-of-the-scoping-rules</a></p>
 
-<p>TODO: mutable default args, and make sure you use immutable types to catch this earlier
-TODO: new type hinting
-TODO: function annotations: <a href="https://github.com/kennknowles/python-rightarrow">https://github.com/kennknowles/python-rightarrow</a></p>
+<p><a href="https://docs.python.org/2/library/functions.html#apply">https://docs.python.org/2/library/functions.html#apply</a>
+Deprecated since version 2.3: Use function(*args, **keywords) instead of apply(function, args, keywords) (see Unpacking Argument Lists).</p>
+
+<p><a href="http://effbot.org/zone/default-values.htm#valid-uses-for-mutable-defaults">http://effbot.org/zone/default-values.htm#valid-uses-for-mutable-defaults</a></p>
+
+<h2 id="mutable-default-argument">mutable (default) argument</h2>
+
+<p>This is a design flaw, explicitly documented here: <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">https://docs.python.org/3/reference/compound_stmts.html#function-definitions</a></p>
+
+<blockquote>
+  <p>Default parameter values are evaluated from left to right when the function definition is executed.
+…
+This is generally not what was intended.</p>
+</blockquote>
+
+<p>The same effect can be easily achieved using let over lambda:</p>
+
+<pre><code class="language-Python">def generate_f():
+    default_mutable_argument = []
+    def f(x, l = default_mutable_argument):
+        l.append(x)
+        return l
+    return f
+
+f = generate_f()
+</code></pre>
+
+<p>Python docs recommend this construct:</p>
+
+<pre><code class="language-Python">def f(x, l = None):
+    if l is None:
+        l = []
+    l.append(x)
+    return l
+</code></pre>
+
+<p>Which can be enhanced slightly with type annotations for readability:</p>
+
+<pre><code class="language-Python">def f(x, l: [] = None):
+    ...
+</code></pre>
+
+<p>And doesn’t mention this way at all:</p>
+
+<pre><code class="language-Python">def f(a, L = []):
+    L = copy(L)        # or deepcopy(L), or L[:], depending on context
+    L.append(a)
+    return L
+</code></pre>
+
+<p>Which is surprising to me. Because in this trivial example it makes sense, but here’s another one:</p>
+
+<pre><code class="language-Python">def f(a, L = None):
+    if L is None:
+        L = []
+    L.append(a)
+    return sum(L)/a
+</code></pre>
+
+<p>Here it really shouldn’t modify the argument, but the mistake is obscure and can’t be recognized.
+TODO: a good real world example</p>
+
+<p>In ruby it copies the default argument on every call and no puppy was harmed because of this.</p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20functions">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="lambda">lambda</h2>
+
+<p>No return statement in lambdas: <a href="https://docs.python.org/3/reference/expressions.html#lambda">https://docs.python.org/3/reference/expressions.html#lambda</a></p>
+
+<p><a href="https://stackoverflow.com/questions/862412/is-it-possible-to-have-multiple-statements-in-a-python-lambda-expression">https://stackoverflow.com/questions/862412/is-it-possible-to-have-multiple-statements-in-a-python-lambda-expression</a>
+just use a tuple: <code class="highlighter-rouge">lambda x: ( f(x), g(x) )</code></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20lambda">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="scope">scope</h1>
+
+<p>Closures are good, for example, to have global scope clean, to replace hard-coded constants.</p>
+
+<p>Python doesn’t have open free variables: <a href="http://effbot.org/zone/closure.htm">http://effbot.org/zone/closure.htm</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def outer(msg):
+    def inner():
+        print(msg)
+    return inner
+
+i = outer('hell')
+i()    # prints 'hell'
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def closure():
+    count = 0
+    def inner():
+        nonlocal count
+        count += 1
+        print(count)
+    return inner
+i = clojure()
+i()    # prints 1
+i()    # prints 2
+i()    # prints 3
+</code></pre></div></div>
+
+<p>If you don’t declare a var <code class="highlighter-rouge">global</code>, a new local one is created:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 0
+
+def f():
+    x = 1
+    print(x)
+
+f()     # 1
+x       # 0
+</code></pre></div></div>
+
+<p>Global actually means module scope.</p>
+
+<p>TODO: What is a closure?</p>
+
+<p>LEGB rule: <a href="https://stackoverflow.com/questions/291978/short-description-of-the-scoping-rules/292502#292502">https://stackoverflow.com/questions/291978/short-description-of-the-scoping-rules/292502#292502</a></p>
+
+<p>Instance and class variables can only be accessed by explicitly providing the namespace:</p>
+
+<pre><code class="language-Python">class Foo():
+    x = 0
+    def foo(self):
+        self.__class__.x = 1
+        self.x = 10
+
+ff = Foo()
+ff.x == 0
+ff.foo()
+ff.x == 10
+Foo.x == 1
+</code></pre>
+
+<p>The scope of names defined in a class block is limited to the class block; it does not extend to the code blocks of methods -– this includes comprehensions and generator expressions since they are implemented using a function scope:</p>
+
+<pre><code class="language-Python">class Foo:
+    x = 0
+    def f(self):
+        print(x)
+        
+Foo().f()     # NameError: name 'x' is not defined
+
+
+class Foo:
+    x = 0
+    y = [x for _ in range(3)]     # NameError: name 'x' is not defined
+</code></pre>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20scope">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="docstrings">docstrings</h1>
+
+<p>PEP 257 – Docstring Conventions: <a href="https://www.python.org/dev/peps/pep-0257/">https://www.python.org/dev/peps/pep-0257/</a></p>
+
+<p><a href="https://stackoverflow.com/questions/3898572/what-is-the-standard-python-docstring-format">https://stackoverflow.com/questions/3898572/what-is-the-standard-python-docstring-format</a></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20docstrings">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
 <h1 id="conditionals-and-loops">conditionals and loops</h1>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
-    <span class="n">whatever</span><span class="p">()</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'ok'</span><span class="p">)</span>
-</code></pre></div></div>
+<pre><code class="language-Python">if False:
+    whatever()
+else:
+    print('ok')
+</code></pre>
 
 <p><code class="highlighter-rouge">switch/case</code> <a href="https://www.python.org/dev/peps/pep-3103/">pep-3103</a></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-    <span class="s">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-<span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</code></pre></div></div>
+<pre><code class="language-Python">{
+    'a': 1,
+    'b': 2,
+    'c': 3,
+}.get(x, 0)
+</code></pre>
 
 <p>these do not support fall through, and this can be good or bad, depends on the point of view and problems you solve</p>
 
 <p><code class="highlighter-rouge">range()</code> used to be <code class="highlighter-rouge">xrange()</code> in python 2</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100000000</span><span class="p">):</span>
-  <span class="k">pass</span>
+<pre><code class="language-Python">for n in range(0,100000000):
+  pass
 
-<span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100000000</span><span class="p">:</span>
-  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-</code></pre></div></div>
+int i = 0
+while i &lt; 100000000:
+  i += 1
+</code></pre>
 
 <p><a href="http://stackoverflow.com/questions/869229/why-is-looping-over-range-in-python-faster-than-using-a-while-loop">http://stackoverflow.com/questions/869229/why-is-looping-over-range-in-python-faster-than-using-a-while-loop</a></p>
 
-<pre><code class="language-Python">if condition:
-    ...
-else:
-    ...
+<pre><code class="language-Python">i = 100
+for i in range(3):
+    pass
+
+print(i)    # prints 2
 </code></pre>
 
-<p>TODO: what if we do <code class="highlighter-rouge">for i in range(0)</code>?
-TODO: what if we do <code class="highlighter-rouge">for i in ...: else: ... use i</code>?</p>
+<pre><code class="language-Python">i = 100
+for i in []:
+    pass
 
-<div class="ryctoic-questions">
-  <ul>
-    <li>q: Write an if-then-else.</li>
-    <li>q: Write an one line if-else statement (ternary conditional operator). — a: <code class="highlighter-rouge">x = 'good' if y else 'bad'</code></li>
-    <li>q: What is short for else if? — a: <code class="highlighter-rouge">elif</code></li>
-    <li>q: What is going to be printed in this example when the condition is false? <code class="highlighter-rouge">if x &lt; y &lt; z: print(x); print(y); print(z)</code> — a: Semicolon binds tighter than the colon in this context, so that in this example, either all or none of the print() calls are executed.</li>
-    <li>q: Write a switch/case statement. — a: Python doesn’t have this, but we can have an if/elif chain or dict-based dispatch, but those do not support fall through.</li>
-    <li>q: <code class="highlighter-rouge">range()</code> vs <code class="highlighter-rouge">xrange()</code> — a: <code class="highlighter-rouge">range()</code> used to be <code class="highlighter-rouge">xrange()</code> in python 2.</li>
-    <li>q: Write a for loop from 0 to n-1 inclusive. — a: <code class="highlighter-rouge">for i in range(n): ...</code></li>
-    <li>q: Write a for loop from 1 to n inclusive. — a: <code class="highlighter-rouge">for i in range(1, n+1): ...</code></li>
-    <li>
-      <p>q: What is going to be printed? <code class="highlighter-rouge">for i in range(1, n+1): print(i)</code> — a: Numbers from <code class="highlighter-rouge">1</code> to <code class="highlighter-rouge">n</code> inclusive.</p>
-    </li>
-    <li>
-      <p>q: Get a range with a step — a: <code class="highlighter-rouge">range(start, end, step)</code></p>
-    </li>
-    <li>q: Get a range going backwards. — a: <code class="highlighter-rouge">range(99, 0, -1)</code></li>
-    <li>q: Get a range from <code class="highlighter-rouge">99</code> to <code class="highlighter-rouge">0</code> with a step <code class="highlighter-rouge">2</code>. — a: <code class="highlighter-rouge">range(99, 0, -2)</code></li>
-    <li>q: Get a range from <code class="highlighter-rouge">0</code> to <code class="highlighter-rouge">-10</code>. — a: <code class="highlighter-rouge">range(0, -10, -1)</code></li>
-    <li>q: <code class="highlighter-rouge">for i in range(10**10): ...</code> vs <code class="highlighter-rouge">i=0; while i &lt; 10**10: i+=1; ...;</code>? — a: The former should be faster, code for <code class="highlighter-rouge">range()</code> is optimized.</li>
-    <li>q: Write a while statement. — a: <code class="highlighter-rouge">while condition: ...</code></li>
-    <li>q: What does <code class="highlighter-rouge">else</code> do after <code class="highlighter-rouge">for</code> and <code class="highlighter-rouge">while</code> statements? — a: The <code class="highlighter-rouge">else</code> code is executed after the loop ends if there was no <code class="highlighter-rouge">break</code>.</li>
-    <li>q: What are <code class="highlighter-rouge">break</code> and <code class="highlighter-rouge">continue</code> for? — a: <code class="highlighter-rouge">continue</code> is for moving forward to the next iteration, <code class="highlighter-rouge">break</code> is for ending the loop.</li>
-  </ul>
-</div>
+print(i)    # prints 100
+</code></pre>
 
-<iframe class="autoresize" src="https://vagrant.local:8443/api/v0/deck/aeb6a5dd-3ff7-4856-bbe2-f201004d82e2"><p>Your browser does not support iframes.</p></iframe>
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20conditionals%20and%20loops">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="ranges">ranges</h1>
+
+<p><a href="https://stackoverflow.com/questions/35004162/why-is-range0-range2-2-2-true-in-python-3">https://stackoverflow.com/questions/35004162/why-is-range0-range2-2-2-true-in-python-3</a></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20ranges">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
 <h1 id="comprehensions">comprehensions</h1>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
 </code></pre></div></div>
 
-<ul>
-  <li>q: Write multidimensional list comprehension. — a: <code class="highlighter-rouge">[ (x,y) for x in ... for y in ... if x&gt;1 if y&gt;1 ]</code></li>
-  <li>q: Write a list comprehension to get squares of odd numbers from 1 to 8. — a: <code class="highlighter-rouge">[x**2 for x in range(1, 9) if x%2==1]</code></li>
-  <li>q: Write a dictionary comprehension. — a: <code class="highlighter-rouge">l = [1, 1, 2, 3]; d = { x : l.count(x)   for x in l}</code>; for this particular example there is <code class="highlighter-rouge">collections.Counter(l)</code> though.</li>
-  <li>q: Write a set comprehension. — a: <code class="highlighter-rouge">set_of_primes = { i for i in range(101) if is_prime(i) }</code></li>
-  <li>q: Check if any element in a list satisfies some condition. — a: <code class="highlighter-rouge">any(l == 'x' for l in a_string)</code></li>
-  <li>q: Check if all elements in a list satisfy some condition. — a: <code class="highlighter-rouge">all(x &gt; 0 for x in lst)</code></li>
-</ul>
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20comprehensions">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="input">input</h1>
+
+<p><code class="highlighter-rouge">input()</code> used to be <code class="highlighter-rouge">raw_input()</code> in python 2: <a href="http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html#raw_input">http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html#raw_input</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">int</span><span class="p">(</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<pre><code class="language-Python">while True:
+    try:
+        i = int(input('i: '))
+        break
+    except:
+        pass
+
+print(i)
+</code></pre>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python%20--%20user%20input">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="slicing">slicing</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'h'</span><span class="p">]</span>
+<span class="n">a</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">==</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Extended slices can’t be used for assigning a list of different length: <a href="https://docs.python.org/2.3/whatsnew/section-slices.html">https://docs.python.org/2.3/whatsnew/section-slices.html</a></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- slicing">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="shallow-and-deep-copy">shallow and deep copy</h1>
+
+<p><a href="http://www.python-course.eu/deep_copy.php">http://www.python-course.eu/deep_copy.php</a></p>
+
+<p>q: What are shallow copy and deep copy? — When you do <code class="highlighter-rouge">a = [1, 2, 3]; b = a</code>, you bind both variables to a list object. Now, if you operate on <code class="highlighter-rouge">a</code> and modify it, you modify the object, so you’ll see changes through the <code class="highlighter-rouge">b</code> variable. If the list is flat, you can create a shallow copy, so different vars are bound to different list objects. But if a list contains other lists, a shallow copy is not enough, you need to create a deep copy. The same can be said about other mutable containers like dicts and sets.
+q: Get a deep copy of a list, dict, set, deque. — a: <code class="highlighter-rouge">copy.deepcopy(thing)</code>
+q: What does <code class="highlighter-rouge">l = lst[:]</code> mean? — a: Creates a shallow copy of entire list.</p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- shallow and deep copy">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="lists">lists</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">lst</span> <span class="o">+=</span> <span class="s">'a'</span>
+<span class="n">lst</span> <span class="o">+=</span> <span class="p">[</span><span class="s">'b'</span><span class="p">]</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s">'c'</span><span class="p">])</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">'0'</span><span class="p">)</span>
+<span class="n">lst</span> <span class="o">==</span> <span class="p">[</span><span class="s">'0'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="p">[</span><span class="s">'c'</span><span class="p">]]</span>
+
+<span class="n">lst</span> <span class="o">==</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">lst.sort()</code> returns <code class="highlighter-rouge">None</code>, here is why: <a href="https://mail.python.org/pipermail/python-dev/2003-October/038855.html">https://mail.python.org/pipermail/python-dev/2003-October/038855.html</a></p>
+
+<p>pre-allocating a list benchmark: <a href="http://stackoverflow.com/questions/22225666/pre-allocating-a-list-of-none">http://stackoverflow.com/questions/22225666/pre-allocating-a-list-of-none</a></p>
+
+<p><code class="highlighter-rouge">lst.index(e)</code> raises <code class="highlighter-rouge">ValueError</code> when <code class="highlighter-rouge">e</code> is not in the list, because a value like <code class="highlighter-rouge">-1</code> could lead to obscure bugs</p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- lists">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="tuples">tuples</h1>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- tuples">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="deques">deques</h1>
+
+<p><a href="https://dbader.org/blog/queues-in-python">https://dbader.org/blog/queues-in-python</a></p>
+
+<p class="centered"><img src="./images/python.deques.001.svg" alt="python deques" /></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- deques">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="dicts">dicts</h1>
+
+<p><a href="https://docs.python.org/3/library/stdtypes.html#typesmapping">https://docs.python.org/3/library/stdtypes.html#typesmapping</a></p>
+
+<p>interesting thing: <code class="highlighter-rouge">d[k]</code> raises <code class="highlighter-rouge">ValueError</code> when the <code class="highlighter-rouge">k</code> is not in the dict, while <code class="highlighter-rouge">d[k] = 'whatever'</code> sets the new value</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>   <span class="c"># raises ValueError </span>
+<span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">'whatever'</span>   <span class="c"># sets the value</span>
+</code></pre></div></div>
+
+<p>interesting: Due to the way the Python C-level APIs developed, a lot of built-in functions and methods don’t actually have names for their arguments. <code class="highlighter-rouge">.get(x, default=0)</code> throws <code class="highlighter-rouge">TypeError: get() takes no keyword arguments</code>, but <code class="highlighter-rouge">.get(x, 0)</code> works</p>
+
+<p>How (not) to merge dictionaries: <a href="http://treyhunner.com/2016/02/how-to-merge-dictionaries-in-python/">http://treyhunner.com/2016/02/how-to-merge-dictionaries-in-python/</a>, <a href="https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression/26853961#26853961">https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression/26853961#26853961</a></p>
+
+<p>TODO: <code class="highlighter-rouge">iteritems</code>, <code class="highlighter-rouge">iterkeys</code>, <code class="highlighter-rouge">itervalues</code> are no longer supported</p>
+
+<p>TODO: how dicts are implemented: <a href="https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented/44509302#44509302">https://stackoverflow.com/questions/327311/how-are-pythons-built-in-dictionaries-implemented/44509302#44509302</a>, <a href="https://mail.python.org/pipermail/python-dev/2012-December/123028.html">https://mail.python.org/pipermail/python-dev/2012-December/123028.html</a></p>
+
+<p>Why lists can’t be keys in a dict: <a href="https://wiki.python.org/moin/DictionaryKeys">https://wiki.python.org/moin/DictionaryKeys</a></p>
+
+<p><img src="./images/python.dicts.001.svg" alt="python deques" /></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- dictionaries">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- iterating over dictionaries">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<p><a href="https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python">https://stackoverflow.com/questions/2799064/how-do-i-merge-dictionaries-together-in-python</a>
+<a href="https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression">https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression</a></p>
+
+<p>Dicts preserve order of insertion in python 3.7 and newer. <a href="https://www.python.org/dev/peps/pep-0468/#motivation">https://www.python.org/dev/peps/pep-0468/#motivation</a></p>
+
+<p><a href="https://github.com/mewwts/addict">https://github.com/mewwts/addict</a></p>
+
+<h2 id="setdefault-and-defaultdict">setdefault and defaultdict</h2>
+
+<p>Good examples of <code class="highlighter-rouge">.setdefault()</code> <a href="http://xwell.org/2015/04/07/python-tricks-setdefault/">http://xwell.org/2015/04/07/python-tricks-setdefault/</a>:</p>
+
+<pre><code class="language-Python">incident = {}
+incident.setdefault('action', {}).setdefault('hacking', {}).setdefault('variety', []).append("Brute force")   # =&gt; {'action': {'hacking': {'variety': ['Brute force']}}}
+</code></pre>
+
+<p><a href="https://github.com/mewwts/addict">https://github.com/mewwts/addict</a>: for working with dicts js-style:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mapping = addict.Dict()
+mapping.a.b.c.d.e = 2
+mapping == {'a': {'b': {'c': {'d': {'e': 2}}}}}
+</code></pre></div></div>
+
+<p><a href="https://code.activestate.com/recipes/66516-add-an-entry-to-a-dictionary-unless-the-entry-is-a/">https://code.activestate.com/recipes/66516-add-an-entry-to-a-dictionary-unless-the-entry-is-a/</a>:</p>
+
+<blockquote>
+  <p>setdefault is normally not useful if the values are immutable
+setdefault is particularly useful for the very common data structure that is a dictionary whose values are lists, and the single most typical usage form for it is somedict.setdefault(somekey,[]).append(somevalue).</p>
+</blockquote>
+
+<p><a href="http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html">http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html</a>:</p>
+
+<blockquote>
+  <p>The only problem with dict.setdefault() is that the default value is always evaluated, whether needed or not. That only matters if the default value is expensive to compute.</p>
+</blockquote>
+
+<p><a href="http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html">http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html</a>:</p>
+
+<blockquote>
+  <p>You cannot get KeyError exceptions from properly initialized defaultdict instances. You have to use a “key in dict” conditional if you need to check for the existence of a specific key.</p>
+</blockquote>
+
+<h2 id="ordereddict">OrderedDict</h2>
+
+<p><a href="https://www.reddit.com/r/Python/comments/7jyluw/dict_knownordered_versus_ordereddict_an/">https://www.reddit.com/r/Python/comments/7jyluw/dict_knownordered_versus_ordereddict_an/</a></p>
+
+<p><a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict">https://docs.python.org/3/library/collections.html#collections.OrderedDict</a></p>
+
+<p>TODO: performance comparison <code class="highlighter-rouge">dict</code> vs <code class="highlighter-rouge">collections.OrderedDict</code></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- collections.OrderedDict">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="sets">sets</h1>
+
+<p><code class="highlighter-rouge">isdisjoint</code> is faster than <code class="highlighter-rouge">s &amp; t</code>, because it does short-circuit: <a href="https://stackoverflow.com/questions/45112928/python-isdisjoint-runtime">https://stackoverflow.com/questions/45112928/python-isdisjoint-runtime</a></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- sets">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="itertools-module">itertools module</h1>
+
+<p><a href="https://more-itertools.readthedocs.io/en/latest/">https://more-itertools.readthedocs.io/en/latest/</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lst = [('USA', 'LA'), ('Russia', 'Moscow'), ('USA', 'NY'), ('Russia', 'St. Petersburg'), ('England', 'London')]
+
+[(k, list(g)) 
+   for k, g in 
+   itertools.groupby( sorted(lst), key = lambda x: x[0] )]
+             ## [('England', [('England', 'London')]), ('Russia', [('Russia', 'Moscow'), ('Russia', 'St. Petersburg')]), ('USA', [('USA', 'LA'), ('USA', 'NY')])]
+
+[(k, [j for i,j in g]) 
+   for k, g in 
+   itertools.groupby( sorted(lst), key = lambda x: x[0] )]
+             ## [('England', ['London']), ('Russia', ['Moscow', 'St. Petersburg']), ('USA', ['LA', 'NY'])]
+</code></pre></div></div>
+
+<p>TODO: how to get prev and next values in a loop
+if you don’t have to look too smart:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>l = len(timestamps)
+for i in range(l):
+    if i &lt; l-1:
+        result.append(timestamps[i])
+        result.append(  (timestamps[i] + timestamps[i+1]) / 2  )
+    else:
+        result.append(timestamps[i])
+</code></pre></div></div>
+
+<p>q: divide a string into groups of repeated consecutive elements, e.g., <code class="highlighter-rouge">'AAAABBBCCDAA'</code> into <code class="highlighter-rouge">['AAAA', 'BBB', 'CC', 'D', 'AA']</code> — a: <code class="highlighter-rouge">[''.join(list(g)) for k, g in itertools.groupby('AAAABBBCCDAA')]</code>
+q: group elements of a list by some key, e.g., <code class="highlighter-rouge">[..., ('Russia', 'Moscow'), ..., ('Russia', 'St. Petersburg'), ...]</code> into  <code class="highlighter-rouge">[..., ('Russia', ['Moscow', 'St. Petersburg']), ...]</code>— a: <code class="highlighter-rouge">[(k, [j for i,j in g]) for k, g in itertools.groupby(sorted(lst), lambda x: x[0])]</code></p>
+
+<p>q: get an iterator, which is similar to reduce, but returns an intermediate results — a: <code class="highlighter-rouge">itertools.accumulate(lst, operator.mul)</code>
+q: how to iterate over multiple lists, one after another, without concatenating — a: <code class="highlighter-rouge">itertools.chain( [1, 2, 3], [4, 5, 6] )</code>
+q: <code class="highlighter-rouge">itertools.chain()</code> vs <code class="highlighter-rouge">itertools.chain.from_iterable()</code> — a: the latter gets lazily iterates over input, which can be infinite sequence
+q: get rid of head of a list before a predicate becomes false — a: <code class="highlighter-rouge">list(itertools.dropwhile(lambda x: x&lt;3, [1, 2, 3, 1, 2, 3])) == [3, 1, 2, 3]</code>
+q: get rid of tail of a list after a predicate becomes false — a: <code class="highlighter-rouge">list(itertools.takewhile(lambda x: x&lt;3, [1, 2, 3, 1, 2, 3])) == [1, 2]</code>
+q: <code class="highlighter-rouge">slice()</code> vs <code class="highlighter-rouge">itertools.islice()</code> — a: the latter is for iterators, which don’t support indexing, consumes data on them; in most cases just use the former
+q: <code class="highlighter-rouge">map()</code> vs <code class="highlighter-rouge">itertools.starmap()</code> — a: the latter is for data, which has been pre-zipped, <code class="highlighter-rouge">list( itertools.starmap(pow, [(5,2), (3,2), (10,3)]) ) == [25, 9, 1000]</code>
+q: <code class="highlighter-rouge">zip()</code> two sequences until the longest one is exhauseted, with a given value for missing bits — a: <code class="highlighter-rouge">itertools.zip_longest(*iterables, fillvalue=None)</code>
+q: <code class="highlighter-rouge">zip()</code> vs <code class="highlighter-rouge">itertools.zip_longest()</code> — a: the former stops when the shortest iterator is exhausted, the latter stops when the longest one is done</p>
+
+<p><img src="./images/python.itertools.001.svg" alt="python itertools" /></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- itertools">
+    <p>Your browser does not support iframes.</p>
+</iframe>
 
 
   </div>
@@ -371,7 +741,7 @@ TODO: what if we do <code class="highlighter-rouge">for i in ...: else: ... use 
 
 </footer>
 
-    
+    <script src="http://vagrant.local:35730/livereload.js"></script>
 
 
 

@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Github</title>
+  <title>Implementation details</title>
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/superlearn-wiki/assets/main.css">
-  <link rel="canonical" href="http://0.0.0.0:4000/superlearn-wiki/git/github">
+  <link rel="canonical" href="http://0.0.0.0:4000/superlearn-wiki/python/implementation_details">
   <link rel="alternate" type="application/rss+xml" title="superlearn-wiki" href="/superlearn-wiki/feed.xml">
   
   
@@ -75,65 +75,37 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
     
     
 
 <article class="post">
     <!-- TODO: any html tag for go up a level? -->
-    <a href="/superlearn-wiki/git">Git/</a>
+    <a href="/superlearn-wiki/python">Python/</a>
 
   <header class="post-header">
-    <h1 class="post-title no-anchor">Github</h1>
+    <h1 class="post-title no-anchor">Implementation details</h1>
   </header>
 
   <div class="post-content">
     <ul id="markdown-toc">
-  <li><a href="#github" id="markdown-toc-github">github</a>    <ul>
-      <li><a href="#pull-requests" id="markdown-toc-pull-requests">pull requests</a></li>
-      <li><a href="#workflow" id="markdown-toc-workflow">workflow</a></li>
-    </ul>
-  </li>
+  <li><a href="#complexity" id="markdown-toc-complexity">complexity</a></li>
 </ul>
 
-<h1 id="github">github</h1>
+<h1 id="complexity">complexity</h1>
 
-<p><a href="https://opensource.guide">https://opensource.guide</a></p>
-
-<p><a href="https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project">https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project</a>
-<a href="https://stackoverflow.com/questions/14680711/how-to-do-a-github-pull-request">https://stackoverflow.com/questions/14680711/how-to-do-a-github-pull-request</a></p>
-
-<p>Эффективное использование Github – <a href="https://habrahabr.ru/company/2gis/blog/306166/">https://habrahabr.ru/company/2gis/blog/306166/</a></p>
-
-<h2 id="pull-requests">pull requests</h2>
-
-<p>origin vs upstream: <a href="https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github">https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github</a>
-forks are clones on the server side of github, which you interact with: <a href="https://stackoverflow.com/questions/6286571/are-git-forks-actually-git-clones">https://stackoverflow.com/questions/6286571/are-git-forks-actually-git-clones</a></p>
-
-<p>from <a href="https://stackoverflow.com/questions/3611256/forking-vs-branching-in-github/3611349#comment13305892_3611349">https://stackoverflow.com/questions/3611256/forking-vs-branching-in-github/3611349#comment13305892_3611349</a>:</p>
-
-<blockquote>
-  <p>Honestly, even if you don’t have to, it is always a good idea to have a sacred repo that is writable only for senior developers, team leads or other “trusted” people. All other team members should work in their forks (~sandboxes) and contribute their changes in the form of pull request. Since DVCS makes it possible, we adapted it as a “best practice” and successfully use this even in the smallest projects.</p>
-</blockquote>
-
-<p>TODO: automate creating of pull requests via api: <a href="https://developer.github.com/v3/pulls/#create-a-pull-request">https://developer.github.com/v3/pulls/#create-a-pull-request</a></p>
+<p>TODO:</p>
 
 <ul>
-  <li>q: Origin vs upstream?</li>
-  <li>q: Forks vs clones?</li>
-  <li>q: Why it’s better to isolate modifications in a branch instead of creating a pull request from master?</li>
-  <li>q: After you fork, how to create a topic branch? – a: <code class="highlighter-rouge">git checkout -b &lt;branch-name&gt;</code></li>
-  <li>q: How to push the topic branch to your fork? – a: <code class="highlighter-rouge">git push origin &lt;branch-name&gt;</code>
-TODO: Centralized workflow vs integration-manager workflow: <a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#_integration_manager">https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#_integration_manager</a>; what happens behind the scenes when you accept the pr? The upstream adds the fork as a remote and then fetches and merges the commit from there.</li>
-  <li>q: Github pull request workflow? – a: fork and create a branch, edit, commit and push the branch to origin, open a pull request</li>
+  <li>q: How are lists implemented in python? What is complexity of adding and removing of items? — a: Continuous arrays. <code class="highlighter-rouge">O(1)</code>.</li>
 </ul>
-
-<h2 id="workflow">workflow</h2>
-
-<p>fork and create a topic branch
-edit
-commit and push the branch to origin
-open a pull request, discuss, continue committing until it’s merged or closed</p>
-
 
   </div>
 

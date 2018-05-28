@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Strings and format</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/superlearn-wiki/assets/main.css">
+  <link rel="canonical" href="http://0.0.0.0:4000/superlearn-wiki/python/strings_and_format">
+  <link rel="alternate" type="application/rss+xml" title="superlearn-wiki" href="/superlearn-wiki/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/superlearn-wiki/">superlearn-wiki</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+            <a class="page-link" href="/superlearn-wiki/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/superlearn-wiki/site-map">Site map</a>
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+
+<article class="post">
+    <!-- TODO: any html tag for go up a level? -->
+    <a href="/superlearn-wiki/python">Python/</a>
+
+  <header class="post-header">
+    <h1 class="post-title no-anchor">Strings and format</h1>
+  </header>
+
+  <div class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#strings" id="markdown-toc-strings">strings</a>    <ul>
+      <li><a href="#concatenation" id="markdown-toc-concatenation">concatenation</a></li>
+      <li><a href="#substrings" id="markdown-toc-substrings">substrings</a></li>
+      <li><a href="#reverse" id="markdown-toc-reverse">reverse</a></li>
+      <li><a href="#split-and-trim" id="markdown-toc-split-and-trim">split and trim</a></li>
+      <li><a href="#alignment" id="markdown-toc-alignment">alignment</a></li>
+      <li><a href="#checks" id="markdown-toc-checks">checks</a></li>
+    </ul>
+  </li>
+  <li><a href="#f-strings" id="markdown-toc-f-strings">f-strings</a></li>
+  <li><a href="#format" id="markdown-toc-format">format</a>    <ul>
+      <li><a href="#format-numbers" id="markdown-toc-format-numbers">format numbers</a></li>
+    </ul>
+  </li>
+  <li><a href="#print" id="markdown-toc-print">print()</a></li>
+</ul>
+
+<h1 id="strings">strings</h1>
+
+<p>TODO: unicode
+TODO: <code class="highlighter-rouge">str(bytes, encoding, errors)</code> is equivalent to <code class="highlighter-rouge">bytes.decode(encoding, errors)</code>
+TODO: <code class="highlighter-rouge">str.encode(encoding="utf-8", errors="strict")</code>
+TODO: <code class="highlighter-rouge">io.StringIO</code>, <code class="highlighter-rouge">io.BytesIO</code>, <code class="highlighter-rouge">tempfile.SpooledTemporaryFile</code></p>
+
+<p>TODO: <a href="https://docs.python.org/3/library/string.html#string-constants">https://docs.python.org/3/library/string.html#string-constants</a></p>
+
+<p><a href="https://stackoverflow.com/questions/40348174/should-i-use-python-casefold">https://stackoverflow.com/questions/40348174/should-i-use-python-casefold</a></p>
+
+<p><a href="https://stackoverflow.com/questions/34546171/python-expandtabs-string-operation">https://stackoverflow.com/questions/34546171/python-expandtabs-string-operation</a></p>
+
+<p class="centered"><img src="./images/python.strings.001.svg" alt="python strings methods" /></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="concatenation">concatenation</h2>
+
+<p>Strings <code class="highlighter-rouge">.join()</code> vs <code class="highlighter-rouge">+=</code> in a loop: <a href="http://stackoverflow.com/questions/1349311/python-string-join-is-faster-than-but-whats-wrong-here/21964653#21964653">http://stackoverflow.com/questions/1349311/python-string-join-is-faster-than-but-whats-wrong-here/21964653#21964653</a></p>
+
+<p>Strings are immutable, we can’t use these operations on them: <a href="https://docs.python.org/3/library/stdtypes.html#typesseq-mutable">https://docs.python.org/3/library/stdtypes.html#typesseq-mutable</a></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings concatenation">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="substrings">substrings</h2>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings substrings">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="reverse">reverse</h2>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings reverse">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<p>Be careful with the <code class="highlighter-rouge">sep</code> argument of <code class="highlighter-rouge">a_str.split()</code>: if a <code class="highlighter-rouge">sep</code> arg is not specified or <code class="highlighter-rouge">None</code>, an empty string is split into an empty list: <code class="highlighter-rouge">''.split() == []</code>; otherwise: <code class="highlighter-rouge">''.split(',') ==['']</code>.
+When it’s not actually split: returns a list containing the string. <code class="highlighter-rouge">'  a  '.split(',') == ['  a  ']</code>; if a <code class="highlighter-rouge">sep</code> arg is not specified or <code class="highlighter-rouge">None</code>, it also trims it: <code class="highlighter-rouge">'  a  '.split() == ['a']</code></p>
+
+<h2 id="split-and-trim">split and trim</h2>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings split and trim">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="alignment">alignment</h2>
+
+<p class="centered"><img src="./images/python.strings.alignment.001.svg" alt="python strings methods" /></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings adjustments">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="checks">checks</h2>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings other">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="f-strings">f-strings</h1>
+
+<p><a href="https://www.python.org/dev/peps/pep-0498/#expression-evaluation">https://www.python.org/dev/peps/pep-0498/#expression-evaluation</a>:</p>
+
+<blockquote>
+  <p>The expressions that are extracted from the string are evaluated in the context where the f-string appeared. This means the expression has full access to local and global variables. Any valid Python expression can be used, including function and method calls.</p>
+</blockquote>
+
+<p>Gotcha: we can’t have <code class="highlighter-rouge">'\n'</code> in a expression part of an f-string, e.g.: <code class="highlighter-rouge">f"{'\n'.join(l)}"</code> won’t work.</p>
+
+<p>Our choises are:</p>
+
+<ul>
+  <li>have it joined outside: <code class="highlighter-rouge">s = '\n'.join(l); f"{s}"</code></li>
+  <li><code class="highlighter-rouge">newline = '\n'; f'{newline.join(l)}'</code></li>
+  <li><code class="highlighter-rouge">'{}'.format('\n'.join(l))</code></li>
+  <li><code class="highlighter-rouge">print(*l, sep='\n')</code></li>
+</ul>
+
+<p><a href="https://docs.python.org/3/reference/lexical_analysis.html#f-strings">https://docs.python.org/3/reference/lexical_analysis.html#f-strings</a></p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings f-strings">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="format">format</h1>
+
+<p><a href="https://docs.python.org/3/library/string.html#format-specification-mini-language">https://docs.python.org/3/library/string.html#format-specification-mini-language</a></p>
+
+<pre><code class="language-Text">format_spec     ::=  [[fill]align][sign][#][0][width][grouping_option][.precision][type]
+fill            ::=  &lt;any character&gt;
+align           ::=  "&lt;" | "&gt;" | "=" | "^"
+sign            ::=  "+" | "-" | " "
+width           ::=  integer
+grouping_option ::=  "_" | ","
+precision       ::=  integer
+type            ::=  "b" | "c" | "d" | "e" | "E" | "f" | "F" | "g" | "G" | "n" | "o" | "s" | "x" | "X" | "%"
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'hello, {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+
+<span class="s">'{1} is better than {0}, {2}{2}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">'emacs'</span><span class="p">,</span> <span class="s">'vim'</span><span class="p">,</span> <span class="s">'ha'</span><span class="p">)</span>
+<span class="s">'{0} {2} {1} {2}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">tpl</span><span class="p">)</span>
+
+<span class="s">'{0!s}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">an_obj</span><span class="p">)</span>   <span class="c"># calls str() on the argument</span>
+<span class="s">'{0!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">an_obj</span><span class="p">)</span>   <span class="c"># calls repr() on the argument</span>
+<span class="s">'{0!a}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">an_obj</span><span class="p">)</span>   <span class="c"># calls ascii() on the argument</span>
+<span class="s">'repr() shows quotes: {0!r}; str() doesn'</span><span class="n">t</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="err">!</span><span class="n">s</span><span class="p">}</span><span class="s">'.format('</span><span class="n">test</span><span class="s">')</span><span class="err">
+
+</span><span class="s">'</span><span class="p">{</span><span class="n">first</span><span class="p">}</span> <span class="p">{</span><span class="n">last</span><span class="p">}</span><span class="s">'.format(first='</span><span class="n">John</span><span class="s">', last='</span><span class="n">Smith</span><span class="s">')</span><span class="err">
+</span><span class="s">'</span><span class="p">{</span><span class="n">first</span><span class="p">}</span> <span class="p">{</span><span class="n">last</span><span class="p">}</span><span class="s">'.format(**{'</span><span class="n">first</span><span class="s">': '</span><span class="n">John</span><span class="s">', '</span><span class="n">last</span><span class="s">': '</span><span class="n">Smith</span><span class="s">'})</span><span class="err">
+
+</span><span class="s">'</span><span class="p">{</span><span class="mf">0.</span><span class="n">real</span><span class="p">},</span> <span class="p">{</span><span class="mf">0.</span><span class="n">imag</span><span class="p">}</span><span class="s">'.format(1-1j)</span><span class="err">
+
+</span><span class="s">coord = (3, 5)</span><span class="err">
+</span><span class="s">'</span><span class="n">X</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">[</span><span class="mi">0</span><span class="p">]};</span>  <span class="n">Y</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span><span class="s">'.format(coord)</span><span class="err">
+
+
+</span><span class="s">'</span><span class="p">{:</span><span class="n">f</span><span class="p">}</span><span class="s">'.format(1) == '</span><span class="mf">1.000000</span><span class="s">'</span><span class="err">
+</span><span class="s">'</span><span class="p">{:</span><span class="o">.</span><span class="mi">1</span><span class="n">f</span><span class="p">}</span> <span class="p">{}</span><span class="s">'.format(698.243, '</span><span class="n">GB</span><span class="s">') == '</span><span class="mf">698.2</span> <span class="n">GB</span><span class="s">'</span><span class="err">
+</span><span class="s">'</span><span class="p">{</span><span class="mi">0</span><span class="p">}</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">g</span><span class="p">}</span><span class="s">'.format(1.0)</span><span class="err">
+
+</span><span class="s">'</span><span class="p">{:</span><span class="o">+</span><span class="n">f</span><span class="p">};</span> <span class="p">{:</span><span class="o">+</span><span class="n">f</span><span class="p">}</span><span class="s">'.format(3.14, -3.14) == '</span><span class="o">+</span><span class="mf">3.140000</span><span class="p">;</span> <span class="o">-</span><span class="mf">3.140000</span><span class="s">'   # always show sign</span><span class="err">
+</span><span class="s">'</span><span class="p">{:</span> <span class="n">f</span><span class="p">};</span> <span class="p">{:</span> <span class="n">f</span><span class="p">}</span><span class="s">'.format(3.14, -3.14) == '</span> <span class="mf">3.140000</span><span class="p">;</span> <span class="o">-</span><span class="mf">3.140000</span><span class="s">'</span><span class="err">
+
+</span><span class="s">'</span><span class="p">{:</span><span class="o">-</span><span class="n">f</span><span class="p">};</span> <span class="p">{:</span><span class="o">-</span><span class="n">f</span><span class="p">}</span><span class="s">'.format(3.14, -3.14)    # default, same as just {:f}</span><span class="err">
+
+</span><span class="s">'</span><span class="p">{:</span><span class="c">#5x}'.format(15) == '  0xf'</span>
+<span class="s">'{:#5X}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="o">==</span> <span class="s">'  0XF'</span>
+
+<span class="nb">map</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d'</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="s">'{:&lt;30}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">'left aligned'</span><span class="p">)</span>
+<span class="s">'left aligned                  '</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'{:&gt;30}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">'right aligned'</span><span class="p">)</span>
+<span class="s">'                 right aligned'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'{:^30}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">'centered'</span><span class="p">)</span>
+<span class="s">'           centered           '</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'{:*^30}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">'centered'</span><span class="p">)</span>  <span class="c"># use '*' as a fill char</span>
+<span class="s">'***********centered***********'</span>
+
+<span class="kn">import</span> <span class="nn">locale</span>
+<span class="n">locale</span><span class="o">.</span><span class="n">setlocale</span><span class="p">(</span><span class="n">locale</span><span class="o">.</span><span class="n">LC_ALL</span><span class="p">,</span> <span class="s">'en_US'</span><span class="p">)</span>   <span class="c">## in this example we set a locale to see the difference:</span>
+<span class="s">'{:n}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1,000,000'</span>
+<span class="n">locale</span><span class="o">.</span><span class="n">setlocale</span><span class="p">(</span><span class="n">locale</span><span class="o">.</span><span class="n">LC_ALL</span><span class="p">,</span> <span class="n">locale</span><span class="o">.</span><span class="n">getdefaultlocale</span><span class="p">())</span>
+
+<span class="s">'{:.1</span><span class="si">%</span><span class="s">}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">0.33</span><span class="p">)</span> <span class="o">==</span> <span class="s">'33.0</span><span class="si">%</span><span class="s">'</span>
+<span class="s">'{:.3}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">'xylophone'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'xyl'</span>
+
+<span class="s">'{:{fill}{align}{width}}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">'hello'</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s">'*'</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s">'^'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span> <span class="o">==</span> <span class="s">'***hello***'</span>
+</code></pre></div></div>
+
+<p>for formatting dates see the dates section</p>
+
+<p>not covered: printing binary and octal</p>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings format">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h2 id="format-numbers">format numbers</h2>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings format numbers">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+<h1 id="print">print()</h1>
+
+<iframe class="autoresize" src="https://superlearn.local-vm:8443/ht/asdf2?deckname=python -- strings print">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">superlearn-wiki</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              superlearn-wiki
+            
+            </li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/koddo"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">koddo</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+    <script src="http://vagrant.local:35730/livereload.js"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+<script>anchors.add().remove(".no-anchor");</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.15/iframeResizer.min.js"></script>
+<script>iFrameResize({log:false}, 'iframe.autoresize')</script>
+
+
+
+
+
+  </body>
+</html>
