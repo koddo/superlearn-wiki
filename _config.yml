@@ -37,7 +37,8 @@ plugins:
 keep_files:
     - .git
 exclude:
-  # - README.md
+  - README.md
+  - README-master-branch.md
   - _oldwiki
 
 permalink: /blog/:title
