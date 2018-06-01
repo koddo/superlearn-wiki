@@ -128,5 +128,60 @@
          x="167.89999"
          y="210.86221"
          id="tspan4201">repeat(x)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="487.90002"
+       y="49.462231"
+       id="text4842"
+       sodipodi:linespacing="130%"><tspan
+         sodipodi:role="line"
+         id="tspan4844"
+         x="487.90002"
+         y="49.462231">zip() vs zip_longest()</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="489.89999"
+       y="76.462234"
+       id="text4846"
+       sodipodi:linespacing="130%"><tspan
+         sodipodi:role="line"
+         id="tspan4848"
+         x="489.89999"
+         y="76.462234">map() vs starmap()</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="448.89999"
+       y="201.4622"
+       id="text4850"
+       sodipodi:linespacing="130%"><tspan
+         sodipodi:role="line"
+         id="tspan4852"
+         x="448.89999"
+         y="201.4622">takewhile() and dropwhile()</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="467.89999"
+       y="145.46223"
+       id="text4854"
+       sodipodi:linespacing="130%"><tspan
+         sodipodi:role="line"
+         id="tspan4856"
+         x="467.89999"
+         y="145.46223">reduce() vs accumulate()t</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="480.89996"
+       y="277.46222"
+       id="text4858"
+       sodipodi:linespacing="130%"><tspan
+         sodipodi:role="line"
+         id="tspan4860"
+         x="480.89996"
+         y="277.46222">slice() vs islice()</tspan></text>
   </g>
 </svg>

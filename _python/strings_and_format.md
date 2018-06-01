@@ -69,6 +69,31 @@ When it's not actually split: returns a list containing the string. `'  a  '.spl
 {: .centered}
 ![python strings methods](./images/python.strings.alignment.001.svg)
 
+``` python
+>>> '{:<30}'.format('left aligned')
+'left aligned                  '
+>>> '{:>30}'.format('right aligned')
+'                 right aligned'
+>>> '{:^30}'.format('centered')
+'           centered           '
+>>> '{:*^30}'.format('centered')  # use '*' as a fill char
+'***********centered***********'
+```
+
+We can also print numbers like `+00042`, there is another align option besides `<`, `>`, `^`, it's `=`:
+
+``` python
+'{:0=6}'.format(   42)   == '000042'
+'{:0=6}'.format(  -42)   == '-00042'
+'{:0=+6}'.format(  42)   == '+00042'
+'{:0=+6}'.format( -42)   == '-00042'
+'{:0=-6}'.format(  42)   == '000042'
+'{:0=-6}'.format( -42)   == '-00042'
+'{:0= 6}'.format(  42)   == ' 00042'
+'{:0= 6}'.format( -42)   == '-00042'
+# there is old `'42'.zfill(6)`, but format is far better
+```
+
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings adjustments">
     <p>Your browser does not support iframes.</p>
 </iframe>
@@ -154,15 +179,6 @@ map('%Y-%m-%d'.format, lst)
 ```
 
 ``` python
->>> '{:<30}'.format('left aligned')
-'left aligned                  '
->>> '{:>30}'.format('right aligned')
-'                 right aligned'
->>> '{:^30}'.format('centered')
-'           centered           '
->>> '{:*^30}'.format('centered')  # use '*' as a fill char
-'***********centered***********'
-
 import locale
 locale.setlocale(locale.LC_ALL, 'en_US')   ## in this example we set a locale to see the difference:
 '{:n}'.format(10**6) == '1,000,000'

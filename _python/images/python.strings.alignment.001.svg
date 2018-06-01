@@ -78,7 +78,7 @@
          y="117.58613"
          x="80.924004"
          id="tspan4761"
-         sodipodi:role="line">'{:^5}'</tspan></text>
+         sodipodi:role="line">'{:*^5}'</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -112,5 +112,16 @@
          x="242.77202"
          id="tspan4817"
          sodipodi:role="line">.rjust()</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="101.12373"
+       y="113.98615"
+       id="text4838"
+       sodipodi:linespacing="130%"><tspan
+         sodipodi:role="line"
+         id="tspan4840"
+         x="101.12373"
+         y="113.98615"></tspan></text>
   </g>
 </svg>

@@ -444,6 +444,16 @@ pre-allocating a list benchmark: <http://stackoverflow.com/questions/22225666/pr
 
 `lst.index(e)` raises `ValueError` when `e` is not in the list, because a value like `-1` could lead to obscure bugs
 
+Unpacking:
+
+```
+a, (b, c) = [1, [2, 3]]
+a, b, *rest = range(10)
+a, *rest, b = range(10)
+first, *_, last = f.readlines()
+```
+
+
 
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- lists">
     <p>Your browser does not support iframes.</p>
@@ -566,9 +576,12 @@ TODO: performance comparison `dict` vs `collections.OrderedDict`
 </iframe>
 
 
+
 # itertools module
 
-<https://more-itertools.readthedocs.io/en/latest/>
+Summary table: <https://docs.python.org/3/library/itertools.html>
+
+<https://more-itertools.readthedocs.io/en/latest/>, <https://github.com/erikrose/more-itertools>
 
 ```
 lst = [('USA', 'LA'), ('Russia', 'Moscow'), ('USA', 'NY'), ('Russia', 'St. Petersburg'), ('England', 'London')]
@@ -601,16 +614,11 @@ for i in range(l):
 q: divide a string into groups of repeated consecutive elements, e.g., `'AAAABBBCCDAA'` into `['AAAA', 'BBB', 'CC', 'D', 'AA']` --- a: `[''.join(list(g)) for k, g in itertools.groupby('AAAABBBCCDAA')]`
 q: group elements of a list by some key, e.g., `[..., ('Russia', 'Moscow'), ..., ('Russia', 'St. Petersburg'), ...]` into  `[..., ('Russia', ['Moscow', 'St. Petersburg']), ...]`--- a: `[(k, [j for i,j in g]) for k, g in itertools.groupby(sorted(lst), lambda x: x[0])]`
 
-q: get an iterator, which is similar to reduce, but returns an intermediate results --- a: `itertools.accumulate(lst, operator.mul)`
-q: how to iterate over multiple lists, one after another, without concatenating --- a: `itertools.chain( [1, 2, 3], [4, 5, 6] )`
-q: `itertools.chain()` vs `itertools.chain.from_iterable()` --- a: the latter gets lazily iterates over input, which can be infinite sequence
-q: get rid of head of a list before a predicate becomes false --- a: `list(itertools.dropwhile(lambda x: x<3, [1, 2, 3, 1, 2, 3])) == [3, 1, 2, 3]`
-q: get rid of tail of a list after a predicate becomes false --- a: `list(itertools.takewhile(lambda x: x<3, [1, 2, 3, 1, 2, 3])) == [1, 2]`
-q: `slice()` vs `itertools.islice()` --- a: the latter is for iterators, which don't support indexing, consumes data on them; in most cases just use the former
-q: `map()` vs `itertools.starmap()` --- a: the latter is for data, which has been pre-zipped, `list( itertools.starmap(pow, [(5,2), (3,2), (10,3)]) ) == [25, 9, 1000]`
-q: `zip()` two sequences until the longest one is exhauseted, with a given value for missing bits --- a: `itertools.zip_longest(*iterables, fillvalue=None)`
-q: `zip()` vs `itertools.zip_longest()` --- a: the former stops when the shortest iterator is exhausted, the latter stops when the longest one is done
 
+
+tee() ???
+filterfalse()
+compress()
 
 ![python itertools](./images/python.itertools.001.svg)
 
@@ -618,6 +626,8 @@ q: `zip()` vs `itertools.zip_longest()` --- a: the former stops when the shortes
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- itertools">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+
 
 
 

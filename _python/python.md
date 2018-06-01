@@ -134,7 +134,7 @@ parallelism lib named dask
 
 
 
-
+<https://docs.python.org/3/library/functools.html>
 
 
 # collections module
@@ -416,6 +416,11 @@ TODO: - q: iterator and iterable <http://stackoverflow.com/a/9884501/159149>
 
 for, with, comprehensions, StopIteration <https://www.python.org/dev/peps/pep-0479/>
 
+
+- q: What is the difference between iterators and generators? --- a: Iterators are objects with `__next__()` method that is used to get next value, generators are functions that produce a sequence of values using `yeild` method. Generators are iterators, but not vice versa. Generators are used to create iterators essentially, so you don't have to write classes.
+- q: `generator.send()`, `.close()`
+
+
 # coroutines
 
 TODO
@@ -609,11 +614,6 @@ isinstance(tree.getroot().attrib, dict) == True
 
 
 
-# unpacking
 
-- q: Unpack `[1, [2, 3]]` into three variables `a = 1; b = 2; c = 3`. --- a: `a, (b, c) = [1, [2, 3]]`
-- q: advanced unpacking: `a, b, *rest = range(10)`, `a, *rest, b = range(10)`, `first, *_, last = f.readlines()`
-
-<https://stackoverflow.com/questions/6967632/unpacking-extended-unpacking-and-nested-extended-unpacking>
 
 

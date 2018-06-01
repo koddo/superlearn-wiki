@@ -104,3 +104,8 @@ i.e., for forms 303 = 201+refresh, https://www.w3.org/Protocols/rfc2616/rfc2616-
 
 
 http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api
+
+# ssh
+
+How to kill an unresponsive ssh connection? Hit enter and then `~.`, which is tilda and dot. This is a default disconnect sequence.
+
