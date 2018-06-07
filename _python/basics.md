@@ -616,10 +616,6 @@ q: group elements of a list by some key, e.g., `[..., ('Russia', 'Moscow'), ...,
 
 
 
-tee() ???
-filterfalse()
-compress()
-
 ![python itertools](./images/python.itertools.001.svg)
 
 

@@ -58,19 +58,34 @@ Strings are immutable, we can't use these operations on them: <https://docs.pyth
 Be careful with the `sep` argument of `a_str.split()`: if a `sep` arg is not specified or `None`, an empty string is split into an empty list: `''.split() == []`; otherwise: `''.split(',') ==['']`.
 When it's not actually split: returns a list containing the string. `'  a  '.split(',') == ['  a  ']`; if a `sep` arg is not specified or `None`, it also trims it: `'  a  '.split() == ['a']`
 
-## split and trim
+## split and strip
 
 <https://docs.python.org/3/library/stdtypes.html#str.split>, <https://stackoverflow.com/questions/16645083/when-splitting-an-empty-string-in-python-why-does-split-return-an-empty-list>
 
-It's not immediately obvious, but the `str.split(sep=None, maxsplit=-1)` function has two algorithms under the hood.
+It's not immediately obvious that the `str.split(sep=None, maxsplit=-1)` function has two algorithms under the hood.
 
-With no arguments (or `sep=None`) the runs of consecutive whitespace are regarded as a single separator. This is useful when data is given in columns: `'a       b   c'.split() == ['a', 'b', 'c']`
+With no arguments (or `sep=None`) the runs of consecutive whitespace are regarded as a single separator. This is useful when data is given in columns:
 
-If a `sep` is given, it doesn't group delimiters. This is useful for data separated by commas: `'a,b,c'.split(',') == ['a', 'b', 'c']`
+```
+'a       b   c'.split() == ['a', 'b', 'c']
+```
 
-The non-obvious thing about this function is when there's no `sep` the number of result fields is _one less_ than the number of actual delimiters: `' a '` has two delimiters and splitting it will result in one field. And with `sep` given the number of result fields is _one more_ than the number of actual delimiters: `','` has one delimiter and splitting will result in two fields.
+If a `sep` is given, it doesn't group delimiters. This is useful for data separated by commas: 
+
+```
+'a,b,c'.split(',') == ['a', 'b', 'c']
+```
+
+The non-obvious thing about this function is that `''.split() != ''.split(' ')`.
+
+This is because when there's no `sep` the number of result fields is _one less_ than the number of actual delimiters: `' a '` has two delimiters and splitting it will result in one field. `'a'` too by the way, empty whitespace is still a whitespace for this algorithm.
+
+And with `sep` given the number of result fields is _one more_ than the number of actual delimiters: `','` has one delimiter and splitting will result in two fields.
 
 So the edge case when the string is empty works like this: `''.split()` will have zero fields because the number of delimiters is one, while `''.split(' ')` will have one field because the number of delimiters is zero.
+
+{: .centered}
+![python strings methods](./images/python.split_and_strip.001.svg)
 
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings split and trim">
     <p>Your browser does not support iframes.</p>

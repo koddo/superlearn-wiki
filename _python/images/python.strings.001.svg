@@ -25,8 +25,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="456.22793"
+     inkscape:zoom="0.97365289"
+     inkscape:cx="403.57545"
      inkscape:cy="189.16481"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -34,7 +34,7 @@
      inkscape:window-width="1440"
      inkscape:window-height="851"
      inkscape:window-x="0"
-     inkscape:window-y="273"
+     inkscape:window-y="323"
      inkscape:window-maximized="1"
      fit-margin-top="10"
      fit-margin-left="10"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -99,24 +99,24 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="321"
-       y="326.36221"
+       x="342.56824"
+       y="322.25397"
        id="text3366"
        sodipodi:linespacing="130%"><tspan
          sodipodi:role="line"
          id="tspan3368"
-         x="321"
-         y="326.36221">ljust</tspan></text>
+         x="342.56824"
+         y="322.25397">ljust</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="414"
+       x="412.97293"
        y="320.36221"
        id="text3370"
        sodipodi:linespacing="130%"><tspan
          sodipodi:role="line"
          id="tspan3372"
-         x="414"
+         x="412.97293"
          y="320.36221">center</tspan></text>
     <text
        xml:space="preserve"
@@ -221,5 +221,27 @@
          id="tspan3505"
          x="214.77005"
          y="537.7074">count</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="118.66302"
+       y="295.29291"
+       id="text6162"
+       sodipodi:linespacing="130%"><tspan
+         sodipodi:role="line"
+         id="tspan6164"
+         x="118.66302"
+         y="295.29291">splitlines</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:129.99999523%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="151.52895"
+       y="309.67178"
+       id="text6166"
+       sodipodi:linespacing="130%"><tspan
+         sodipodi:role="line"
+         id="tspan6168"
+         x="151.52895"
+         y="309.67178">keepends=True</tspan></text>
   </g>
 </svg>
