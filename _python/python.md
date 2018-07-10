@@ -11,6 +11,8 @@ layout:  collection_page
 
 # todo
 
+Try bandit static linter to avoid common security gotchas: <https://hackernoon.com/10-common-security-gotchas-in-python-and-how-to-avoid-them-e19fbe265e03>
+
 - q: How to pass `+`, `**`, `[3:5]`, `.field` as a function? --- a: The operator module have all these operators: <https://docs.python.org/3/library/operator.html>
 TODO: `None` is a singleton
 TODO: trailing comma, https://stackoverflow.com/questions/11597901/why-are-trailing-commas-allowed-in-a-list
