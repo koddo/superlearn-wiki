@@ -212,7 +212,7 @@ locale.setlocale(locale.LC_ALL, 'en_US')   ## in this example we set a locale to
 locale.setlocale(locale.LC_ALL, locale.getdefaultlocale())
 
 '{:.1%}'.format(0.33) == '33.0%'
-'{:.3}'.format('xylophone') == 'xyl'
+'{:.3s}'.format('xylophone') == 'xyl'
 
 '{:{fill}{align}{width}}'.format('hello', fill='*', align='^', width=11) == '***hello***'
 ```
@@ -228,6 +228,8 @@ not covered: printing binary and octal
 
 ## format numbers
 
+There are also `'{:n}'` and `'{:e}'`.
+
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings format numbers">
     <p>Your browser does not support iframes.</p>
 </iframe>
@@ -235,6 +237,26 @@ not covered: printing binary and octal
 
 # print()
 
+Here are the defaults: `print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)`.
+
+{: .centered}
+![python print()](./images/python.print_function.001.svg)
+
+Be careful with `stderr`, you have to flush it[^1]:
+
+[^1]: https://stackoverflow.com/questions/939866/print-vs-stderr/2411107#2411107
+
+```
+for n in range(3):
+    print(n, file=sys.stderr, end='')    # print n to sys.stderr with no newline char
+    time.sleep(1)
+```
+ 
+
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings print">
     <p>Your browser does not support iframes.</p>
 </iframe>
+
+
+
+
