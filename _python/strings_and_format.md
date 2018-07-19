@@ -84,6 +84,8 @@ And with `sep` given the number of result fields is _one more_ than the number o
 
 So the edge case when the string is empty works like this: `''.split()` will have zero fields because the number of delimiters is one, while `''.split(' ')` will have one field because the number of delimiters is zero.
 
+`˽1˽2˽` — one less fields, `1,2` — one more fields.
+
 {: .centered}
 ![python strings methods](./images/python.split_and_strip.001.svg)
 

@@ -453,6 +453,14 @@ a, *rest, b = range(10)
 first, *_, last = f.readlines()
 ```
 
+Deleting has quircks too:
+
+```
+l = [0, 1, 2, 3, 4]
+del l[10]           # IndexError
+l[10:11] = []          # nothing happens
+del l[10:11]           # same
+```
 
 
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- lists">
