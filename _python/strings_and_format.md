@@ -232,6 +232,9 @@ not covered: printing binary and octal
 
 There are also `'{:n}'` and `'{:e}'`.
 
+{: .centered}
+![format numbers](./images/python.format_numbers.001.svg)
+
 <iframe class="autoresize" src="{{ site.superlearn_url }}/ht/asdf2?deckname=python -- strings format numbers">
     <p>Your browser does not support iframes.</p>
 </iframe>
