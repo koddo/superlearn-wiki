@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+{% for c in site.collections %}
+  {% if c.label == page.collection %}
+    {% assign my_collection = c %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<article class="post">
+    <!-- TODO: any html tag for go up a level? -->
+    <a href="{{ site.baseurl }}/{{ page.collection }}">{{ my_collection.title }}/</a>
+
+  <header class="post-header">
+    <h1 class="post-title no-anchor">{{ page.title }}</h1>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  {% if page.comments %}
+    {% include disqus.html %}
+  {% endif %}
+</article>

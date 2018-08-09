@@ -1,0 +1,10 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima";
+
+iframe.autoresize {
+    width: 100%;
+    // height is handled by https://github.com/davidjbradshaw/iframe-resizer
+}

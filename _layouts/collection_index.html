@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+{% assign my_collection = site.collections | where: "label", page.collection | first %}
+{% assign sorted_by_priority = my_collection.docs | sort: 'priority' %}
+
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title no-anchor">{{ my_collection.title }}</h1>
+  </header>
+
+  <div class="post-content">
+    <ul>
+      {% for my_page in sorted_by_priority %}
+        {% if my_page.title != 'Index' %}
+      <li><a class="page-link" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {{ content }}
+  </div>
+
+  {% if page.comments %}
+    {% include disqus.html %}
+  {% endif %}
+</article>
