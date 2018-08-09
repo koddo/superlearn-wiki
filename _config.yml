@@ -24,7 +24,7 @@ url: "https://koddo.github.io" # the base hostname & protocol for your site, e.g
 superlearn_url: "https://superlearn.it"
 
 # email: your-email@domain.com
-github_username:  koddoooooooooooooooo
+github_username:  koddo
 
 # Build settings
 markdown: kramdown
