@@ -378,6 +378,8 @@ TODO: multiple inheritance vs composition
 TODO: multiple inheritance when sets of functions are disjoint
 
 
+- q: Accessing a class variable using `Foo.x` vs `self.__class__.x`. --- a: In case you have inheritance, the class variable can belong to both base and derived classed. Which one you'd like to access? If always the one in base class, go with `Foo.x`. But most likely you want to access the class variable that belongs whatever class you currently use.
+
 # date and time
 
 q: convert a string like `17.04.1975 14:35` to a datetime --- a: `from datetime import datetime; datetime.strptime(s, '%d.%m.%Y %H:%M')`
@@ -612,6 +614,7 @@ isinstance(tree.getroot().attrib, dict) == True
 
 <https://rushter.com/blog/python-garbage-collector/>
 <https://rushter.com/blog/python-memory-managment/>
+
 
 
 

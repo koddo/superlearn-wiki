@@ -45,6 +45,17 @@ cur.execute('select d, ts from test')
 cur.execute('select current_date as "d [date]", current_timestamp as "ts [timestamp]"')
 ```
 
+```
+## https://stackoverflow.com/questions/16936608/storing-bools-in-sqlite-database
+
+sqlite3.register_adapter(bool, int)
+sqlite3.register_converter("BOOLEAN", lambda v: bool(int(v)))
+
+## or
+
+sqlite3.register_converter("BOOLEAN", lambda v: v != '0')
+```
+
 TODO: importing csv into sqlite using `.separator` and `.import` sqlite special functions: <https://cs.stanford.edu/people/widom/cs145/sqlite/SQLiteLoad.html>
 TODO: read <http://charlesleifer.com/blog/going-fast-with-sqlite-and-python/>
 TODO: types adapters and converters

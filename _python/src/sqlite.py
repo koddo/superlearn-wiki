@@ -2,6 +2,9 @@ import sqlite3
 from contextlib import closing
 import datetime
 
+sqlite3.register_adapter(bool, int)
+sqlite3.register_converter("BOOLEAN", lambda v: bool(int(v)))       # or `v != '0'`, can be better for legacy data
+
 with closing(sqlite3.connect(":memory:",
                              detect_types = sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)) as conn:
     conn.row_factory = sqlite3.Row     # access fields by name
